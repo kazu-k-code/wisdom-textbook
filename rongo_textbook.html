@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>論語 ― ゼロから学ぶ「人としての生き方」の古典</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;700;900&family=Zen+Kurenaido&family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #1a1a1a;
+  --sumi-light: #2d2a26;
+  --shu: #c8423a;
+  --shu-deep: #93221e;
+  --shu-soft: #d76155;
+  --kin: #c8a548;
+  --kin-soft: #e0c069;
+  --kinari: #f5f1e6;
+  --hakuji: #fafaf7;
+  --kasumi: #ebe5d4;
+  --kohaku: #786650;
+  --paper: #faf6ec;
+  --paper-shadow: #e8dfc8;
+  --line: #d9cfb3;
+  --aijiro: #ebf1f0;
+  --ai: #2a4858;
+  --green: #4a7c59;
+}
+[data-theme="dark"] {
+  --sumi: #f0ede0;
+  --sumi-light: #d8d4c0;
+  --shu: #e87b71;
+  --shu-deep: #c8423a;
+  --shu-soft: #c87a72;
+  --kin: #e0c069;
+  --kin-soft: #f0d488;
+  --kinari: #1c1a17;
+  --hakuji: #15130f;
+  --kasumi: #2a2620;
+  --kohaku: #b8a890;
+  --paper: #1c1a16;
+  --paper-shadow: #0e0c0a;
+  --line: #3a342a;
+  --aijiro: #1f262a;
+  --ai: #8db1c2;
+  --green: #8ab09a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', '游明朝', 'YuMincho', serif;
+  background: var(--paper);
+  color: var(--sumi);
+  line-height: 1.85;
+  font-size: 16px;
+  font-feature-settings: "palt";
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+/* progress bar */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--shu), var(--kin));
+  z-index: 1000;
+  width: 0%;
+  transition: width 0.1s;
+}
+/* header */
+header.global {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+[data-theme="dark"] header.global { background: rgba(28, 26, 22, 0.92); }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Zen Old Mincho', serif;
+}
+.brand-seal {
+  width: 36px;
+  height: 36px;
+  background: var(--shu);
+  color: var(--kinari);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 4px;
+  letter-spacing: -2px;
+  font-family: 'Zen Old Mincho', serif;
+  box-shadow: 2px 2px 0 var(--shu-deep);
+}
+.brand-title { font-size: 17px; font-weight: 700; color: var(--sumi); }
+.brand-sub { font-size: 11px; color: var(--kohaku); letter-spacing: 1px; }
+.controls { display: flex; gap: 8px; }
+.btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--sumi);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.btn:hover { background: var(--shu); color: var(--kinari); border-color: var(--shu); }
+/* layout */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 0;
+}
+nav.side {
+  position: sticky;
+  top: 64px;
+  align-self: start;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  padding: 24px 18px;
+  border-right: 1px solid var(--line);
+  background: var(--paper);
+}
+nav.side ol { list-style: none; }
+nav.side > ol > li { margin-bottom: 4px; }
+nav.side a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--kohaku);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+nav.side a:hover, nav.side a.active {
+  color: var(--shu);
+  background: var(--kasumi);
+  border-left-color: var(--shu);
+}
+nav.side a.section-title {
+  font-weight: 700;
+  color: var(--sumi);
+  font-size: 15px;
+  margin-top: 16px;
+}
+nav.side a.sub { font-size: 13px; padding-left: 24px; }
+main { padding: 32px 48px 80px; max-width: 880px; }
+/* hero */
+.hero {
+  position: relative;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--kasumi) 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  border: 1px solid var(--line);
+}
+.hero::before {
+  content: "論";
+  position: absolute;
+  top: -40px; right: -20px;
+  font-size: 320px;
+  color: var(--shu);
+  opacity: 0.08;
+  font-family: 'Zen Old Mincho', serif;
+  font-weight: 900;
+  line-height: 1;
+}
+.hero-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--shu);
+  color: var(--kinari);
+  font-size: 11px;
+  letter-spacing: 2px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  color: var(--sumi);
+}
+.hero .sub-title { font-size: 18px; color: var(--kohaku); margin-bottom: 24px; }
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  font-size: 13px;
+  color: var(--kohaku);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.hero-meta-item span { display: block; color: var(--sumi); font-weight: 700; font-size: 16px; margin-top: 2px;}
+/* section */
+section.part {
+  margin-bottom: 80px;
+  scroll-margin-top: 80px;
+}
+.part-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--shu);
+}
+.part-num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--shu);
+  line-height: 1;
+}
+.part-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+.part-subtitle { color: var(--kohaku); font-size: 14px; margin-bottom: 32px; }
+h2.chap {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px;
+  margin: 40px 0 16px;
+  padding-left: 16px;
+  border-left: 4px solid var(--shu);
+  scroll-margin-top: 80px;
+}
+h3.sec {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px;
+  color: var(--shu-deep);
+  margin: 28px 0 12px;
+}
+p { margin: 12px 0; font-size: 15.5px; }
+p.lead { font-size: 17px; color: var(--sumi); line-height: 2; }
+/* timeline */
+.timeline {
+  position: relative;
+  margin: 32px 0;
+  padding: 24px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.timeline-track {
+  display: flex;
+  gap: 0;
+  min-width: 1100px;
+  position: relative;
+  padding: 60px 0 20px;
+}
+.timeline-track::before {
+  content: "";
+  position: absolute;
+  top: 102px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--line);
+}
+.tl-item {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.tl-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--shu);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+.tl-item:hover .tl-dot, .tl-item.active .tl-dot {
+  background: var(--shu);
+  transform: scale(1.3);
+}
+.tl-age {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--shu);
+  margin-bottom: 4px;
+}
+.tl-label {
+  font-size: 12px;
+  color: var(--kohaku);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.tl-detail {
+  margin-top: 40px;
+  padding: 20px;
+  background: var(--kasumi);
+  border-radius: 6px;
+  border-left: 4px solid var(--shu);
+  min-height: 100px;
+}
+.tl-detail-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--shu-deep);
+  margin-bottom: 8px;
+}
+.tl-detail-quote {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 15px;
+  color: var(--sumi);
+  padding: 8px 12px;
+  background: var(--paper);
+  border-radius: 4px;
+  margin-top: 8px;
+  display: inline-block;
+}
+/* keyword cards */
+.kw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.kw-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.kw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(180, 60, 50, 0.12);
+  border-color: var(--shu);
+}
+.kw-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--shu);
+  transition: width 0.3s;
+}
+.kw-card:hover::after { width: 100%; }
+.kw-glyph {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--shu);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.kw-yomi { font-size: 12px; color: var(--kohaku); letter-spacing: 2px; }
+.kw-name { font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; margin: 4px 0 8px; }
+.kw-summary { font-size: 13px; color: var(--kohaku); line-height: 1.6; }
+.kw-detail {
+  margin-top: 16px;
+  padding: 24px;
+  background: var(--kasumi);
+  border-radius: 8px;
+  border-left: 4px solid var(--shu);
+  display: none;
+}
+.kw-detail.open { display: block; animation: fadeIn 0.4s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.kw-detail-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+/* quote card */
+.quote-card {
+  margin: 28px 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.quote-tabs {
+  display: flex;
+  background: var(--kasumi);
+  border-bottom: 1px solid var(--line);
+}
+.quote-tab {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--kohaku);
+  font-family: inherit;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.quote-tab.active {
+  color: var(--shu);
+  background: var(--paper);
+  border-bottom-color: var(--shu);
+  font-weight: 700;
+}
+.quote-tab:hover { color: var(--shu); }
+.quote-body {
+  padding: 24px;
+  min-height: 80px;
+}
+.quote-body[data-mode="genbun"] {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: 4px;
+  color: var(--sumi);
+  padding: 36px 24px;
+  line-height: 2.2;
+}
+.quote-body[data-mode="yomi"] {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 17px;
+  color: var(--sumi);
+}
+.quote-body[data-mode="yaku"] { font-size: 15.5px; color: var(--sumi); }
+.quote-body[data-mode="kaisetsu"] {
+  font-size: 14px;
+  color: var(--kohaku);
+  background: var(--kasumi);
+  border-left: 3px solid var(--shu);
+  padding: 16px 20px;
+  margin: 16px;
+  border-radius: 4px;
+}
+.quote-source {
+  text-align: right;
+  font-size: 12px;
+  color: var(--kohaku);
+  padding: 8px 24px 16px;
+}
+/* table */
+.tbl-wrap { overflow-x: auto; margin: 24px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+caption {
+  caption-side: top;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 0;
+  text-align: left;
+  color: var(--kohaku);
+}
+th {
+  background: var(--shu);
+  color: var(--kinari);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 13px;
+}
+td { padding: 10px 12px; border-top: 1px solid var(--line); }
+tr:nth-child(even) td { background: var(--kasumi); }
+tr:hover td { background: var(--kin-soft); color: var(--sumi); }
+/* accordion */
+.accordion-item {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.accordion-head {
+  padding: 16px 20px;
+  background: var(--kasumi);
+  cursor: pointer;
+  font-family: 'Zen Old Mincho', serif;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.2s;
+}
+.accordion-head:hover { background: var(--kin-soft); }
+.accordion-head::after {
+  content: "▼";
+  font-size: 10px;
+  color: var(--shu);
+  transition: transform 0.3s;
+}
+.accordion-item.open .accordion-head::after { transform: rotate(180deg); }
+.accordion-num {
+  display: inline-block;
+  background: var(--shu);
+  color: var(--kinari);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 13px;
+  margin-right: 12px;
+}
+.accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.5s, padding 0.3s; }
+.accordion-item.open .accordion-body { padding: 16px 20px; max-height: none; }
+/* SVG container */
+.pillar-svg-wrap {
+  margin: 32px auto;
+  max-width: 600px;
+  text-align: center;
+}
+/* exercises */
+.exercise {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+}
+.exercise-num {
+  display: inline-block;
+  background: var(--shu);
+  color: var(--kinari);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.exercise-q { font-weight: 700; margin-bottom: 12px; }
+.exercise textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  background: var(--kinari);
+  color: var(--sumi);
+}
+/* quiz */
+.quiz {
+  background: var(--paper);
+  border: 2px solid var(--shu);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.quiz-q { font-weight: 700; margin-bottom: 14px; font-size: 16px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--kinari);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s;
+  color: var(--sumi);
+}
+.quiz-opt:hover { background: var(--kin-soft); border-color: var(--shu); }
+.quiz-opt.correct { background: #d4ecd5; border-color: var(--green); color: var(--green); font-weight: 700; }
+.quiz-opt.wrong { background: #f3d1cd; border-color: var(--shu-deep); }
+.quiz-feedback {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: #e8f3e9; color: var(--green); }
+.quiz-feedback.wrong { background: #fae6e2; color: var(--shu-deep); }
+/* pillar list */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+.pillar-card {
+  background: var(--paper);
+  padding: 24px;
+  border-radius: 8px;
+  border-top: 4px solid var(--shu);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.pillar-card h4 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px;
+  color: var(--shu);
+  margin-bottom: 8px;
+}
+.pillar-card .pillar-no {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--kohaku);
+}
+/* book list */
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 24px 0; }
+.book {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.book .book-num { color: var(--shu); font-weight: 700; margin-right: 6px; }
+.book .book-title { font-weight: 700; font-family: 'Zen Old Mincho', serif; }
+.book .book-meta { color: var(--kohaku); font-size: 11px; margin-top: 2px; }
+.book .book-cat {
+  display: inline-block;
+  background: var(--kasumi);
+  color: var(--shu-deep);
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+/* footer */
+footer {
+  background: var(--sumi);
+  color: var(--kinari);
+  padding: 40px 24px;
+  text-align: center;
+  margin-top: 80px;
+}
+footer .brand-seal { background: var(--shu); color: var(--kinari); display: inline-flex; }
+footer p { color: var(--paper-shadow); font-size: 13px; margin-top: 12px; }
+/* filter */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: 6px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--sumi);
+  transition: all 0.2s;
+}
+.chip.active, .chip:hover {
+  background: var(--shu);
+  color: var(--kinari);
+  border-color: var(--shu);
+}
+/* tip box */
+.tip {
+  background: var(--aijiro);
+  border-left: 4px solid var(--ai);
+  padding: 14px 18px;
+  border-radius: 4px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--sumi);
+}
+.tip strong { color: var(--ai); }
+/* responsive */
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  nav.side {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  main { padding: 24px 20px 60px; }
+  .hero { padding: 36px 24px; }
+  .hero h1 { font-size: 30px; }
+  .hero::before { font-size: 200px; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; gap: 16px; }
+}
+@media (max-width: 600px) {
+  .kw-grid { grid-template-columns: repeat(2, 1fr); }
+  .quote-tabs { font-size: 11px; }
+  .quote-tab { padding: 8px 4px; font-size: 11px; }
+  .quote-body[data-mode="genbun"] { font-size: 18px; padding: 24px 12px; }
+  .part-num { font-size: 40px; }
+  .part-title { font-size: 20px; }
+  table { font-size: 12px; }
+  th, td { padding: 6px 8px; }
+}
+/* print */
+@media print {
+  header.global, nav.side, .controls, #progress-bar { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  body { background: white; color: black; }
+  .accordion-body { max-height: none !important; padding: 16px 20px !important; }
+  .kw-detail { display: block !important; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<header class="global">
+  <div class="brand">
+    <div class="brand-seal">論語</div>
+    <div>
+      <div class="brand-title">論語 ― ゼロから学ぶ古典</div>
+      <div class="brand-sub">RONGO · UNIVERSITY EDITION</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="toggleTheme()" id="theme-btn">🌙 ダーク</button>
+    <button class="btn" onclick="window.print()">🖨 印刷</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="side" id="sidenav">
+    <ol>
+      <li><a href="#hero" class="section-title active">表紙</a></li>
+      <li><a href="#part0" class="section-title">第0部 はじめに</a>
+        <ol>
+          <li><a href="#confucius-life" class="sub">孔子の生涯</a></li>
+          <li><a href="#book-map" class="sub">本書の使い方</a></li>
+        </ol>
+      </li>
+      <li><a href="#part1" class="section-title">第1部 10のキーワード</a></li>
+      <li><a href="#part2" class="section-title">第2部 20篇精読</a></li>
+      <li><a href="#part3" class="section-title">第3部 思想の4本柱</a></li>
+      <li><a href="#part4" class="section-title">第4部 現代との橋渡し</a></li>
+      <li><a href="#part5" class="section-title">第5部 ワークブック</a>
+        <ol>
+          <li><a href="#exercises" class="sub">演習10問</a></li>
+          <li><a href="#quiz" class="sub">クイズ</a></li>
+          <li><a href="#books" class="sub">推薦図書</a></li>
+        </ol>
+      </li>
+      <li><a href="#sources" class="section-title">Sources</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <span class="hero-tag">UNIVERSITY EDITION</span>
+      <h1>論語<br><span style="font-size:0.55em; color: var(--shu-deep);">ゼロから学ぶ「人としての生き方」の古典</span></h1>
+      <p class="sub-title">紀元前6世紀の中国・魯の国に生まれた孔子。彼が弟子たちに語った言葉は、二千五百年の時を超え、いま私たちの「働き方」「学び方」「人との関わり方」の指針として読み直されている。</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">著者<span>孔子（紀元前551-479）</span></div>
+        <div class="hero-meta-item">編纂<span>弟子・孫弟子による</span></div>
+        <div class="hero-meta-item">分量<span>全20篇 512章</span></div>
+        <div class="hero-meta-item">本書のページ<span>5部構成・約45p</span></div>
+      </div>
+    </section>
+
+    <!-- PART 0 -->
+    <section class="part" id="part0">
+      <div class="part-header">
+        <div class="part-num">零</div>
+        <div>
+          <div class="part-title">はじめに ― 孔子と『論語』への招待</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 0｜INTRODUCTION</div>
+
+      <p class="lead">本書は『論語』を「ゼロから一冊で一周できる教科書」として編んだものである。儒教の専門知識も漢文の素養も前提としない。求められるのは「人としてどう生きるか、どうリーダーシップを発揮するか、どう学び続けるか」を真剣に考えようとする気持ちだけである。</p>
+
+      <h2 class="chap" id="confucius-life">孔子の生涯 ― 14年の周遊と教育者としての到達</h2>
+
+      <p>孔子（こうし、紀元前551年-紀元前479年）は、中国の春秋時代末期、魯（ろ）の国に生まれた思想家である。氏は孔、名は丘（きゅう）、字（あざな）は仲尼（ちゅうじ）。山東省の曲阜（きょくふ）の生まれ。彼の生きた時代は、周王朝の権威がすでに失われ、諸侯が独立した「国」として覇権を争いはじめた時期にあたる。すなわち、社会秩序の崩壊期である。</p>
+
+      <p>孔子は若い頃に父を失い、貧しい家庭で育った。下級官吏として倉庫番や牧場の管理人をしながら、独学で礼楽・古典を修めた。中年期には魯の国で大司寇（だいしこう、司法長官に近い役職）にまで昇進したが、政治改革に挫折し、五十代半ばで魯を去る。その後の14年間、弟子たちを連れて諸国を巡り、自らの政治思想を採用してくれる君主を探した。これがいわゆる「周遊列国」であるが、結局どの国にも本格的に登用されず、晩年は魯に戻り、弟子の教育と古典の編纂に余生を捧げた。</p>
+
+      <div class="tip"><strong>POINT</strong>　政治家としての孔子は失敗者だった。しかし彼が育てた数千の弟子たちが、彼の思想を中国・東アジア全土へ広げた。二千年以上にわたって、東アジアの統治・教育・倫理の基盤となる――この影響力は、生前の孔子からは想像できなかっただろう。</p>
+
+      <h3 class="sec">孔子の人生年表（クリックで詳細）</h3>
+      <p>『論語』為政篇の有名な一節「吾十有五にして学に志す、三十にして立つ、四十にして惑わず…」は、孔子自身による生涯の自己評価でもある。クリックして各ステージを確かめてみよう。</p>
+
+      <div class="timeline">
+        <div class="timeline-track">
+          <div class="tl-item active" data-stage="0" onclick="showStage(0)">
+            <div class="tl-age">15</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">志学</div>
+          </div>
+          <div class="tl-item" data-stage="1" onclick="showStage(1)">
+            <div class="tl-age">30</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">而立</div>
+          </div>
+          <div class="tl-item" data-stage="2" onclick="showStage(2)">
+            <div class="tl-age">40</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">不惑</div>
+          </div>
+          <div class="tl-item" data-stage="3" onclick="showStage(3)">
+            <div class="tl-age">50</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">知命</div>
+          </div>
+          <div class="tl-item" data-stage="4" onclick="showStage(4)">
+            <div class="tl-age">60</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">耳順</div>
+          </div>
+          <div class="tl-item" data-stage="5" onclick="showStage(5)">
+            <div class="tl-age">70</div>
+            <div class="tl-dot"></div>
+            <div class="tl-label">従心</div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-detail" id="tl-detail">
+        <div class="tl-detail-title">15歳 ― 志学（しがく）</div>
+        <p>「吾十有五にして学に志す」。孔子は十五歳で学問を志した。当時の学問は王朝の典礼・歴史・詩経・楽。下級官吏として働きながら独学。<br>
+        <strong>現代に翻訳</strong>：自分の道を意識しはじめる思春期後半。「何をやりたいか」より「何を学び続けるか」を決める時期。</p>
+        <div class="tl-detail-quote">志学 ＝ 学問へのコミット</div>
+      </div>
+
+      <h2 class="chap" id="book-map">本書の使い方 ― 5部構成のマップ</h2>
+      <p>本書は5つの部から成る。読者の状況に応じて、次のような読み方を推奨する。</p>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">FOR BEGINNERS</div>
+          <h4>初学者の標準ルート</h4>
+          <p>第0部 → 第1部 → 第2部 → 第3部 → 第4部 → 第5部の順に通読。第1部の10キーワードを覚えるまで、無理に第2部に進まない。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">FOR BUSY</div>
+          <h4>忙しい人の最短ルート</h4>
+          <p>第0部 → 第1部（10キーワードのみ）→ 第4部（実務との橋渡し）→ 第5部（演習）。第2部・第3部は後日じっくり。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">FOR READERS</div>
+          <h4>再読者向け</h4>
+          <p>第3部（思想体系化）→ 第4部（現代理論との対応）→ 第2部の関心ある篇のみ。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">FOR TEACHERS</div>
+          <h4>教育者として使う</h4>
+          <p>第1部の用語表と第5部のテンプレートをワークシートとして配布。第2部の引用を素材に対話するワークショップを設計可能。</p>
+        </div>
+      </div>
+
+      <h3 class="sec">原書20篇と本書第2部の対応表</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:42%">本書第2部の章</th><th style="width:34%">原書の篇</th><th>主たるテーマ</th></tr></thead>
+          <tbody>
+            <tr><td>2.1 学びと徳治のはじまり</td><td>学而第一・為政第二</td><td>学・孝・徳治の入口</td></tr>
+            <tr><td>2.2 礼楽と仁の住まう所</td><td>八佾第三・里仁第四</td><td>礼楽の意義、仁の本質</td></tr>
+            <tr><td>2.3 弟子と孔子その人</td><td>公冶長・雍也・述而</td><td>人物評・孔子の人柄</td></tr>
+            <tr><td>2.4 高潔さと日常の所作</td><td>泰伯・子罕・郷党</td><td>君子の徳・日常作法</td></tr>
+            <tr><td>2.5 教育の現場</td><td>先進・顔淵・子路</td><td>弟子問答・政治実践</td></tr>
+            <tr><td>2.6 君子の条件と政治</td><td>憲問・衛霊公・季氏</td><td>君子論・人物分類</td></tr>
+            <tr><td>2.7 晩年の声</td><td>陽貨・微子・子張・堯曰</td><td>後期思想・弟子の言葉</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PART 1 -->
+    <section class="part" id="part1">
+      <div class="part-header">
+        <div class="part-num">壱</div>
+        <div>
+          <div class="part-title">入門編 ― 10のキーワードで核をつかむ</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 1｜TEN KEY CONCEPTS</div>
+
+      <p class="lead">『論語』には鍵となる概念が幾つもある。だが、そのうち10個を押さえれば、原書のおよそ8割の話題は背景知識付きで読める。本部ではその10個を1個ずつ見ていく。<strong>気になる漢字をクリック</strong>すると詳細が展開する。</p>
+
+      <div class="filter-bar">
+        <span style="font-size:13px; color:var(--kohaku); align-self:center; margin-right:4px;">関心領域でフィルター：</span>
+        <button class="chip active" onclick="filterKW('all', this)">全て</button>
+        <button class="chip" onclick="filterKW('human', this)">人間関係</button>
+        <button class="chip" onclick="filterKW('self', this)">自己修養</button>
+        <button class="chip" onclick="filterKW('learn', this)">学び</button>
+      </div>
+
+      <div class="kw-grid" id="kw-grid">
+        <div class="kw-card" data-cat="human self" onclick="openKW('jin')">
+          <div class="kw-glyph">仁</div>
+          <div class="kw-yomi">JIN</div>
+          <div class="kw-name">仁（じん）</div>
+          <div class="kw-summary">人を大切に思う心。『論語』の中心概念。</div>
+        </div>
+        <div class="kw-card" data-cat="human" onclick="openKW('rei')">
+          <div class="kw-glyph">礼</div>
+          <div class="kw-yomi">REI</div>
+          <div class="kw-name">礼（れい）</div>
+          <div class="kw-summary">関係を整える形式。心を形にする。</div>
+        </div>
+        <div class="kw-card" data-cat="self" onclick="openKW('gi')">
+          <div class="kw-glyph">義</div>
+          <div class="kw-yomi">GI</div>
+          <div class="kw-name">義（ぎ）</div>
+          <div class="kw-summary">損得を超えた正しさ。判断の起点。</div>
+        </div>
+        <div class="kw-card" data-cat="learn self" onclick="openKW('chi')">
+          <div class="kw-glyph">知</div>
+          <div class="kw-yomi">CHI</div>
+          <div class="kw-name">知（ち）</div>
+          <div class="kw-summary">物事を見極める判断力とメタ認知。</div>
+        </div>
+        <div class="kw-card" data-cat="human self" onclick="openKW('shin')">
+          <div class="kw-glyph">信</div>
+          <div class="kw-yomi">SHIN</div>
+          <div class="kw-name">信（しん）</div>
+          <div class="kw-summary">言葉と行いの一致。社会人の最低条件。</div>
+        </div>
+        <div class="kw-card" data-cat="human" onclick="openKW('koutei')">
+          <div class="kw-glyph">孝</div>
+          <div class="kw-yomi">KŌ/TEI</div>
+          <div class="kw-name">孝・悌（こう・てい）</div>
+          <div class="kw-summary">家族・年長者への敬意。仁の出発点。</div>
+        </div>
+        <div class="kw-card" data-cat="self" onclick="openKW('kunshi')">
+          <div class="kw-glyph">君</div>
+          <div class="kw-yomi">KUNSHI</div>
+          <div class="kw-name">君子（くんし）</div>
+          <div class="kw-summary">徳と学で自分を高めた理想の人物。</div>
+        </div>
+        <div class="kw-card" data-cat="self" onclick="openKW('chuyo')">
+          <div class="kw-glyph">中</div>
+          <div class="kw-yomi">CHŪYŌ</div>
+          <div class="kw-name">中庸（ちゅうよう）</div>
+          <div class="kw-summary">過不足のない適切な度合いの知恵。</div>
+        </div>
+        <div class="kw-card" data-cat="learn self" onclick="openKW('gaku')">
+          <div class="kw-glyph">学</div>
+          <div class="kw-yomi">GAKU</div>
+          <div class="kw-name">学（がく）</div>
+          <div class="kw-summary">終わりなき自己更新。孔子の出発点。</div>
+        </div>
+        <div class="kw-card" data-cat="human self" onclick="openKW('chujo')">
+          <div class="kw-glyph">恕</div>
+          <div class="kw-yomi">CHŪJO</div>
+          <div class="kw-name">忠恕（ちゅうじょ）</div>
+          <div class="kw-summary">真心と思いやり。孔子の道の核心。</div>
+        </div>
+      </div>
+
+      <div class="kw-detail" id="kw-detail">
+        <div class="kw-detail-title">クリックして詳細を見る</div>
+        <p>各カードをタップすると、その概念の詳細解説と『論語』内の代表的な引用が現れます。</p>
+      </div>
+
+      <h3 class="sec">代表的な引用：「巧言令色、鮮なし仁」</h3>
+      <div class="quote-card" data-quote="kogen">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this, 'genbun')">原文</button>
+          <button class="quote-tab" onclick="switchTab(this, 'yomi')">書き下し</button>
+          <button class="quote-tab" onclick="switchTab(this, 'yaku')">現代語訳</button>
+          <button class="quote-tab" onclick="switchTab(this, 'kaisetsu')">ひと言解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">子曰、巧言令色、鮮矣仁。</div>
+        <div class="quote-source">学而篇</div>
+      </div>
+
+      <h3 class="sec">代表的な引用：「己の欲せざる所、人に施すこと勿れ」</h3>
+      <div class="quote-card" data-quote="ki-no">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this, 'genbun')">原文</button>
+          <button class="quote-tab" onclick="switchTab(this, 'yomi')">書き下し</button>
+          <button class="quote-tab" onclick="switchTab(this, 'yaku')">現代語訳</button>
+          <button class="quote-tab" onclick="switchTab(this, 'kaisetsu')">ひと言解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">己所不欲、勿施於人。</div>
+        <div class="quote-source">衛霊公篇</div>
+      </div>
+
+      <h3 class="sec">10のキーワード総まとめ表</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>読み</th><th>ひと言定義</th><th>身近な例</th></tr></thead>
+          <tbody>
+            <tr><td>仁</td><td>じん</td><td>人を大切に思う心</td><td>困っている同僚への自然な気遣い</td></tr>
+            <tr><td>礼</td><td>れい</td><td>関係を整える形式</td><td>会議の挨拶・席次・名刺交換</td></tr>
+            <tr><td>義</td><td>ぎ</td><td>損得を超えた正しさ</td><td>短期の利を捨て、信用を取る判断</td></tr>
+            <tr><td>知</td><td>ち</td><td>見極める判断力</td><td>データを読み、現場感覚で補正する</td></tr>
+            <tr><td>信</td><td>しん</td><td>言葉と行いの一致</td><td>納期を守る、コミットを果たす</td></tr>
+            <tr><td>孝・悌</td><td>こう・てい</td><td>親・年長者への敬意</td><td>親に定期的に連絡する</td></tr>
+            <tr><td>君子</td><td>くんし</td><td>徳と学を持つ理想の人物</td><td>信頼される上司・先輩</td></tr>
+            <tr><td>中庸</td><td>ちゅうよう</td><td>過不足のない適切さ</td><td>怒鳴らず、しかし叱るべきは叱る</td></tr>
+            <tr><td>学</td><td>がく</td><td>終わりなき自己更新</td><td>読書・研修・現場での内省</td></tr>
+            <tr><td>忠恕</td><td>ちゅうじょ</td><td>真心と思いやりの一対</td><td>自分の倫理＋相手への想像力</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PART 2 -->
+    <section class="part" id="part2">
+      <div class="part-header">
+        <div class="part-num">弐</div>
+        <div>
+          <div class="part-title">中級編 ― 20篇を7ブロックで精読</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 2｜CLOSE READING</div>
+
+      <p class="lead">第2部では『論語』全20篇を7ブロックに再編して読む。各ブロックの見出しをクリックして展開しよう。原文・書き下し・現代語訳・解説の4点セットがタブで切り替わる。</p>
+
+      <div id="accordions">
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">1</span>学而・為政 ― 学びと徳治のはじまり</span></div>
+          <div class="accordion-body">
+            <p>『論語』の入口。学而篇は「学・友・自立」の三句で始まり、為政篇は徳治政治と孔子の人生年表を示す。</p>
+
+            <h3 class="sec">学而篇の冒頭三句</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">子曰、学而時習之、不亦説乎。<br>有朋自遠方来、不亦楽乎。<br>人不知而不慍、不亦君子乎。</div>
+              <div class="quote-source">学而篇</div>
+            </div>
+
+            <h3 class="sec">為政篇：孔子の人生年表</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">吾十有五而志于学、三十而立、四十而不惑、五十而知天命、六十而耳順、七十而従心所欲、不踰矩。</div>
+              <div class="quote-source">為政篇</div>
+            </div>
+
+            <p class="tip"><strong>3行サマリー</strong><br>・学而篇は「学・友・自立」「自己反省」「孝悌」を入口に置く<br>・為政篇は徳治政治と、孔子自身の生涯学習史を示す<br>・いずれも『論語』全体の方向感覚を読者に与える役割</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">2</span>八佾・里仁 ― 礼楽と仁の住まう所</span></div>
+          <div class="accordion-body">
+            <p>第3篇は礼楽論、第4篇は仁の本質論。『論語』の二大概念がここで集中的に扱われる。</p>
+
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">朝聞道、夕死可矣。</div>
+              <div class="quote-source">里仁篇</div>
+            </div>
+
+            <p class="tip"><strong>3行サマリー</strong><br>・八佾篇は形式（礼）と内面（仁）の両方が必要であることを説く<br>・里仁篇は仁を「環境」「死生観」「義」「忠恕」の各角度から語る<br>・この二篇で『論語』の中心思想は出揃ったと言って良い</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">3</span>公冶長・雍也・述而 ― 弟子と孔子その人</span></div>
+          <div class="accordion-body">
+            <p>この三篇は、孔子と弟子たちの人物像を主題にする。</p>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">三人行、必有我師焉。択其善者而従之、其不善者而改之。</div>
+              <div class="quote-source">述而篇</div>
+            </div>
+            <p class="tip"><strong>3行サマリー</strong><br>・公冶長・雍也篇は人物評・人物観察の宝庫<br>・述而篇は孔子の自己理解「述而不作」「三人行必有我師」が顕著<br>・「人を見る目」「教師としての姿勢」の教材として最重要</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">4</span>泰伯・子罕・郷党 ― 高潔さと日常の所作</span></div>
+          <div class="accordion-body">
+            <p>子罕篇には逆境論・志論の名句が連発する。郷党篇は孔子の日常の所作を細密に観察する異色篇。</p>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">歳寒、然後知松柏之後彫也。</div>
+              <div class="quote-source">子罕篇</div>
+            </div>
+            <p class="tip"><strong>3行サマリー</strong><br>・泰伯篇は古代聖王・賢人を讃え、高潔さの規範を示す<br>・子罕篇は逆境論・志論の核心章句が連発<br>・郷党篇は「修身は会議の外でも続く」というメッセージ</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">5</span>先進・顔淵・子路 ― 教育の現場と政治実践</span></div>
+          <div class="accordion-body">
+            <p>孔子と弟子の問答が中核。第2部のなかでも特に長い章句が多く、教育現場の臨場感が伝わってくる。</p>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">克己復礼為仁。</div>
+              <div class="quote-source">顔淵篇</div>
+            </div>
+            <p class="tip"><strong>3行サマリー</strong><br>・教育現場の生の音声に最も近い篇群<br>・「克己復礼」「正名」「己所不欲勿施於人」が集中<br>・弟子ごとに答え方を変える孔子の柔軟性が真骨頂</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">6</span>憲問・衛霊公・季氏 ― 君子の条件と政治の倫理</span></div>
+          <div class="accordion-body">
+            <p>短い格言調の章句が多く、引用しやすい三篇。</p>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">過而不改、是謂過矣。</div>
+              <div class="quote-source">衛霊公篇</div>
+            </div>
+            <p class="tip"><strong>3行サマリー</strong><br>・短い格言の宝庫<br>・「恕」「過而不改是謂過矣」「益者三友損者三友」が並ぶ<br>・君子の条件は「自己制御」「過ちを認める」「友を選ぶ」の三点</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">7</span>陽貨・微子・子張・堯曰 ― 晩年の声と『論語』の閉じ方</span></div>
+          <div class="accordion-body">
+            <p>『論語』の閉じ方を示す後半四篇。</p>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">性相近也、習相遠也。</div>
+              <div class="quote-source">陽貨篇</div>
+            </div>
+            <p class="tip"><strong>3行サマリー</strong><br>・性習論・三戒・益損三友など覚えやすい命題が多い<br>・堯曰篇の最後は「命・礼・言」で君子の条件を圧縮<br>・全20篇512章のうち8割の話題を背景知識付きで触れたことに</p>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="sec">全20篇の章数と主要テーマ一覧</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>篇</th><th>章数</th><th>主要テーマ</th></tr></thead>
+          <tbody>
+            <tr><td>1 学而</td><td>16</td><td>学び・孝悌・自己反省</td></tr>
+            <tr><td>2 為政</td><td>24</td><td>徳治・人生年表・温故知新</td></tr>
+            <tr><td>3 八佾</td><td>26</td><td>礼楽・身分秩序</td></tr>
+            <tr><td>4 里仁</td><td>26</td><td>仁の本質・忠恕・義利</td></tr>
+            <tr><td>5 公冶長</td><td>28</td><td>弟子・人物評</td></tr>
+            <tr><td>6 雍也</td><td>30</td><td>人物評・知者と仁者</td></tr>
+            <tr><td>7 述而</td><td>38</td><td>孔子の自己理解</td></tr>
+            <tr><td>8 泰伯</td><td>21</td><td>古代聖王・徳の系譜</td></tr>
+            <tr><td>9 子罕</td><td>31</td><td>志・逆境・年齢</td></tr>
+            <tr><td>10 郷党</td><td>27</td><td>孔子の日常作法</td></tr>
+            <tr><td>11 先進</td><td>26</td><td>弟子論・教育観</td></tr>
+            <tr><td>12 顔淵</td><td>24</td><td>仁・政治・君子論</td></tr>
+            <tr><td>13 子路</td><td>30</td><td>政治実践・正名</td></tr>
+            <tr><td>14 憲問</td><td>47</td><td>君子・恥・徳</td></tr>
+            <tr><td>15 衛霊公</td><td>42</td><td>君子論・恕</td></tr>
+            <tr><td>16 季氏</td><td>14</td><td>益損三友・三戒</td></tr>
+            <tr><td>17 陽貨</td><td>26</td><td>人間性論・隠者問答</td></tr>
+            <tr><td>18 微子</td><td>11</td><td>逸民賛美</td></tr>
+            <tr><td>19 子張</td><td>25</td><td>弟子の言葉集</td></tr>
+            <tr><td>20 堯曰</td><td>3</td><td>古代聖王・最終警句</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PART 3 -->
+    <section class="part" id="part3">
+      <div class="part-header">
+        <div class="part-num">参</div>
+        <div>
+          <div class="part-title">上級編 ― 思想の4本柱で体系化する</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 3｜SYSTEMATIZATION</div>
+
+      <p class="lead">第2部までは『論語』の流れに沿った「点」。第3部では、点在する論点を<strong>人間論・学問論・政治論・礼楽論</strong>の4本柱に再構築する。点が線になり、線が面になる作業である。</p>
+
+      <div class="pillar-svg-wrap">
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <radialGradient id="centerG" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#c8423a" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#93221e" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <!-- connecting lines -->
+          <line x1="300" y1="220" x2="150" y2="100" stroke="#c8a548" stroke-width="2" stroke-dasharray="4,4"/>
+          <line x1="300" y1="220" x2="450" y2="100" stroke="#c8a548" stroke-width="2" stroke-dasharray="4,4"/>
+          <line x1="300" y1="220" x2="150" y2="380" stroke="#c8a548" stroke-width="2" stroke-dasharray="4,4"/>
+          <line x1="300" y1="220" x2="450" y2="380" stroke="#c8a548" stroke-width="2" stroke-dasharray="4,4"/>
+          <!-- center -->
+          <circle cx="300" cy="220" r="55" fill="url(#centerG)"/>
+          <text x="300" y="232" text-anchor="middle" fill="#faf6ec" font-family="Zen Old Mincho, serif" font-size="36" font-weight="900">仁</text>
+          <text x="300" y="290" text-anchor="middle" fill="#786650" font-size="12" letter-spacing="2">CORE</text>
+          <!-- 4 pillars -->
+          <g>
+            <circle cx="150" cy="100" r="48" fill="#faf6ec" stroke="#c8423a" stroke-width="2"/>
+            <text x="150" y="100" text-anchor="middle" fill="#c8423a" font-family="Zen Old Mincho, serif" font-size="24" font-weight="900">人間論</text>
+            <text x="150" y="120" text-anchor="middle" fill="#786650" font-size="10">仁・忠恕</text>
+          </g>
+          <g>
+            <circle cx="450" cy="100" r="48" fill="#faf6ec" stroke="#c8423a" stroke-width="2"/>
+            <text x="450" y="100" text-anchor="middle" fill="#c8423a" font-family="Zen Old Mincho, serif" font-size="24" font-weight="900">学問論</text>
+            <text x="450" y="120" text-anchor="middle" fill="#786650" font-size="10">学・思・行</text>
+          </g>
+          <g>
+            <circle cx="150" cy="380" r="48" fill="#faf6ec" stroke="#c8423a" stroke-width="2"/>
+            <text x="150" y="380" text-anchor="middle" fill="#c8423a" font-family="Zen Old Mincho, serif" font-size="24" font-weight="900">礼楽論</text>
+            <text x="150" y="400" text-anchor="middle" fill="#786650" font-size="10">礼・楽</text>
+          </g>
+          <g>
+            <circle cx="450" cy="380" r="48" fill="#faf6ec" stroke="#c8423a" stroke-width="2"/>
+            <text x="450" y="380" text-anchor="middle" fill="#c8423a" font-family="Zen Old Mincho, serif" font-size="24" font-weight="900">政治論</text>
+            <text x="450" y="400" text-anchor="middle" fill="#786650" font-size="10">徳治・正名・民信</text>
+          </g>
+        </svg>
+        <p style="color:var(--kohaku); font-size:13px;">図3-1：『論語』思想の4本柱と「仁」の中心性</p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">PILLAR 1</div>
+          <h4>人間論 ― 仁・忠恕・愛</h4>
+          <p>「仁」は単一定義を持たない多義語。文脈ごとに違う側面を見せる。これを弟子の曾子が「忠恕」と二字で要約した。「忠」が自己への誠実、「恕」が他者への思いやり。両者を欠くと「巧言令色」――見栄えだけの空疎な人間――になる。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">PILLAR 2</div>
+          <h4>学問論 ― 学・思・行</h4>
+          <p>「学んで思わざれば則ち罔し、思いて学ばざれば則ち殆うし」――入力（学）と加工（思）の両輪。さらに「知る→好む→楽しむ」の三段階で学問は人格化する。学びとは情報の蓄積ではなく、惑いの減少、天命の発見である。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">PILLAR 3</div>
+          <h4>政治論 ― 徳治・正名・民信</h4>
+          <p>「政を為すに徳を以てす」（徳治）、「名を正さんか」（正名）、「民信なくんば立たず」――この三命題は規模を問わずあらゆる組織のリーダーに有効。現代のサーバントリーダーシップ・パーパス経営の源流。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">PILLAR 4</div>
+          <h4>礼楽論 ― 礼・楽・序</h4>
+          <p>「礼」は人間関係のフォーマット、「楽」は場の雰囲気。完全フラットな組織が往々にして揉めるのは、フォーマット欠如が原因。「礼楽」は現代に翻訳すれば「文化と作法」となる。</p>
+        </div>
+      </div>
+
+      <h3 class="sec">4本柱と個人/組織の対応</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>柱</th><th>中心概念</th><th>個人レベル</th><th>組織レベル</th></tr></thead>
+          <tbody>
+            <tr><td>人間論</td><td>仁・忠恕</td><td>自己制御＋他者尊重</td><td>チーム内の信頼関係</td></tr>
+            <tr><td>学問論</td><td>学・思・行</td><td>生涯学習</td><td>学習する組織</td></tr>
+            <tr><td>政治論</td><td>徳治・正名・民信</td><td>リーダーシップ</td><td>ガバナンス</td></tr>
+            <tr><td>礼楽論</td><td>礼・楽</td><td>振る舞いの一貫性</td><td>組織文化・雰囲気</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PART 4 -->
+    <section class="part" id="part4">
+      <div class="part-header">
+        <div class="part-num">肆</div>
+        <div>
+          <div class="part-title">現代戦略論・実務との橋渡し</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 4｜BRIDGE TO MODERN</div>
+
+      <p class="lead">『論語』は読むだけでは武器にならない。現代の経営理論・リーダーシップ論・キャリア論と橋を架けることで、はじめて二千五百年前の言葉が今日の意思決定を支える。</p>
+
+      <h2 class="chap">『論語』と現代理論の対応表</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>『論語』の概念</th><th>現代の対応概念</th><th>提唱者</th></tr></thead>
+          <tbody>
+            <tr><td>仁</td><td>サーバントリーダーシップ</td><td>ロバート・グリーンリーフ</td></tr>
+            <tr><td>修己治人</td><td>7つの習慣（私的成功→公的成功）</td><td>スティーブン・コヴィー</td></tr>
+            <tr><td>徳治</td><td>オーセンティック・リーダーシップ</td><td>ビル・ジョージ</td></tr>
+            <tr><td>正名</td><td>パーパス・ドリブン経営</td><td>ラリー・フィンク（BlackRock）</td></tr>
+            <tr><td>学而時習之</td><td>学習する組織</td><td>ピーター・センゲ</td></tr>
+            <tr><td>三省吾身</td><td>リフレクション・1on1ミーティング</td><td>エドガー・シャイン</td></tr>
+            <tr><td>益者三友</td><td>ピアサポート・メンタリング</td><td>―</td></tr>
+            <tr><td>君子和而不同</td><td>心理的安全性・多様性経営</td><td>エイミー・エドモンドソン</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="chap">渋沢栄一『論語と算盤』の系譜</h2>
+      <p>明治・大正期の実業家・渋沢栄一（1840-1931）は、日本資本主義の父と呼ばれる。彼の代表的著作『論語と算盤』（1916年）は、<strong>道徳経済合一説</strong>を提唱。商売は欲を満たすために行うが、その欲は「義」の枠内でなければならない――算盤（経済合理性）が論語（道徳）の上に立つのではなく、論語のうえに算盤が乗る。</p>
+      <p>この思想は戦後の松下幸之助、稲盛和夫、土光敏夫らに受け継がれた。<strong>2024年7月、渋沢栄一は新一万円札の肖像</strong>となった。これは「道徳と経済の両立」というメッセージを、現代日本がもう一度、社会的に確認した出来事である。</p>
+
+      <h2 class="chap">明日から使う10の問い</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>問い</th><th>由来</th><th>タイミング</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>今日、人のために計らうのに真心を尽くしたか</td><td>三省吾身</td><td>毎晩</td></tr>
+            <tr><td>2</td><td>友人・同僚との約束を守ったか</td><td>信</td><td>毎週</td></tr>
+            <tr><td>3</td><td>学んだことを今週どう復習したか</td><td>学而時習之</td><td>毎週</td></tr>
+            <tr><td>4</td><td>短期の利と長期の信用、どちらで判断したか</td><td>君子喩於義</td><td>毎月</td></tr>
+            <tr><td>5</td><td>自分の過ちを認め、改めたか</td><td>過而不改是謂過矣</td><td>毎月</td></tr>
+            <tr><td>6</td><td>「正しい言葉」で物事を呼んでいるか</td><td>正名</td><td>毎四半期</td></tr>
+            <tr><td>7</td><td>益となる友、損となる友を見分けているか</td><td>益者三友</td><td>毎四半期</td></tr>
+            <tr><td>8</td><td>自分の欲しないことを他人にしていないか</td><td>己所不欲勿施於人</td><td>毎日</td></tr>
+            <tr><td>9</td><td>部下を「徳」で動かしているか、「圧」で動かしているか</td><td>為政以徳</td><td>毎月</td></tr>
+            <tr><td>10</td><td>自分の天命を意識できているか</td><td>五十而知天命</td><td>毎年</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PART 5 -->
+    <section class="part" id="part5">
+      <div class="part-header">
+        <div class="part-num">伍</div>
+        <div>
+          <div class="part-title">実践ワークブック</div>
+        </div>
+      </div>
+      <div class="part-subtitle">PART 5｜WORKBOOK</div>
+
+      <p class="lead">読書から思考、思考から行動へ。各演習に3-5行で答えてみよう。正解はない。<strong>自分の言葉で考える</strong>ことが目的である。</p>
+
+      <h2 class="chap" id="exercises">演習問題集 ― 10の問い</h2>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 1 ／ 仁</span>
+        <div class="exercise-q">あなたの職場で「人を大切にする」とは具体的にどう振る舞うことか。1日のうちで起きた具体的なシーンを一つ挙げよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 2 ／ 礼</span>
+        <div class="exercise-q">あなたの組織の「礼」のうち、本当に意味があるものを3つ、形骸化しているものを3つ挙げよ。</div>
+        <textarea placeholder="意味があるもの：1. 2. 3.&#10;形骸化しているもの：1. 2. 3."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 3 ／ 義と利</span>
+        <div class="exercise-q">直近1年で、あなたが「義」と「利」のあいだで迷った具体的な場面を1つ思い出し、どう判断したか、振り返って書け。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 4 ／ 信</span>
+        <div class="exercise-q">今週、約束を守れなかったことはないか。あったとすれば、何が原因か。再発防止に何ができるか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 5 ／ 学</span>
+        <div class="exercise-q">あなたが今、学んでいることは何か。それを「思（考えること）」と「行（実行）」のどちらに偏らせているか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 6 ／ 君子と小人</span>
+        <div class="exercise-q">あなたの身近にいる人物のうち、「君子」と感じる人、「小人」と感じる人を匿名で1人ずつ思い浮かべよ。両者の違いを3つ書き出せ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 7 ／ 中庸</span>
+        <div class="exercise-q">あなたが「過剰」「不足」になりがちな振る舞いは何か。その中庸点はどこか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 8 ／ 忠恕</span>
+        <div class="exercise-q">「己の欲せざる所、人に施す勿れ」――今週、これを破ったことはないか。あったとすれば何か。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 9 ／ 正名</span>
+        <div class="exercise-q">あなたの組織で「名（呼称）と実体」がずれている例を3つ挙げよ。それぞれをどう修正すべきか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 10 ／ 天命</span>
+        <div class="exercise-q">あなたの「天命」――何のために生きているか・働いているか――は何か。50字以内で表現せよ。</div>
+        <textarea placeholder="ここに記入..." maxlength="100"></textarea>
+      </div>
+
+      <h2 class="chap" id="quiz">理解度クイズ（4問）</h2>
+      <p>各問いに答えるとすぐに正解・解説が表示されます。気軽に挑戦してください。</p>
+
+      <div class="quiz" data-correct="b" data-explain="「巧言令色、鮮なし仁」（学而篇）。言葉巧みで顔つきを取り繕う人間には仁の徳は稀である、という孔子の人物観察です。">
+        <div class="quiz-q">Q1. 「巧言令色、鮮なし仁」が意味するのはどれ？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 美しい言葉と表情は仁の証である</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 口先がうまく愛想がいい人には仁が少ない</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 美しく語ることが孔子の理想である</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 仁とは言葉を上手に使うことだ</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="顔淵篇の名定義。「克己復礼」は自己制御と礼への回帰を一語に圧縮した、仁の最高難度の定義です。">
+        <div class="quiz-q">Q2. 孔子が顔淵に「仁とは何か」と問われ、答えたのはどれ？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 三人行えば必ず我が師あり</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 学んで思わざれば則ち罔し</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 己に克ちて礼に復るを仁と為す</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 過ちて改めざる、これを過ちと謂う</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="a" data-explain="子貢に答えた政治の優先順位の問答。食・兵・民信のうち民信が最後の砦――組織における信頼の絶対的位置を示します。">
+        <div class="quiz-q">Q3. 孔子が「食・兵・信」のうち、最後まで捨ててはならないとしたのは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 民信（民の信頼）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 兵（軍備）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 食（食料）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 礼（儀礼）</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="d" data-explain="渋沢栄一は明治期に日本の近代企業約500社の設立に関わった「日本資本主義の父」。『論語と算盤』は1916年の著作で、道徳経済合一説を提唱しました。">
+        <div class="quiz-q">Q4. 『論語と算盤』を著し、道徳と経済の両立を説いたのは誰？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 松下幸之助</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 稲盛和夫</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 福沢諭吉</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 渋沢栄一</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h2 class="chap" id="books">推薦図書20冊</h2>
+      <div class="filter-bar">
+        <button class="chip active" onclick="filterBook('all', this)">すべて</button>
+        <button class="chip" onclick="filterBook('translation', this)">邦訳・注釈</button>
+        <button class="chip" onclick="filterBook('biography', this)">人物伝</button>
+        <button class="chip" onclick="filterBook('business', this)">経営応用</button>
+        <button class="chip" onclick="filterBook('related', this)">関連古典</button>
+        <button class="chip" onclick="filterBook('modern', this)">現代応用</button>
+      </div>
+
+      <div class="books" id="books">
+        <div class="book" data-cat="translation"><span class="book-num">01.</span><span class="book-title">論語 増補版</span><div class="book-meta">加地伸行／講談社学術文庫</div><span class="book-cat">邦訳・注釈</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">02.</span><span class="book-title">論語</span><div class="book-meta">金谷治訳注／岩波文庫</div><span class="book-cat">邦訳・定番</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">03.</span><span class="book-title">論語</span><div class="book-meta">吉川幸次郎／朝日選書</div><span class="book-cat">邦訳・解説</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">04.</span><span class="book-title">現代語訳 論語</span><div class="book-meta">宮崎市定／岩波現代文庫</div><span class="book-cat">現代語訳</span></div>
+        <div class="book" data-cat="business"><span class="book-num">05.</span><span class="book-title">論語と算盤</span><div class="book-meta">渋沢栄一／角川ソフィア文庫</div><span class="book-cat">経営応用</span></div>
+        <div class="book" data-cat="business"><span class="book-num">06.</span><span class="book-title">論語の活学</span><div class="book-meta">安岡正篤／プレジデント社</div><span class="book-cat">帝王学</span></div>
+        <div class="book" data-cat="business"><span class="book-num">07.</span><span class="book-title">論語―生き方を知る</span><div class="book-meta">守屋洋／PHP文庫</div><span class="book-cat">経営応用</span></div>
+        <div class="book" data-cat="business"><span class="book-num">08.</span><span class="book-title">論語講義</span><div class="book-meta">渋沢栄一／講談社学術文庫</div><span class="book-cat">経営応用</span></div>
+        <div class="book" data-cat="biography"><span class="book-num">09.</span><span class="book-title">孔子</span><div class="book-meta">貝塚茂樹／岩波新書</div><span class="book-cat">人物伝</span></div>
+        <div class="book" data-cat="biography"><span class="book-num">10.</span><span class="book-title">孔子伝</span><div class="book-meta">白川静／中公文庫</div><span class="book-cat">人物伝</span></div>
+        <div class="book" data-cat="biography"><span class="book-num">11.</span><span class="book-title">孔子伝</span><div class="book-meta">加地伸行／中公文庫</div><span class="book-cat">人物伝</span></div>
+        <div class="book" data-cat="related"><span class="book-num">12.</span><span class="book-title">古代中国の思想</span><div class="book-meta">浅野裕一／NHK出版</div><span class="book-cat">学術</span></div>
+        <div class="book" data-cat="related"><span class="book-num">13.</span><span class="book-title">諸子百家</span><div class="book-meta">浅野裕一／講談社現代新書</div><span class="book-cat">周辺思想</span></div>
+        <div class="book" data-cat="related"><span class="book-num">14.</span><span class="book-title">孟子</span><div class="book-meta">小林勝人訳注／岩波文庫</div><span class="book-cat">四書</span></div>
+        <div class="book" data-cat="related"><span class="book-num">15.</span><span class="book-title">大学・中庸</span><div class="book-meta">金谷治訳注／岩波文庫</div><span class="book-cat">四書</span></div>
+        <div class="book" data-cat="related"><span class="book-num">16.</span><span class="book-title">老子・荘子</span><div class="book-meta">蜂屋邦夫訳注／岩波文庫</div><span class="book-cat">競合思想</span></div>
+        <div class="book" data-cat="modern"><span class="book-num">17.</span><span class="book-title">完訳 7つの習慣</span><div class="book-meta">S・コヴィー／キングベアー</div><span class="book-cat">現代応用</span></div>
+        <div class="book" data-cat="modern"><span class="book-num">18.</span><span class="book-title">LIFE SHIFT</span><div class="book-meta">L・グラットン／東洋経済</div><span class="book-cat">現代応用</span></div>
+        <div class="book" data-cat="modern"><span class="book-num">19.</span><span class="book-title">サーバントリーダーシップ</span><div class="book-meta">R・グリーンリーフ／英治出版</div><span class="book-cat">現代応用</span></div>
+        <div class="book" data-cat="modern"><span class="book-num">20.</span><span class="book-title">マネジメント</span><div class="book-meta">P・F・ドラッカー／ダイヤモンド社</div><span class="book-cat">現代応用</span></div>
+      </div>
+    </section>
+
+    <!-- SOURCES -->
+    <section class="part" id="sources">
+      <div class="part-header">
+        <div class="part-num">出</div>
+        <div>
+          <div class="part-title">Sources ― 参考文献・版本情報</div>
+        </div>
+      </div>
+      <div class="part-subtitle">SOURCES</div>
+
+      <h3 class="sec">一次資料（『論語』の邦訳・注釈）</h3>
+      <ol style="padding-left:24px; line-height:2;">
+        <li>金谷治訳注『論語』岩波文庫、改版1999年。</li>
+        <li>加地伸行訳注『論語 増補版』講談社学術文庫、2009年。</li>
+        <li>吉川幸次郎『論語』朝日選書、1959年初版。</li>
+        <li>宮崎市定『現代語訳 論語』岩波現代文庫、2000年。</li>
+      </ol>
+
+      <h3 class="sec">注記</h3>
+      <p style="font-size:13px; color:var(--kohaku);">本書中の原文・書き下しは、岩波文庫版（金谷治訳注）と講談社学術文庫版（加地伸行訳注）を参照して整理した。現代語訳は学術的厳密さよりも、本書の読者（非専門家のビジネスパーソン・大学生）の可読性を優先した。原文の機微を完全に再現することは目的としていない。一次資料に当たる際は上記を参照されたい。</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="brand-seal" style="margin: 0 auto 12px;">論語</div>
+  <p>論語 ― ゼロから学ぶ「人としての生き方」の古典 · University Edition</p>
+  <p style="font-size:11px; color:var(--paper-shadow); margin-top:8px; letter-spacing:1px;">© COMPREHENSIVE TEXTBOOK BUILDER · 2026</p>
+</footer>
+
+<script>
+// ====== DATA ======
+const quoteData = {
+  default: {
+    "子曰、巧言令色、鮮矣仁。": { yomi:"子曰く、巧言令色、鮮なし仁。", yaku:"先生は言われた、「言葉巧みで顔つきを取り繕う人間に、仁の徳が備わっていることは稀である」。", kaisetsu:"学而篇の有名な一節。営業トークの上手い人ほど、内面の徳は薄い、という孔子の人物観察。「巧言」は口先がうまいこと、「令色」は表情を作ること。" },
+    "己所不欲、勿施於人。": { yomi:"己の欲せざる所、人に施すこと勿れ。", yaku:"自分が望まないことを他人にしてはならない。", kaisetsu:"衛霊公篇に出る孔子・子貢の問答。一語で生涯通用する言葉として「恕」が選ばれた。儒教版「黄金律」――世界中の倫理体系に共通する普遍的原理。" },
+    "子曰、学而時習之、不亦説乎。\n有朋自遠方来、不亦楽乎。\n人不知而不慍、不亦君子乎。": { yomi:"子曰く、学びて時にこれを習う、亦た説（よろこ）ばしからずや。朋（とも）有り遠方より来たる、亦た楽しからずや。人知らずして慍（うら）みず、亦た君子ならずや。", yaku:"先生は言われた、「学んで折に触れて復習する、これは喜ばしいことではないか。志を同じくする友が遠くから訪ねてくる、これは楽しいことではないか。人が認めてくれなくても腹を立てない、これは君子ではないか」。", kaisetsu:"学而篇の冒頭。『論語』全篇の出発点。学び・友・自立――この三つで君子の生活が成り立つ。" },
+    "吾十有五而志于学、三十而立、四十而不惑、五十而知天命、六十而耳順、七十而従心所欲、不踰矩。": { yomi:"吾十有五にして学に志す、三十にして立つ、四十にして惑わず、五十にして天命を知る、六十にして耳順（したが）う、七十にして心の欲する所に従えども矩を踰えず。", yaku:"私は十五歳で学問を志し、三十歳で自立し、四十歳で迷わなくなり、五十歳で天命を知り、六十歳で何を聞いても素直に受け入れられるようになり、七十歳で心のままに行動しても道を外れなくなった。", kaisetsu:"為政篇から。孔子の人生年表。「志学」「而立」「不惑」「知命」「耳順」「従心」の各語は現代日本語に残る。" },
+    "朝聞道、夕死可矣。": { yomi:"朝に道を聞かば、夕に死すとも可なり。", yaku:"朝に真理を聞くことができたら、その日の夕方に死んでも悔いはない。", kaisetsu:"里仁篇から。学問・真理への究極的なコミットメントの表明。" },
+    "三人行、必有我師焉。択其善者而従之、其不善者而改之。": { yomi:"三人行えば、必ず我が師あり。其の善き者を択びてこれに従い、其の善からざる者は之を改む。", yaku:"三人で歩けば、必ず私の師となる人がいる。良い点はそれを真似し、悪い点は自分のそれを改める。", kaisetsu:"述而篇から。他者からの学び。すべての他者は先生である、という謙虚な学習姿勢。" },
+    "歳寒、然後知松柏之後彫也。": { yomi:"歳寒くして、然る後に松柏の彫むに後るるを知る。", yaku:"年が寒くなって、初めて松や柏が他の木より遅く葉を落とすことが分かる。", kaisetsu:"子罕篇から。逆境こそが本物を見分ける。順境では誰もが立派に見えるが、苦境で人の真価が分かる。" },
+    "克己復礼為仁。": { yomi:"己に克ちて礼に復るを仁と為す。", yaku:"自分のわがままに打ち克って礼に立ち戻ること、これが仁である。", kaisetsu:"顔淵篇から。仁の最高難度の定義。「克己復礼」は自己制御と礼への回帰を一語に圧縮した名フレーズ。" },
+    "過而不改、是謂過矣。": { yomi:"過ちて改めざる、これを過ちと謂う。", yaku:"過ちを犯して改めないこと、それこそが本当の過ちである。", kaisetsu:"衛霊公篇から。失敗は誰でもする。問題は次にどうするか。" },
+    "性相近也、習相遠也。": { yomi:"性相近きなり、習い相遠きなり。", yaku:"人の生まれつきの性質は互いに近い。しかし習慣によって大きく差がつく。", kaisetsu:"陽貨篇から。人間観の根本テーゼ。生まれより育ち、才能より習慣。" }
+  }
+};
+
+// timeline data
+const stages = [
+  {age:15, name:"志学（しがく）", body:"「吾十有五にして学に志す」。孔子は十五歳で学問を志した。当時の学問は王朝の典礼・歴史・詩経・楽。下級官吏として働きながら独学した。<br><strong>現代に翻訳</strong>：自分の道を意識しはじめる思春期後半。「何をやりたいか」より「何を学び続けるか」を決める時期。", quote:"志学 ＝ 学問へのコミット"},
+  {age:30, name:"而立（じりつ）", body:"「三十にして立つ」。三十歳で自立した。学問と人格が一定の独立性を持ち、生活と思想で「自分の足で立てる」状態。<br><strong>現代に翻訳</strong>：仕事の独り立ち。指導者なしで一人で判断できるようになる時期。", quote:"而立 ＝ 自分の判断軸の確立"},
+  {age:40, name:"不惑（ふわく）", body:"「四十にして惑わず」。四十歳で迷わなくなった。多くの経験を経て、判断が定まる年齢。<br><strong>現代に翻訳</strong>：中堅としての確信。価値観の根が固まり、誘惑や雑音に揺らがなくなる。", quote:"不惑 ＝ 価値観の根の確立"},
+  {age:50, name:"知命（ちめい）", body:"「五十にして天命を知る」。五十歳で天が自分に与えた使命を悟った。<br><strong>現代に翻訳</strong>：何のために生きるかが見える時期。残りの人生で何を成し遂げるべきかが、明確になる瞬間。", quote:"知命 ＝ 自分の使命を見つける"},
+  {age:60, name:"耳順（じじゅん）", body:"「六十にして耳順う」。六十歳で何を聞いても素直に受け入れられるようになった。批判も賞賛も平等に聞ける境地。<br><strong>現代に翻訳</strong>：感情的反応の卒業。批判を「自分への攻撃」とせず、情報として処理できる。", quote:"耳順 ＝ 受容と寛容の境地"},
+  {age:70, name:"従心（じゅうしん）", body:"「七十にして心の欲する所に従えども矩を踰えず」。七十歳、心のままに行動しても道を外れない。本能と倫理が一致した最高境地。<br><strong>現代に翻訳</strong>：欲望と倫理の融合。「したいこと」と「すべきこと」が自然に一致する人格の完成。", quote:"従心 ＝ 倫理と本能の融合"}
+];
+
+// keyword detail data
+const kwData = {
+  jin: {
+    title: "仁（じん） ― 人を人として大切にする心",
+    body: `<p>『論語』の中心概念。「仁」は「人」と「二」から成り、<strong>人と人との間に成り立つもの</strong>を象徴する。孔子は「仁」を単一の定義で語らなかった。弟子の問いによって答え方を変えている。樊遅には「人を愛すること」、顔淵には「己に克ちて礼に復ること」と。共通するのは、<strong>他者への敬意と自分の内側の規律が結びついて初めて成立する</strong>という構造である。</p><p><strong>身近な比喩</strong>：満員電車で席を譲るかどうか考えるあの感覚。譲るのが「正しい」と思っている時点で、すでに「人と人の間」の意識が働いている。</p>`
+  },
+  rei: {
+    title: "礼（れい） ― 関係を整える形式",
+    body: `<p>「礼」は人と人、人と社会のあいだの<strong>関係性を秩序づける形式</strong>である。冠婚葬祭の作法から、上司への口の利き方、食事のマナーまで、社会の中で「ふさわしい振る舞い」を規定する全てが「礼」の範疇に入る。</p><p>現代人は「堅苦しい」と感じやすいが、孔子の真意は「<strong>形式が中身を支える</strong>」というもの。形式が心を整え、心が形式に魂を入れる――この二項の往復が「礼楽」と呼ばれる文化の核心である。</p>`
+  },
+  gi: {
+    title: "義（ぎ） ― 損得を超えた「正しさ」",
+    body: `<p>「義」は損得勘定とは別の次元で「これは正しい・正しくない」と判断する基準である。「君子は義に喩り、小人は利に喩る」（里仁篇）――優れた人物は「正しいかどうか」を起点に判断し、凡庸な人物は「得かどうか」を起点に判断する。</p><p>「義」は「利」を否定するわけではない。<strong>短期の利を取って長期の信用を失うか、長期の信用を取って短期の利を譲るか</strong>――この選択の場面で「義」は問われる。</p>`
+  },
+  chi: {
+    title: "知（ち） ― 物事を見抜く力",
+    body: `<p>「知」は単なる知識量ではなく、<strong>物事を正しく見極める判断力</strong>である。「学んで思わざれば則ち罔し、思いて学ばざれば則ち殆うし」（為政篇）――学ぶこと（入力）と考えること（加工）が両輪でなければ、知は本物にならない。</p><p>もう一つの側面は<strong>メタ認知</strong>。「これを知るをこれを知ると為し、知らざるをこれ知らずと為す」――知ったかぶりは知の敵である。</p>`
+  },
+  shin: {
+    title: "信（しん） ― 言葉と行いの一致",
+    body: `<p>「信」は<strong>言葉と行いの一致</strong>である。一度約束したことは守る。できないことは引き受けない。「人にして信なくんば、其の可なるを知らざるなり」（為政篇）――信なき者は使い物にならない。</p><p>職場の比喩なら、<strong>「納期を守る」「コミットしたことをやり切る」</strong>がそのまま「信」の実践である。能力があっても、口先だけで実行が伴わない人は信頼されない。</p>`
+  },
+  koutei: {
+    title: "孝・悌（こう・てい） ― 家族と年長者への礼節",
+    body: `<p>「孝」は親への敬意、「悌」は兄や年長者への敬意。儒教において、これらは「仁」のもっとも身近な実践とされる。<strong>家族のなかで人を大切にする訓練ができてはじめて、外の社会で人を大切にできる</strong>、という発想である。</p><p>現代の感覚では古めかしく聞こえるかもしれない。だが要は「身近な人を大事にできない者が、社会で他人を大事にできるはずがない」。これは現代の組織論でも有効。</p>`
+  },
+  kunshi: {
+    title: "君子（くんし） ― 人格の完成を目指す者",
+    body: `<p>「君子」は儒教における<strong>理想の人物像</strong>。生まれや身分による貴族ではなく、徳と学問によって自らを高めた者を指す。対義語は「小人」。寛容で、誠実で、学び続け、責任を引き受け、口数は少なく行動は確かで、不遇でも怨まない――これが君子の輪郭である。</p><p>「君子は和して同ぜず、小人は同じて和せず」――<strong>同調圧力に流されないが、孤立もしない</strong>。この絶妙なバランスが「和して同ぜず」。</p>`
+  },
+  chuyo: {
+    title: "中庸（ちゅうよう） ― 行き過ぎず、足りなさすぎず",
+    body: `<p>「中庸」は<strong>極端を避け、適切な度合いを保つ</strong>思想。怒るべき場面で怒り、喜ぶべき場面で喜ぶが、過度に怒り狂ったり喜びすぎたりはしない。</p><p>中庸は「ぬるい中間」ではない。<strong>振れ幅を知った上で、状況に応じた最適点を選ぶ</strong>のが中庸である。プロ野球の打者で言えば、内角・外角・高め・低めをすべて打てるからこそ「平均的に良い」が成立する。</p>`
+  },
+  gaku: {
+    title: "学（がく） ― 終わりなき自己更新",
+    body: `<p>「学」は『論語』第一篇の冒頭、つまり全篇の出発点に置かれる概念。「学んで時にこれを習う、亦た説ばしからずや」――学んだことを折に触れて復習することは、なんと喜ばしいことか。</p><p>孔子の「学」は知識の蓄積だけを指さない。<strong>人格の更新</strong>を含む。だから生涯学習であり、終わりはない。「七十にして心の欲する所に従えども矩を踰えず」は、生涯を通じて自分を磨き続けた到達点の告白である。</p>`
+  },
+  chujo: {
+    title: "忠恕（ちゅうじょ） ― 真心と思いやりの一対",
+    body: `<p>「忠」は<strong>自分に対する誠実さ</strong>、「恕」は<strong>他者への思いやり</strong>。「己の欲せざる所、人に施すこと勿れ」（衛霊公篇）が「恕」の典型的表現。孔子の全思想を弟子の曾子が二字で要約した有名な概念。</p><p>キリスト教の「黄金律」（汝の欲することを他人にもせよ）と比較されることが多い。儒教は「禁止形」、キリスト教は「奨励形」――根底にあるのは<strong>他者への想像力</strong>である。</p>`
+  }
+};
+
+// ====== FUNCTIONS ======
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.dataset.theme;
+  const next = cur === "dark" ? "light" : "dark";
+  html.dataset.theme = next;
+  document.getElementById('theme-btn').textContent = next === "dark" ? "☀ ライト" : "🌙 ダーク";
+}
+
+function showStage(i) {
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tl-item')[i].classList.add('active');
+  const s = stages[i];
+  const detail = document.getElementById('tl-detail');
+  detail.innerHTML = `<div class="tl-detail-title">${s.age}歳 ― ${s.name}</div><p>${s.body}</p><div class="tl-detail-quote">${s.quote}</div>`;
+}
+
+function openKW(id) {
+  const detail = document.getElementById('kw-detail');
+  const d = kwData[id];
+  if (!d) return;
+  detail.innerHTML = `<div class="kw-detail-title">${d.title}</div>${d.body}`;
+  detail.classList.add('open');
+  detail.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function filterKW(cat, btn) {
+  document.querySelectorAll('.filter-bar .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.kw-card').forEach(card => {
+    if (cat === 'all' || (card.dataset.cat || '').includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function filterBook(cat, btn) {
+  document.querySelectorAll('#books').forEach(book => {
+    book.previousElementSibling.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('.book').forEach(book => {
+    if (cat === 'all' || book.dataset.cat === cat) {
+      book.style.display = '';
+    } else {
+      book.style.display = 'none';
+    }
+  });
+}
+
+function switchTab(btn, mode) {
+  const card = btn.closest('.quote-card');
+  const tabs = card.querySelectorAll('.quote-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const body = card.querySelector('.quote-body');
+  const original = body.dataset.original || body.textContent;
+  if (!body.dataset.original) body.dataset.original = original;
+  body.dataset.mode = mode;
+  const key = original.trim();
+  const data = quoteData.default[key];
+  if (mode === 'genbun') body.innerHTML = original.replace(/\n/g, '<br>');
+  else if (data && data[mode]) body.textContent = data[mode];
+  else body.textContent = '（このタブの内容は準備中です）';
+}
+
+function toggleAcc(head) {
+  head.parentElement.classList.toggle('open');
+}
+
+function answerQuiz(btn, choice) {
+  const quiz = btn.closest('.quiz');
+  const correct = quiz.dataset.correct;
+  const explain = quiz.dataset.explain;
+  const fb = quiz.querySelector('.quiz-feedback');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
+  if (choice === correct) {
+    btn.classList.add('correct');
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '◎ 正解！　' + explain;
+  } else {
+    btn.classList.add('wrong');
+    const correctBtn = Array.from(quiz.querySelectorAll('.quiz-opt')).find(o => o.getAttribute('onclick').includes("'" + correct + "'"));
+    if (correctBtn) correctBtn.classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✕ 残念。正解は緑のもの。　' + explain;
+  }
+}
+
+// progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrollTop = h.scrollTop || document.body.scrollTop;
+  const scrollHeight = h.scrollHeight - h.clientHeight;
+  const pct = (scrollTop / scrollHeight) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// active section highlight in sidebar
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('nav.side a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector('nav.side a[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+document.querySelectorAll('section.part, .hero').forEach(s => observer.observe(s));
+
+// init
+showStage(0);
+</script>
+</body>
+</html>
