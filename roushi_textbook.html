@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>老子 ― ゼロから学ぶ「道」と「無為」の古典</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;700;900&family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #1a2218;
+  --sumi-light: #2a3528;
+  --gen: #2d4a3a;
+  --gen-deep: #182b22;
+  --gen-soft: #5a7a6a;
+  --gen-pale: #8aa898;
+  --kin: #c8a548;
+  --kin-soft: #e0c069;
+  --kin-pale: #f0d488;
+  --kinari: #f5f1e6;
+  --hakuji: #fafaf7;
+  --kasumi: #e2e8de;
+  --kohaku: #5a6858;
+  --paper: #f3f0e6;
+  --paper-shadow: #d8d8c8;
+  --line: #c8d0c0;
+  --aijiro: #ebf1f0;
+  --ai: #2a4858;
+  --green: #4a7c59;
+  --shu: #b04030;
+}
+[data-theme="dark"] {
+  --sumi: #e8eee0;
+  --sumi-light: #d0d6c8;
+  --gen: #7aa088;
+  --gen-deep: #4a6a5a;
+  --gen-soft: #5a7a6a;
+  --kin: #e0c069;
+  --kin-soft: #f0d488;
+  --kinari: #1a1c17;
+  --hakuji: #15170f;
+  --kasumi: #232820;
+  --kohaku: #a8b8a0;
+  --paper: #1a1c17;
+  --paper-shadow: #0a0c08;
+  --line: #3a4035;
+  --aijiro: #1f262a;
+  --ai: #8db1c2;
+  --green: #8ab09a;
+  --shu: #d76155;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', '游明朝', 'YuMincho', serif;
+  background: var(--paper);
+  color: var(--sumi);
+  line-height: 1.85;
+  font-size: 16px;
+  font-feature-settings: "palt";
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gen), var(--kin)); z-index: 1000; width: 0%; transition: width 0.1s; }
+header.global {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(243, 240, 230, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+[data-theme="dark"] header.global { background: rgba(26, 28, 23, 0.92); }
+.brand { display: flex; align-items: center; gap: 12px; font-family: 'Zen Old Mincho', serif; }
+.brand-seal {
+  width: 36px; height: 36px;
+  background: var(--gen); color: var(--kinari);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; border-radius: 4px;
+  letter-spacing: -1px; font-family: 'Zen Old Mincho', serif;
+  box-shadow: 2px 2px 0 var(--gen-deep);
+}
+.brand-title { font-size: 17px; font-weight: 700; color: var(--sumi); }
+.brand-sub { font-size: 11px; color: var(--kohaku); letter-spacing: 1px; }
+.controls { display: flex; gap: 8px; }
+.btn {
+  background: none; border: 1px solid var(--line); color: var(--sumi);
+  padding: 6px 14px; border-radius: 4px; cursor: pointer;
+  font-family: inherit; font-size: 13px; transition: all 0.2s;
+}
+.btn:hover { background: var(--gen); color: var(--kinari); border-color: var(--gen); }
+.layout {
+  display: grid; grid-template-columns: 260px 1fr;
+  max-width: 1400px; margin: 0 auto; gap: 0;
+}
+nav.side {
+  position: sticky; top: 64px; align-self: start;
+  height: calc(100vh - 64px); overflow-y: auto;
+  padding: 24px 18px; border-right: 1px solid var(--line); background: var(--paper);
+}
+nav.side ol { list-style: none; }
+nav.side > ol > li { margin-bottom: 4px; }
+nav.side a {
+  display: block; padding: 8px 12px;
+  color: var(--kohaku); text-decoration: none;
+  border-radius: 4px; font-size: 14px;
+  transition: all 0.2s; border-left: 3px solid transparent;
+}
+nav.side a:hover, nav.side a.active {
+  color: var(--gen); background: var(--kasumi); border-left-color: var(--gen);
+}
+nav.side a.section-title { font-weight: 700; color: var(--sumi); font-size: 15px; margin-top: 16px; }
+nav.side a.sub { font-size: 13px; padding-left: 24px; }
+main { padding: 32px 48px 80px; max-width: 880px; }
+.hero {
+  position: relative; padding: 60px 40px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--kasumi) 100%);
+  border-radius: 8px; overflow: hidden; margin-bottom: 48px;
+  border: 1px solid var(--line);
+}
+.hero::before {
+  content: "道"; position: absolute; top: -40px; right: -20px;
+  font-size: 320px; color: var(--gen); opacity: 0.08;
+  font-family: 'Zen Old Mincho', serif; font-weight: 900; line-height: 1;
+}
+.hero-tag {
+  display: inline-block; padding: 4px 12px;
+  background: var(--gen); color: var(--kinari);
+  font-size: 11px; letter-spacing: 2px; border-radius: 2px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 42px; font-weight: 900; line-height: 1.3;
+  margin-bottom: 12px; color: var(--sumi);
+}
+.hero .sub-title { font-size: 18px; color: var(--kohaku); margin-bottom: 24px; }
+.hero-meta {
+  display: flex; gap: 32px; font-size: 13px; color: var(--kohaku);
+  padding-top: 24px; border-top: 1px solid var(--line);
+}
+.hero-meta-item span { display: block; color: var(--sumi); font-weight: 700; font-size: 16px; margin-top: 2px; }
+section.part { margin-bottom: 80px; scroll-margin-top: 80px; }
+.part-header {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 8px; padding-bottom: 12px; border-bottom: 3px solid var(--gen);
+}
+.part-num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 56px; font-weight: 900; color: var(--gen); line-height: 1;
+}
+.part-title { font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; }
+.part-subtitle { color: var(--kohaku); font-size: 14px; margin-bottom: 32px; }
+h2.chap {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px; margin: 40px 0 16px;
+  padding-left: 16px; border-left: 4px solid var(--gen);
+  scroll-margin-top: 80px;
+}
+h3.sec {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px; color: var(--gen-deep); margin: 28px 0 12px;
+}
+p { margin: 12px 0; font-size: 15.5px; }
+p.lead { font-size: 17px; color: var(--sumi); line-height: 2; }
+.cosmo {
+  position: relative; margin: 32px 0; padding: 24px 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.cosmo-track { display: flex; gap: 0; min-width: 700px; position: relative; padding: 20px 0; align-items: center; justify-content: space-around; }
+.c-item {
+  flex: 1; text-align: center; position: relative; cursor: pointer; padding: 14px 8px;
+  background: var(--paper); border: 2px solid var(--line);
+  margin: 0 6px; border-radius: 10px; transition: all 0.25s;
+}
+.c-item:hover, .c-item.active {
+  border-color: var(--gen); background: var(--kasumi);
+  transform: translateY(-3px); box-shadow: 0 8px 16px rgba(45,74,58,0.15);
+}
+.c-level {
+  display: inline-block; background: var(--gen); color: var(--kinari);
+  font-size: 10px; padding: 2px 8px; border-radius: 12px; margin-bottom: 6px; letter-spacing: 1px;
+}
+.c-name { font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 900; color: var(--gen); line-height: 1; margin: 4px 0; }
+.c-label { font-size: 11px; color: var(--kohaku); margin-top: 4px; line-height: 1.4; }
+.c-arrow {
+  font-size: 20px; color: var(--gen); margin: 0 -4px; align-self: center;
+}
+.c-detail {
+  margin-top: 20px; padding: 20px;
+  background: var(--kasumi); border-radius: 6px;
+  border-left: 4px solid var(--gen); min-height: 80px;
+}
+.c-detail-title { font-family: 'Zen Old Mincho', serif; font-size: 18px; font-weight: 700; color: var(--gen-deep); margin-bottom: 8px; }
+.kw-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px; margin: 24px 0;
+}
+.kw-card {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; padding: 20px; cursor: pointer;
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.kw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(45,74,58,0.15);
+  border-color: var(--gen);
+}
+.kw-card::after {
+  content: ""; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 3px; background: var(--gen); transition: width 0.3s;
+}
+.kw-card:hover::after { width: 100%; }
+.kw-glyph {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 64px; font-weight: 900; color: var(--gen); line-height: 1; margin-bottom: 8px;
+}
+.kw-yomi { font-size: 12px; color: var(--kohaku); letter-spacing: 2px; }
+.kw-name { font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; margin: 4px 0 8px; }
+.kw-summary { font-size: 13px; color: var(--kohaku); line-height: 1.6; }
+.kw-detail {
+  margin-top: 16px; padding: 24px;
+  background: var(--kasumi); border-radius: 8px;
+  border-left: 4px solid var(--gen); display: none;
+}
+.kw-detail.open { display: block; animation: fadeIn 0.4s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.kw-detail-title { font-family: 'Zen Old Mincho', serif; font-size: 22px; margin-bottom: 8px; }
+.quote-card {
+  margin: 28px 0; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(45,74,58,0.06);
+}
+.quote-tabs { display: flex; background: var(--kasumi); border-bottom: 1px solid var(--line); }
+.quote-tab {
+  flex: 1; padding: 10px 12px; font-size: 13px;
+  background: none; border: none; cursor: pointer; color: var(--kohaku);
+  font-family: inherit; border-bottom: 3px solid transparent; transition: all 0.2s;
+}
+.quote-tab.active { color: var(--gen); background: var(--paper); border-bottom-color: var(--gen); font-weight: 700; }
+.quote-tab:hover { color: var(--gen); }
+.quote-body { padding: 24px; min-height: 80px; }
+.quote-body[data-mode="genbun"] {
+  font-family: 'Zen Old Mincho', serif; font-size: 22px;
+  text-align: center; letter-spacing: 4px; color: var(--sumi);
+  padding: 36px 24px; line-height: 2.2;
+}
+.quote-body[data-mode="yomi"] { font-family: 'Zen Old Mincho', serif; font-size: 17px; color: var(--sumi); }
+.quote-body[data-mode="yaku"] { font-size: 15.5px; color: var(--sumi); }
+.quote-body[data-mode="kaisetsu"] {
+  font-size: 14px; color: var(--kohaku);
+  background: var(--kasumi); border-left: 3px solid var(--gen);
+  padding: 16px 20px; margin: 16px; border-radius: 4px;
+}
+.quote-source { text-align: right; font-size: 12px; color: var(--kohaku); padding: 8px 24px 16px; }
+.tbl-wrap { overflow-x: auto; margin: 24px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid var(--line); background: var(--paper); }
+th { background: var(--gen); color: var(--kinari); padding: 10px 12px; text-align: left; font-weight: 700; font-size: 13px; }
+td { padding: 10px 12px; border-top: 1px solid var(--line); }
+tr:nth-child(even) td { background: var(--kasumi); }
+tr:hover td { background: var(--kin-pale); color: var(--sumi); }
+.accordion-item { border: 1px solid var(--line); border-radius: 6px; margin-bottom: 12px; overflow: hidden; background: var(--paper); }
+.accordion-head {
+  padding: 16px 20px; background: var(--kasumi); cursor: pointer;
+  font-family: 'Zen Old Mincho', serif; font-weight: 700; font-size: 16px;
+  display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;
+}
+.accordion-head:hover { background: var(--kin-pale); }
+.accordion-head::after { content: "▼"; font-size: 10px; color: var(--gen); transition: transform 0.3s; }
+.accordion-item.open .accordion-head::after { transform: rotate(180deg); }
+.accordion-num {
+  display: inline-block; background: var(--gen); color: var(--kinari);
+  width: 28px; height: 28px; border-radius: 50%;
+  text-align: center; line-height: 28px; font-size: 13px; margin-right: 12px;
+}
+.accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.5s, padding 0.3s; }
+.accordion-item.open .accordion-body { padding: 16px 20px; max-height: none; }
+.pillar-svg-wrap { margin: 32px auto; max-width: 600px; text-align: center; }
+.exercise { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin: 16px 0; }
+.exercise-num {
+  display: inline-block; background: var(--gen); color: var(--kinari);
+  padding: 2px 8px; border-radius: 3px; font-size: 12px; letter-spacing: 1px; margin-bottom: 8px;
+}
+.exercise-q { font-weight: 700; margin-bottom: 12px; }
+.exercise textarea {
+  width: 100%; padding: 12px; border: 1px solid var(--line);
+  border-radius: 4px; font-family: inherit; font-size: 14px;
+  resize: vertical; min-height: 80px; background: var(--kinari); color: var(--sumi);
+}
+.quiz {
+  background: var(--paper); border: 2px solid var(--gen);
+  border-radius: 8px; padding: 24px; margin: 24px 0;
+}
+.quiz-q { font-weight: 700; margin-bottom: 14px; font-size: 16px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 10px 16px; border: 1px solid var(--line);
+  border-radius: 4px; background: var(--kinari); cursor: pointer;
+  text-align: left; font-family: inherit; font-size: 14px;
+  transition: all 0.2s; color: var(--sumi);
+}
+.quiz-opt:hover { background: var(--kin-pale); border-color: var(--gen); }
+.quiz-opt.correct { background: #d4ecd5; border-color: var(--green); color: var(--green); font-weight: 700; }
+.quiz-opt.wrong { background: #f3d1cd; border-color: var(--shu); }
+.quiz-feedback { margin-top: 14px; padding: 12px; border-radius: 4px; font-size: 14px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: #e8f3e9; color: var(--green); }
+.quiz-feedback.wrong { background: #fae6e2; color: var(--shu); }
+.pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+.pillar-card {
+  background: var(--paper); padding: 24px; border-radius: 8px;
+  border-top: 4px solid var(--gen); border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.pillar-card h4 { font-family: 'Zen Old Mincho', serif; font-size: 18px; color: var(--gen); margin-bottom: 8px; }
+.pillar-card .pillar-no { font-size: 11px; letter-spacing: 2px; color: var(--kohaku); }
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 24px 0; }
+.book { background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; font-size: 13px; }
+.book .book-num { color: var(--gen); font-weight: 700; margin-right: 6px; }
+.book .book-title { font-weight: 700; font-family: 'Zen Old Mincho', serif; }
+.book .book-meta { color: var(--kohaku); font-size: 11px; margin-top: 2px; }
+.book .book-cat { display: inline-block; background: var(--kasumi); color: var(--gen-deep); font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-top: 4px; }
+footer { background: var(--sumi); color: var(--kinari); padding: 40px 24px; text-align: center; margin-top: 80px; }
+footer .brand-seal { background: var(--gen); color: var(--kinari); display: inline-flex; }
+footer p { color: var(--paper-shadow); font-size: 13px; margin-top: 12px; }
+.filter-bar { display: flex; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+.chip {
+  padding: 6px 14px; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 20px; cursor: pointer; font-size: 13px; font-family: inherit;
+  color: var(--sumi); transition: all 0.2s;
+}
+.chip.active, .chip:hover { background: var(--gen); color: var(--kinari); border-color: var(--gen); }
+.tip {
+  background: var(--aijiro); border-left: 4px solid var(--ai);
+  padding: 14px 18px; border-radius: 4px; margin: 16px 0;
+  font-size: 14px; color: var(--sumi);
+}
+.tip strong { color: var(--ai); }
+.warn {
+  background: #fae6e2; border-left: 4px solid var(--shu);
+  padding: 14px 18px; border-radius: 4px; margin: 16px 0;
+  font-size: 14px; color: var(--sumi);
+}
+.warn strong { color: var(--shu); }
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; max-width: 100%; }
+  nav.side { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 14px 16px; max-height: 280px; }
+  main { padding: 24px 18px 60px; max-width: 100%; }
+  .hero { padding: 32px 20px; }
+  .hero h1 { font-size: 28px; }
+  .hero::before { font-size: 180px; right: -10px; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; gap: 14px; }
+}
+@media (max-width: 600px) {
+  body { font-size: 14px; }
+  header.global { padding: 8px 12px; }
+  .brand { gap: 8px; }
+  .brand-seal { width: 28px; height: 28px; font-size: 13px; box-shadow: 1px 1px 0 var(--gen-deep); }
+  .brand-title { font-size: 12px; line-height: 1.3; }
+  .brand-sub { display: none; }
+  .controls { gap: 4px; }
+  .btn { padding: 5px 8px; font-size: 10px; }
+  nav.side { padding: 12px 14px; max-height: 240px; }
+  nav.side a { padding: 6px 10px; font-size: 13px; }
+  nav.side a.section-title { font-size: 13px; margin-top: 10px; }
+  nav.side a.sub { font-size: 12px; padding-left: 20px; }
+  main { padding: 18px 14px 40px; max-width: 100%; }
+  .hero { padding: 22px 16px; margin-bottom: 32px; }
+  .hero h1 { font-size: 22px; line-height: 1.35; }
+  .hero h1 span { font-size: 0.6em; }
+  .hero .sub-title { font-size: 13px; line-height: 1.8; }
+  .hero-tag { font-size: 10px; padding: 3px 8px; letter-spacing: 1px; margin-bottom: 12px; }
+  .hero::before { font-size: 140px; right: -5px; top: -10px; }
+  .hero-meta { gap: 12px; padding-top: 16px; font-size: 11px; }
+  .hero-meta-item span { font-size: 13px; }
+  p { font-size: 14px; line-height: 1.85; margin: 10px 0; }
+  p.lead { font-size: 14.5px; line-height: 1.9; }
+  h2.chap { font-size: 16px; margin: 24px 0 10px; padding-left: 10px; border-left-width: 3px; }
+  h3.sec { font-size: 14px; margin: 20px 0 10px; }
+  .part-header { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 8px; }
+  .part-num { font-size: 34px; line-height: 1; }
+  .part-title { font-size: 16px; }
+  .part-subtitle { font-size: 11px; margin-bottom: 18px; letter-spacing: 1px; }
+  .filter-bar { gap: 6px; margin: 12px 0; }
+  .chip { padding: 5px 11px; font-size: 12px; }
+  .kw-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .kw-card { padding: 12px; }
+  .kw-glyph { font-size: 44px; }
+  .kw-yomi { font-size: 10px; }
+  .kw-name { font-size: 13px; }
+  .kw-summary { font-size: 11px; line-height: 1.55; }
+  .kw-detail { padding: 16px; }
+  .kw-detail-title { font-size: 17px; }
+  .quote-tabs { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .quote-tab { padding: 8px 2px; font-size: 10px; border-right: 1px solid var(--line); }
+  .quote-tab:last-child { border-right: none; }
+  .quote-body { padding: 16px 12px; }
+  .quote-body[data-mode="genbun"] { font-size: 15px; padding: 20px 8px; letter-spacing: 1px; line-height: 1.9; }
+  .quote-body[data-mode="yomi"] { font-size: 13.5px; }
+  .quote-body[data-mode="yaku"] { font-size: 13.5px; }
+  .quote-body[data-mode="kaisetsu"] { font-size: 12px; padding: 12px 14px; margin: 12px; }
+  .accordion-head { padding: 12px 14px; font-size: 13px; }
+  .accordion-num { width: 22px; height: 22px; line-height: 22px; font-size: 11px; margin-right: 8px; }
+  .accordion-item.open .accordion-body { padding: 12px 14px; }
+  .pillar-grid { gap: 12px; }
+  .pillar-card { padding: 16px; }
+  .pillar-card h4 { font-size: 15px; }
+  .pillar-card .pillar-no { font-size: 10px; }
+  .tip, .warn { padding: 12px 14px; font-size: 12.5px; line-height: 1.7; }
+  .tbl-wrap { margin: 16px 0; }
+  table { font-size: 11.5px; }
+  th, td { padding: 6px 8px; }
+  th { font-size: 11px; }
+  .cosmo { margin: 20px 0; }
+  .cosmo-track { min-width: 620px; padding: 14px 0; }
+  .c-name { font-size: 26px; }
+  .c-level { font-size: 9px; }
+  .c-label { font-size: 10px; }
+  .c-detail { margin-top: 16px; padding: 14px; }
+  .c-detail-title { font-size: 15px; }
+  .exercise { padding: 14px; margin: 12px 0; }
+  .exercise-q { font-size: 13.5px; margin-bottom: 10px; }
+  .exercise textarea { font-size: 13px; min-height: 70px; padding: 10px; }
+  .exercise-num { font-size: 11px; padding: 2px 7px; }
+  .quiz { padding: 16px; margin: 18px 0; }
+  .quiz-q { font-size: 14px; margin-bottom: 12px; }
+  .quiz-opt { padding: 9px 12px; font-size: 12.5px; }
+  .quiz-feedback { font-size: 12.5px; padding: 10px; }
+  .books { grid-template-columns: 1fr; gap: 8px; }
+  .book { padding: 10px 12px; font-size: 12px; }
+  .book .book-meta { font-size: 10px; }
+  .book .book-cat { font-size: 9px; }
+  .pillar-svg-wrap { margin: 24px auto; }
+}
+@media (max-width: 380px) {
+  .brand-title { display: none; }
+  .kw-grid { grid-template-columns: 1fr; }
+  .quote-tabs { grid-template-columns: repeat(2, 1fr); }
+  .quote-tab:nth-child(2) { border-right: none; }
+}
+@media (max-width: 980px) {
+  html, body { width: 100%; }
+  body { overflow-x: hidden; }
+  .layout, header.global, footer, main, section, nav.side, div, p, h1, h2, h3, h4, ul, ol, li { max-width: 100%; box-sizing: border-box; }
+  p, li, td, th, .kw-summary, .tip, .warn, .quote-body, .accordion-head { overflow-wrap: anywhere; word-break: break-word; }
+  .quote-body[data-mode="genbun"] { overflow-wrap: anywhere; word-break: break-all; }
+  img, svg, video, iframe, embed { max-width: 100%; height: auto; }
+  .cosmo, .tbl-wrap { max-width: 100%; overflow-x: auto; }
+  table { max-width: 100%; }
+  .hero { overflow: hidden; max-width: 100%; }
+}
+@media print {
+  header.global, nav.side, .controls, #progress-bar { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  body { background: white; color: black; }
+  .accordion-body { max-height: none !important; padding: 16px 20px !important; }
+  .kw-detail { display: block !important; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<header class="global">
+  <div class="brand">
+    <div class="brand-seal">道</div>
+    <div>
+      <div class="brand-title">老子 ― ゼロから学ぶ古典</div>
+      <div class="brand-sub">LAO TZU · UNIVERSITY EDITION</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="toggleTheme()" id="theme-btn">🌙 ダーク</button>
+    <button class="btn" onclick="window.print()">🖨 印刷</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="side" id="sidenav">
+    <ol>
+      <li><a href="#hero" class="section-title active">表紙</a></li>
+      <li><a href="#part0" class="section-title">第0部 はじめに</a>
+        <ol>
+          <li><a href="#roushi-who" class="sub">老子という思想家</a></li>
+          <li><a href="#why-now" class="sub">なぜ今読むのか</a></li>
+        </ol>
+      </li>
+      <li><a href="#part1" class="section-title">第1部 8つのキーワード</a></li>
+      <li><a href="#part2" class="section-title">第2部 81章精読</a></li>
+      <li><a href="#part3" class="section-title">第3部 思想体系の再構築</a></li>
+      <li><a href="#part4" class="section-title">第4部 現代理論との橋渡し</a></li>
+      <li><a href="#part5" class="section-title">第5部 ワークブック</a>
+        <ol>
+          <li><a href="#exercises" class="sub">演習</a></li>
+          <li><a href="#quiz" class="sub">クイズ</a></li>
+          <li><a href="#books" class="sub">推薦図書</a></li>
+        </ol>
+      </li>
+      <li><a href="#sources" class="section-title">Sources</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section class="hero" id="hero">
+      <span class="hero-tag">UNIVERSITY EDITION</span>
+      <h1>老子<br><span style="font-size:0.55em; color: var(--gen-deep);">ゼロから学ぶ「道」と「無為」の古典</span></h1>
+      <p class="sub-title">紀元前6世紀ごろの中国・春秋時代の伝説的思想家、老子。彼の名のもとに伝わる『道徳経』約5,000字――世界の古典の中でも最短のひとつ――は、二千五百年を超え、いま私たちの「リーダーシップ」「組織」「キャリア」「人生」の指針として読み直されている。<strong>足し算で成功できなくなった時代の、引き算の哲学</strong>。</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">著者<span>老子（紀元前6世紀頃）</span></div>
+        <div class="hero-meta-item">編纂<span>道家集団（戦国期）</span></div>
+        <div class="hero-meta-item">分量<span>全81章 約5,000字</span></div>
+        <div class="hero-meta-item">本書のページ<span>5部構成・約50p</span></div>
+      </div>
+    </section>
+
+    <section class="part" id="part0">
+      <div class="part-header">
+        <div class="part-num">零</div>
+        <div><div class="part-title">はじめに ― 老子と『道徳経』の世界</div></div>
+      </div>
+      <div class="part-subtitle">PART 0｜INTRODUCTION</div>
+
+      <p class="lead">本書は『道徳経』を「ゼロから一冊で一周できる教科書」として編んだ。古典の知識も中国史の素養も前提としない。求められるのは「自分はなぜ忙しいのか、本当はもっと引き算できないか」を真剣に考えようとする気持ちだけである。</p>
+
+      <h2 class="chap" id="roushi-who">老子という「謎の思想家」</h2>
+
+      <p>老子（ろうし）は、紀元前6世紀ごろの中国・春秋時代に生きたとされる思想家。本名は李耳（りじ）、字は耼（たん）と伝わる。司馬遷『史記』によれば、楚の苦県の出身で、周王朝の蔵書を管理する図書館長を務めたという。孔子が彼に礼について教えを請いに来た、という有名な伝承もある。</p>
+
+      <p>ただし、老子の実在については古来争いがあった。同名の人物が複数いた可能性、後世の道家集団が「伝説の祖」として作り上げた可能性が指摘されている。確かなのは、彼の名のもとに伝わる<strong>『老子』（別名『道徳経』）という、わずか約5,000字の短い書物</strong>が、二千五百年以上にわたり東アジアの精神史の根幹を形作ってきたという事実である。</p>
+
+      <h3 class="sec">孔子（儒家）と老子（道家） ― 中国思想の二大源流</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>観点</th><th>孔子（儒家）</th><th>老子（道家）</th></tr></thead>
+          <tbody>
+            <tr><td>主たる関心</td><td>社会秩序・人倫</td><td>宇宙原理・個人の在り方</td></tr>
+            <tr><td>キーワード</td><td>仁・義・礼・智・信</td><td>道・徳・無為・自然・柔弱</td></tr>
+            <tr><td>理想像</td><td>君子（道徳的人格者）</td><td>聖人（道に沿う賢者）</td></tr>
+            <tr><td>政治姿勢</td><td>積極的統治・教化</td><td>不干渉・小国寡民</td></tr>
+            <tr><td>文体</td><td>対話・問答</td><td>警句・詩的断章</td></tr>
+            <tr><td>比喩</td><td>弓・玉・舟・松柏</td><td>水・赤子・谷・雌・嬰児</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>孔子が「ガチガチに整備された道路」だとすれば、老子は「<strong>川の流れそのもの</strong>」である。前者は秩序の力で人を運ぶが、後者は重力に従って淀みなく下る。本書はこの「川」のほうの哲学を、ゼロから一周できるように設計した教科書である。</p>
+
+      <h2 class="chap">『道徳経』の成立とテキスト史</h2>
+
+      <p>『道徳経』は、上篇「道経」（1-37章）と下篇「徳経」（38-81章）の二部構成からなる。原文はわずか約5,000字。世界の古典の中でも有数の短さである。ただし、その短さに反して、テキストの伝承は複雑を極める。</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>版本</th><th>成立年代</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr><td>郭店楚簡</td><td>紀元前300年ごろ</td><td>1993年湖北省の戦国楚墓から出土。最古の断片</td></tr>
+            <tr><td>馬王堆帛書</td><td>紀元前2世紀</td><td>1973年湖南省の前漢墓から出土。徳経が先、道経が後</td></tr>
+            <tr><td>河上公本</td><td>後漢期</td><td>章分けの定型。注釈付き。民間道教の中心</td></tr>
+            <tr><td>王弼本</td><td>三国時代・魏</td><td>18歳の天才・王弼（226-249）の注釈本。学術的標準</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>現代の翻訳の多くは<strong>王弼本を底本</strong>としつつ、出土資料との校合を行っている。本書も王弼本の章番号と章句に依拠する。</p>
+
+      <h2 class="chap" id="why-now">なぜ今、老子を読むのか</h2>
+
+      <p>『道徳経』の魅力は、その「<strong>ねじれ</strong>」にある。常識を逆さまに振ってみせる。「曲なれば則ち全し」「弱めたければ、まず強めよ」「明らかな道は、むしろ暗く見える」――現代の自己啓発書とは真逆である。それでいて、読み込むほどに「あ、これは現実をよく観察している」と感じる。</p>
+
+      <p>現代のビジネスパーソン、リーダー、組織人にとって、老子は次の3つの局面で深く刺さる。</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">WHY NOW 01</div>
+          <h4>「やりすぎ」の時代の処方箋</h4>
+          <p>情報過多、KPI過多、会議過多、施策過多。あらゆる現場で「もっと、もっと」が叫ばれる。老子は「為して為さず」という、引き算の哲学を提示する。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">WHY NOW 02</div>
+          <h4>リーダーシップの陰の側面</h4>
+          <p>前に出る、語る、決める、引っ張る。これらはリーダーシップの陽の側面。その裏で必要な「下にいる、聞く、待つ、譲る」を体系化したのが老子。サーバントリーダーシップの源流。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">WHY NOW 03</div>
+          <h4>変化への向き合い方</h4>
+          <p>「反者、道之動」（反対のほうへ動くのが道の動き方）――好況の中の不況の芽、絶頂の中の衰退の予兆、混乱の中の秩序の兆しを読む眼を養う。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">SUMMARY</div>
+          <h4>引き算の哲学</h4>
+          <p>要するに老子は<strong>「足し算で成功できなくなった時代の、引き算の哲学」</strong>である。読み始めるのに、これ以上に良いタイミングはない。</p>
+        </div>
+      </div>
+
+      <h3 class="sec">道の生成 ― 「道→一→二→三→万物」（クリックで詳細）</h3>
+      <p>第42章「道生一、一生二、二生三、三生萬物」は、老子の宇宙論を凝縮した一句。<strong>道はどう万物を生み出すか</strong>――この5段階の生成プロセスを、クリックして確かめてみよう。</p>
+
+      <div class="cosmo">
+        <div class="cosmo-track">
+          <div class="c-item active" data-stage="0" onclick="showCosmo(0)">
+            <div class="c-level">根源</div>
+            <div class="c-name">道</div>
+            <div class="c-label">混成・寂寥</div>
+          </div>
+          <div class="c-arrow">→</div>
+          <div class="c-item" data-stage="1" onclick="showCosmo(1)">
+            <div class="c-level">第一段</div>
+            <div class="c-name">一</div>
+            <div class="c-label">統一原理</div>
+          </div>
+          <div class="c-arrow">→</div>
+          <div class="c-item" data-stage="2" onclick="showCosmo(2)">
+            <div class="c-level">第二段</div>
+            <div class="c-name">二</div>
+            <div class="c-label">陰陽の対立</div>
+          </div>
+          <div class="c-arrow">→</div>
+          <div class="c-item" data-stage="3" onclick="showCosmo(3)">
+            <div class="c-level">第三段</div>
+            <div class="c-name">三</div>
+            <div class="c-label">陰陽＋沖気</div>
+          </div>
+          <div class="c-arrow">→</div>
+          <div class="c-item" data-stage="4" onclick="showCosmo(4)">
+            <div class="c-level">展開</div>
+            <div class="c-name">万物</div>
+            <div class="c-label">個別の事物</div>
+          </div>
+        </div>
+      </div>
+      <div class="c-detail" id="c-detail">
+        <div class="c-detail-title">道 ― 混沌として定義不能の根源</div>
+        <p>「有物混成、先天地生」――あるものが混沌として一体に成り、天地より先に生まれた。静かで、深く、独り立って変わらず、巡り行って疲れない。これこそ天下の母（生み出すもの）である。<strong>道は言葉や概念の檻に入らない</strong>。だから語ろうとした瞬間に「道そのもの」からは外れる。<br><strong>現代に翻訳</strong>：スポーツのフロー状態、優秀な営業の「なんとなく」――言語化以前の最適化が「道」の小さな現れ。</p>
+      </div>
+
+      <div class="tip"><strong>3行サマリー</strong><br>・老子は紀元前6世紀ごろの伝説的思想家。実在の有無は確定しないが、その名のもとに伝わる『道徳経』約5,000字が中国思想の根幹を作った<br>・『道徳経』は道経（1-37章）と徳経（38-81章）の二部構成。王弼本が学術的標準<br>・老子は「足し算の時代」が壁にぶつかった現代にこそ、「引き算の哲学」として読み直す価値がある</div>
+    </section>
+
+    <section class="part" id="part1">
+      <div class="part-header">
+        <div class="part-num">壱</div>
+        <div><div class="part-title">入門編 ― 8つのキーワードで老子を掴む</div></div>
+      </div>
+      <div class="part-subtitle">PART 1｜EIGHT KEY CONCEPTS</div>
+
+      <p class="lead">老子を読み始める前に、頻出する8つの中核キーワードを押さえる。この8つを掴めば、『道徳経』のどの章に当たっても「ああ、これはあのキーワードの話だな」と方向感が取れる。<strong>気になる漢字をクリック</strong>すると詳細が展開する。</p>
+
+      <div class="kw-grid" id="kw-grid">
+        <div class="kw-card" onclick="openKW('do')">
+          <div class="kw-glyph">道</div><div class="kw-yomi">DŌ / TAO</div>
+          <div class="kw-name">道（みち）</div>
+          <div class="kw-summary">言葉で掴めない宇宙の根本原理</div>
+        </div>
+        <div class="kw-card" onclick="openKW('mui')">
+          <div class="kw-glyph">無</div><div class="kw-yomi">MUI</div>
+          <div class="kw-name">無為（むい）</div>
+          <div class="kw-summary">本質的でない作為を減らした働き</div>
+        </div>
+        <div class="kw-card" onclick="openKW('jinen')">
+          <div class="kw-glyph">自</div><div class="kw-yomi">JINEN</div>
+          <div class="kw-name">自然（じねん）</div>
+          <div class="kw-summary">本来そうあるさま、強制のなさ</div>
+        </div>
+        <div class="kw-card" onclick="openKW('jujaku')">
+          <div class="kw-glyph">柔</div><div class="kw-yomi">JŪJAKU</div>
+          <div class="kw-name">柔弱（じゅうじゃく）</div>
+          <div class="kw-summary">短期の弱さ＝長期の強さ</div>
+        </div>
+        <div class="kw-card" onclick="openKW('han')">
+          <div class="kw-glyph">反</div><div class="kw-yomi">HAN</div>
+          <div class="kw-name">反（はん）</div>
+          <div class="kw-summary">極まれば反転する宇宙の動作</div>
+        </div>
+        <div class="kw-card" onclick="openKW('gen')">
+          <div class="kw-glyph">玄</div><div class="kw-yomi">GEN</div>
+          <div class="kw-name">玄（げん）</div>
+          <div class="kw-summary">奥の奥まで深いブラックボックス</div>
+        </div>
+        <div class="kw-card" onclick="openKW('jozen')">
+          <div class="kw-glyph">水</div><div class="kw-yomi">JŌZEN</div>
+          <div class="kw-name">上善若水</div>
+          <div class="kw-summary">利他・不争・謙下の三徳</div>
+        </div>
+        <div class="kw-card" onclick="openKW('chisoku')">
+          <div class="kw-glyph">足</div><div class="kw-yomi">CHISOKU</div>
+          <div class="kw-name">知足（ちそく）</div>
+          <div class="kw-summary">限度を知って深く生きる徳</div>
+        </div>
+      </div>
+
+      <div class="kw-detail" id="kw-detail">
+        <div class="kw-detail-title">クリックして詳細を見る</div>
+        <p>各カードをタップすると、その概念の詳細解説と『道徳経』内の代表的な引用が現れます。</p>
+      </div>
+
+      <h3 class="sec">最重要の引用：「道可道、非常道」</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">ひと言解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">道可道、非常道。名可名、非常名。</div>
+        <div class="quote-source">第1章</div>
+      </div>
+
+      <h3 class="sec">最重要の引用：「上善若水」</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">ひと言解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">上善若水。水善利萬物、而不爭。處衆人之所惡、故幾於道。</div>
+        <div class="quote-source">第8章</div>
+      </div>
+
+      <h3 class="sec">最重要の引用：「知足者富」</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">ひと言解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">知人者智、自知者明。勝人者有力、自勝者強。知足者富。</div>
+        <div class="quote-source">第33章</div>
+      </div>
+
+      <h3 class="sec">8つのキーワード総まとめ表</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>キーワード</th><th>ひと言定義</th><th>身近な比喩</th></tr></thead>
+          <tbody>
+            <tr><td>道（タオ）</td><td>言葉で掴めない宇宙の根本原理</td><td>スポーツのフロー状態</td></tr>
+            <tr><td>無為</td><td>本質的でない作為を減らした働き</td><td>権限移譲のうまい上司</td></tr>
+            <tr><td>自然</td><td>本来そうあるさま、強制のなさ</td><td>植物の伸びる条件を整える</td></tr>
+            <tr><td>柔弱</td><td>短期の弱さ＝長期の強さ</td><td>水が岩を削る</td></tr>
+            <tr><td>反</td><td>極まれば反転する宇宙の動作</td><td>株式市場の振り子</td></tr>
+            <tr><td>玄</td><td>奥の奥まで深いブラックボックス</td><td>ネガティブ・ケイパビリティ</td></tr>
+            <tr><td>上善若水</td><td>利他・不争・謙下の三徳</td><td>いいリーダーは川と海</td></tr>
+            <tr><td>知足</td><td>限度を知って深く生きる徳</td><td>QOLの根本</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip"><strong>第1部のまとめ</strong><br>・老子の8つの中核キーワードを掴めば、『道徳経』全体の8割の話題に追いつける<br>・道→無為→自然 が宇宙論の縦軸、柔弱→反→玄 が処世の横軸、上善若水→知足 が倫理の到達点<br>・第2部では、この8つを念頭に、『道徳経』81章を6つの章群で順に精読していく</div>
+    </section>
+
+    <section class="part" id="part2">
+      <div class="part-header">
+        <div class="part-num">弐</div>
+        <div><div class="part-title">中級編 ― 81章を6つの章群で精読</div></div>
+      </div>
+      <div class="part-subtitle">PART 2｜CLOSE READING</div>
+
+      <p class="lead">第2部では『道徳経』全81章を、テーマ的に近い6つの章群に分け、章群ごとに精読する。各章群の見出しをクリックして展開しよう。原文・書き下し・現代語訳・ひと言解説の4点セットがタブで切り替わる。</p>
+
+      <div id="accordions">
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">1</span>第1-10章 ― 道の本体論</span></div>
+          <div class="accordion-body">
+            <p>「道とは何か」「道に沿う在り方とは何か」を、原理的に語る部分。最も抽象度が高く、最も詩的な章群でもある。</p>
+
+            <h3 class="sec">第2章：対立は連れ立っている</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">天下皆知美之為美、斯惡已。皆知善之為善、斯不善已。</div>
+              <div class="quote-source">第2章</div>
+            </div>
+
+            <h3 class="sec">第7章：後其身而身先</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">是以聖人後其身、而身先。外其身、而身存。</div>
+              <div class="quote-source">第7章</div>
+            </div>
+
+            <h3 class="sec">第10章：玄徳</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">生而不有、為而不恃、長而不宰。是謂玄德。</div>
+              <div class="quote-source">第10章</div>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・第1-10章は「道とは何か」「道に沿う在り方とは何か」の原理篇<br>・キーワードは「対立の相互生成」「評価設計の罪」「目立たないことの効用」「やりすぎへの戒め」<br>・現代の組織論・人事制度設計・リーダーシップ論への直接の含意を持つ</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">2</span>第11-20章 ― 無為の効用（道の用論）</span></div>
+          <div class="accordion-body">
+            <p>道の本体ではなく「道がどう働くか」に焦点を移す。「無の効用」と「過剰刺激の麻痺効果」がこの章群の柱。</p>
+
+            <h3 class="sec">第11章：無の用</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">故有之以為利、無之以為用。</div>
+              <div class="quote-source">第11章</div>
+            </div>
+
+            <h3 class="sec">第17章：最高のリーダーは存在を知られているだけ</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">太上、下知有之。其次、親而譽之。其次、畏之。其次、侮之。</div>
+              <div class="quote-source">第17章</div>
+            </div>
+
+            <h3 class="sec">リーダーシップの4段階（第17章）</h3>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>レベル</th><th>リーダー像</th><th>部下の感じ方</th></tr></thead>
+                <tbody>
+                  <tr><td>太上（最高）</td><td>仕組みを作って退く</td><td>「いるけど干渉しない」</td></tr>
+                  <tr><td>その次</td><td>信頼で引っ張る</td><td>「好きで尊敬している」</td></tr>
+                  <tr><td>その次</td><td>権威で律する</td><td>「怖い、従う」</td></tr>
+                  <tr><td>最下</td><td>浅薄・独善</td><td>「バカにされる」</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・「道がどう働くか」という用論。鍵は「無の効用」と「過剰刺激の麻痺効果」<br>・最高のリーダーは「いるけど干渉しない」存在感を消したリーダー<br>・学問・刺激・感覚――すべて「過剰になれば麻痺する」という法則が貫く</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">3</span>第21-37章 ― 道の働きと德の輪郭</span></div>
+          <div class="accordion-body">
+            <p>道がどのような特徴を持ち、人がそれにどう沿うかが、より具体的に語られる章群。</p>
+
+            <h3 class="sec">第22章：6つの逆説</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">曲則全、枉則直、窪則盈、敝則新、少則得、多則惑。</div>
+              <div class="quote-source">第22章</div>
+            </div>
+
+            <h3 class="sec">第36章：反転の戦略</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">將欲歙之、必固張之。將欲弱之、必固強之。</div>
+              <div class="quote-source">第36章</div>
+            </div>
+
+            <h3 class="sec">第37章：無為にして為さざるは無し</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">道常無為、而無不為。</div>
+              <div class="quote-source">第37章</div>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・道の働きには「逆説」「反転」「執着の禁忌」という共通の性質がある<br>・強さを知った上での柔らかさが、本物の柔弱<br>・「無為にして為さざるは無し」が道経の到達点</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">4</span>第38-50章 ― 徳経の入口</span></div>
+          <div class="accordion-body">
+            <p>第38章から下篇「徳経」が始まる。本物の徳とは何か、徳の階層構造はどうなっているか、を論じる。</p>
+
+            <h3 class="sec">第38章：上徳不徳</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">上德不德、是以有德。下德不失德、是以無德。</div>
+              <div class="quote-source">第38章</div>
+            </div>
+
+            <h3 class="sec">第40章：反者道之動</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">反者、道之動。弱者、道之用。</div>
+              <div class="quote-source">第40章</div>
+            </div>
+
+            <h3 class="sec">第48章：学習は足し算、修養は引き算</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">為學日益、為道日損。損之又損、以至於無為。</div>
+              <div class="quote-source">第48章</div>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・徳経の入口は「無自覚の徳」「学問の限界」「修養としての引き算」<br>・道→一→二→三→万物 という創世神話が東アジア思想の宇宙論の原型<br>・中年以降は「足し算の学習」より「引き算の修養」へ重心を移すべし</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">5</span>第51-65章 ― 治国の哲学</span></div>
+          <div class="accordion-body">
+            <p>老子の政治論・統治論が集中する部分。現代の組織運営にもそのまま当てはまる。</p>
+
+            <h3 class="sec">第60章：治大国若烹小鮮</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">治大國若烹小鮮。</div>
+              <div class="quote-source">第60章</div>
+            </div>
+
+            <h3 class="sec">第63章：早めに小さく処理せよ</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">圖難於其易、為大於其細。</div>
+              <div class="quote-source">第63章</div>
+            </div>
+
+            <h3 class="sec">第64章：千里之行、始於足下</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">合抱之木、生於毫末。九層之臺、起於累土。千里之行、始於足下。</div>
+              <div class="quote-source">第64章</div>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・老子の政治論は「干渉の少なさ」「使い分け」「予防的処理」「累積効果」が柱<br>・「治大国若烹小鮮」は、変化を求めすぎる現代の経営にも刺さる箴言<br>・「千里之行、始於足下」は単なる慎重論ではなく、累積の物理学を語っている</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">6</span>第66-81章 ― 戦争・終末・最高の人生</span></div>
+          <div class="accordion-body">
+            <p>戦争観、リーダー論、終末の智恵、そして人生の最高形態が語られる最終章群。</p>
+
+            <h3 class="sec">第67章：老子の三宝</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">我有三寶、持而保之。一曰慈、二曰儉、三曰不敢為天下先。</div>
+              <div class="quote-source">第67章</div>
+            </div>
+
+            <h3 class="sec">老子の三宝</h3>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>宝</th><th>意味</th><th>現代的応用</th></tr></thead>
+                <tbody>
+                  <tr><td>慈</td><td>やさしさ・包容力</td><td>共感的リーダーシップ</td></tr>
+                  <tr><td>倹</td><td>つつましさ・節度</td><td>サステナビリティ・ミニマリズム</td></tr>
+                  <tr><td>不敢為天下先</td><td>先頭に立とうとしない</td><td>サーバントリーダーシップ</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="sec">第78章：水より柔弱なるはなし</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">天下莫柔弱於水、而攻堅強者、莫之能勝。</div>
+              <div class="quote-source">第78章</div>
+            </div>
+
+            <h3 class="sec">第81章：信言不美、美言不信</h3>
+            <div class="quote-card">
+              <div class="quote-tabs">
+                <button class="quote-tab active" onclick="switchTab(this,'genbun')">原文</button>
+                <button class="quote-tab" onclick="switchTab(this,'yomi')">書き下し</button>
+                <button class="quote-tab" onclick="switchTab(this,'yaku')">現代語訳</button>
+                <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+              </div>
+              <div class="quote-body" data-mode="genbun">信言不美、美言不信。善者不辯、辯者不善。</div>
+              <div class="quote-source">第81章</div>
+            </div>
+
+            <div class="tip"><strong>3行サマリー</strong><br>・最終章群は「謙下のリーダー論」「三宝の倫理綱領」「柔弱の物理観」「成長を強制しない社会観」が柱<br>・「慈・倹・不敢為天下先」が老子の倫理最終形<br>・老子の智恵は「分かりやすいのに行いがたい」――だから繰り返し読む価値がある</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip"><strong>第2部の総括</strong>　81章は決してバラバラの断章ではない。「道→無為→自然→柔弱→反→玄→上善若水→知足→三宝」というひとつの精神の道筋が、変奏曲のように繰り返される。読み終わったら、第1部の8つのキーワードに戻ると、それぞれが奥行きを持って見えてくるはず。</div>
+    </section>
+
+    <section class="part" id="part3">
+      <div class="part-header">
+        <div class="part-num">参</div>
+        <div><div class="part-title">上級編 ― 老子の思想体系を再構築する</div></div>
+      </div>
+      <div class="part-subtitle">PART 3｜SYSTEMATIZATION</div>
+
+      <p class="lead">第2部までは原書の流れに沿った「点」と「線」だった。第3部では、それを<strong>「面」</strong>にする。横断的なテーマを立て、老子の思想を体系として再構築する。中心にあるのは「道」――そして「道→一→二→三→万物」の宇宙生成図式。</p>
+
+      <div class="pillar-svg-wrap">
+        <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <radialGradient id="centerG" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#5a7a6a" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#1a2d24" stop-opacity="1"/>
+            </radialGradient>
+            <linearGradient id="lineG" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2d4a3a" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#c8a548" stop-opacity="0.6"/>
+            </linearGradient>
+          </defs>
+          <!-- Flow lines -->
+          <line x1="300" y1="80" x2="300" y2="430" stroke="url(#lineG)" stroke-width="2" stroke-dasharray="5,5"/>
+          <!-- 道 at top -->
+          <circle cx="300" cy="60" r="40" fill="url(#centerG)"/>
+          <text x="300" y="68" text-anchor="middle" fill="#f5f1e6" font-family="Zen Old Mincho, serif" font-size="28" font-weight="900">道</text>
+          <text x="300" y="115" text-anchor="middle" fill="#5a6858" font-size="11" letter-spacing="2">混成・寂寥</text>
+          <!-- 一 -->
+          <circle cx="300" cy="160" r="32" fill="#f3f0e6" stroke="#2d4a3a" stroke-width="2.5"/>
+          <text x="300" y="168" text-anchor="middle" fill="#2d4a3a" font-family="Zen Old Mincho, serif" font-size="24" font-weight="900">一</text>
+          <text x="300" y="200" text-anchor="middle" fill="#5a6858" font-size="11">統一原理</text>
+          <!-- 二 (陰陽) -->
+          <circle cx="250" cy="245" r="28" fill="#f3f0e6" stroke="#2d4a3a" stroke-width="2.5"/>
+          <text x="250" y="253" text-anchor="middle" fill="#2d4a3a" font-family="Zen Old Mincho, serif" font-size="20" font-weight="900">陰</text>
+          <circle cx="350" cy="245" r="28" fill="#1a2d24" stroke="#2d4a3a" stroke-width="2.5"/>
+          <text x="350" y="253" text-anchor="middle" fill="#f5f1e6" font-family="Zen Old Mincho, serif" font-size="20" font-weight="900">陽</text>
+          <text x="300" y="290" text-anchor="middle" fill="#5a6858" font-size="11">対立する二項</text>
+          <!-- 三 (陰陽沖) -->
+          <circle cx="220" cy="335" r="24" fill="#f3f0e6" stroke="#2d4a3a" stroke-width="2"/>
+          <text x="220" y="342" text-anchor="middle" fill="#2d4a3a" font-family="Zen Old Mincho, serif" font-size="16" font-weight="900">陰</text>
+          <circle cx="300" cy="335" r="24" fill="#c8a548" stroke="#2d4a3a" stroke-width="2"/>
+          <text x="300" y="342" text-anchor="middle" fill="#1a2d24" font-family="Zen Old Mincho, serif" font-size="16" font-weight="900">沖</text>
+          <circle cx="380" cy="335" r="24" fill="#1a2d24" stroke="#2d4a3a" stroke-width="2"/>
+          <text x="380" y="342" text-anchor="middle" fill="#f5f1e6" font-family="Zen Old Mincho, serif" font-size="16" font-weight="900">陽</text>
+          <text x="300" y="375" text-anchor="middle" fill="#5a6858" font-size="11">沖気による三項調和</text>
+          <!-- 万物 -->
+          <g>
+            <circle cx="200" cy="430" r="8" fill="#5a7a6a"/>
+            <circle cx="230" cy="445" r="6" fill="#8aa898"/>
+            <circle cx="260" cy="425" r="7" fill="#c8a548"/>
+            <circle cx="290" cy="450" r="5" fill="#5a7a6a"/>
+            <circle cx="320" cy="430" r="8" fill="#8aa898"/>
+            <circle cx="350" cy="445" r="6" fill="#c8a548"/>
+            <circle cx="380" cy="425" r="7" fill="#5a7a6a"/>
+            <circle cx="410" cy="445" r="5" fill="#8aa898"/>
+          </g>
+          <text x="300" y="475" text-anchor="middle" fill="#2d4a3a" font-family="Zen Old Mincho, serif" font-size="18" font-weight="900">万物</text>
+        </svg>
+        <p style="color:var(--kohaku); font-size:13px;">図3-1：「道生一、一生二、二生三、三生萬物」――道から万物への生成の連鎖（第42章）</p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 1</div>
+          <h4>宇宙論 ― 道→一→二→三→万物</h4>
+          <p>道→一（統一）→二（陰陽）→三（陰陽＋沖気）→万物。特徴は<strong>「対立を経由して調和に至る」</strong>こと。二項対立に「沖気（中庸の気）」という第三項が加わることで世界が動く。ヘーゲルの「正・反・合」の遠い先取り。優れたファシリテーターは意図的に「第三項」を挿入する。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 2</div>
+          <h4>認識論 ― 知不知</h4>
+          <p>「知りて知らずとするは、上なり」（第71章）――本当は知っているのに「知らない」とする姿勢が最上。<strong>ダニング=クルーガー効果の2,500年越しの処方箋</strong>。採用面接で「あなたが最も分かっていないことは？」と問えば、即答できる候補者ほど長期で伸びる。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 3</div>
+          <h4>政治論 ― 治大国若烹小鮮</h4>
+          <p>三原則：①最小干渉（治大国若烹小鮮）②価値づけ抑制（不尚賢）③存在感を消す（太上下知有之）。<strong>国家原理としては極端だが、組織運営の原理としては現代的</strong>。マイクロマネジメント・KPI過剰設計・上司の過剰露出への警告。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 4</div>
+          <h4>人生論 ― 三宝（慈・倹・不敢為天下先）</h4>
+          <p>第67章の人生論集大成。儒家の「五常」が積極性を強調するのに対し、老子の三宝は<strong>抑制を強調</strong>する。現代のミニマリズム、サステナビリティ、サーバントリーダーシップに直接通じる。やさしく、つつましく、目立たず――が長期幸福の道。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 5</div>
+          <h4>儒家との対比 ― 整える vs 緩める</h4>
+          <p>孔子は「社会のために整える」、老子は「自然に沿って緩める」。両者は対立しつつも補完的で、伝統的に<strong>「公では儒家、私では道家」</strong>と使い分けられた。現代人も「仕事の場と私生活の場」で両者を使い分けると精神衛生が保たれる。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CORE 6</div>
+          <h4>荘子との対比 ― 統治の道家 vs 自由の道家</h4>
+          <p>同じ道家でも質が違う。<strong>老子は統治・処世の道家、荘子は精神的自由の道家</strong>。経営者・組織のトップには老子、芸術家・個人事業主には荘子。本書が老子を扱うのは、現代のビジネスパーソンへの実用度が高いから。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="part" id="part4">
+      <div class="part-header">
+        <div class="part-num">肆</div>
+        <div><div class="part-title">現代戦略論・実務との橋渡し</div></div>
+      </div>
+      <div class="part-subtitle">PART 4｜BRIDGE TO MODERN</div>
+
+      <p class="lead">老子の思想を、現代の経営理論・心理学・リーダーシップ論と橋渡しする。2,500年前の智恵が、20世紀後半の経営学・心理学にいかに先取りされていたかが見えてくる。</p>
+
+      <h2 class="chap">『老子』と現代理論の対応表</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>現代の概念</th><th>提唱者</th><th>老子での対応</th></tr></thead>
+          <tbody>
+            <tr><td>サーバントリーダーシップ</td><td>ロバート・グリーンリーフ（1970）</td><td>江海所以能為百谷王、太上下知有之、不敢為天下先</td></tr>
+            <tr><td>引き算の経営戦略</td><td>Apple、星野リゾート、ブルーオーシャン</td><td>為学日益、為道日損（第48章）</td></tr>
+            <tr><td>マインドフルネス</td><td>ジョン・カバットジン</td><td>無為、自然、住する所なき</td></tr>
+            <tr><td>ストア哲学</td><td>マルクス・アウレリウス</td><td>知足、無為、コントロール可能なものに集中</td></tr>
+            <tr><td>ネガティブ・ケイパビリティ</td><td>ジョン・キーツ／ビオン</td><td>玄（奥深いブラックボックス）、知不知</td></tr>
+            <tr><td>振り子の法則・回帰平均</td><td>行動経済学</td><td>反者道之動（第40章）</td></tr>
+            <tr><td>MVP・ピボット</td><td>エリック・リース『リーン・スタートアップ』</td><td>為者敗之、執者失之（第29章）</td></tr>
+            <tr><td>心理的安全性</td><td>エイミー・エドモンドソン</td><td>無為、太上下知有之、慈</td></tr>
+            <tr><td>予防医療・コーチング</td><td>現代医療・教育</td><td>為大於其細（第63章）、自然を引き出す</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="chap">引き算の経営戦略 ― 3つの例</h2>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">EXAMPLE 1</div>
+          <h4>Apple ― 製品ラインの絞り込み</h4>
+          <p>ジョブズが1997年にAppleに復帰した時、最初にしたのは「製品ラインを15から4に絞る」こと。プロ向け・コンシューマ向け、それぞれデスクトップとノートで2×2＝4。典型的な<strong>「為道日損」の戦略</strong>。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">EXAMPLE 2</div>
+          <h4>星野リゾート ― ブランド集約</h4>
+          <p>数百のホテルを「星のや」「界」「リゾナーレ」「OMO」「BEB」の5ブランドに絞り込み。多様な施設の中身を、5つのブランド軸に整理することで、<strong>顧客の選択疲労を減らす</strong>。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">EXAMPLE 3</div>
+          <h4>ブルーオーシャン戦略 ― 「減らす」</h4>
+          <p>キム＆モボルニュの4アクション「増やす・減らす・取り除く・付け加える」のうち、<strong>「減らす・取り除く」が新市場の半分を作る</strong>。老子の「損之又損」はこれに直結。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CHECKLIST</div>
+          <h4>引き算チェックリスト</h4>
+          <p>製品ラインで「やめる」候補は？　KPIで「測るのをやめる」候補は？　ミーティングで「廃止する」候補は？　社内ルールで「撤廃する」候補は？　顧客セグメントで「切り捨てる」候補は？</p>
+        </div>
+      </div>
+
+      <h2 class="chap">明日から使う老子の10の問い</h2>
+      <p>朝の通勤時間、あるいは週末に自問するだけで、思考の質が変わる。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>問い</th><th>出典の章</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>今やっている作業の中で、減らせるものは何か？</td><td>第48章</td></tr>
+            <tr><td>2</td><td>私は、知らないことを「知らない」と言えているか？</td><td>第71章</td></tr>
+            <tr><td>3</td><td>目立とうとしすぎていないか？</td><td>第7章、第17章</td></tr>
+            <tr><td>4</td><td>短期的に勝とうとして、長期で何かを失っていないか？</td><td>第76章、第78章</td></tr>
+            <tr><td>5</td><td>「もっと欲しい」を、いったん止められるか？</td><td>第33章、第44章</td></tr>
+            <tr><td>6</td><td>対立する意見の中に、第三の道はないか？</td><td>第42章</td></tr>
+            <tr><td>7</td><td>やりすぎていないか？8分目で止められているか?</td><td>第9章</td></tr>
+            <tr><td>8</td><td>相手より下に立つことで、相手を活かせないか？</td><td>第66章</td></tr>
+            <tr><td>9</td><td>いま起きている「成功」の中に、衰退の芽はないか？</td><td>第58章</td></tr>
+            <tr><td>10</td><td>敢えて「何もしない」選択肢は、テーブルにあるか？</td><td>第37章、第57章</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip"><strong>第4部のまとめ</strong>　老子はサーバントリーダーシップ・引き算の経営戦略・マインドフルネス・ストア哲学の遠い祖先。IT・教育・医療など、現代の主要産業にすでに老子の応用が広がっている。「10の問い」を日常に組み込めば、思考の質が確実に上がる。</div>
+    </section>
+
+    <section class="part" id="part5">
+      <div class="part-header">
+        <div class="part-num">伍</div>
+        <div><div class="part-title">実践ワークブック</div></div>
+      </div>
+      <div class="part-subtitle">PART 5｜WORKBOOK</div>
+
+      <p class="lead">読者が能動的に思考し、自分の人生・仕事に老子を翻訳するための章。<strong>正解はない</strong>。問い続けること自体が老子の実践である。</p>
+
+      <h2 class="chap" id="exercises">演習10問</h2>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 1 ／ 道</span>
+        <div class="exercise-q">あなたが仕事の中で「考えずに、しかし最適に動いている」と感じる場面は何か。それは何によって支えられているか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 2 ／ 無為</span>
+        <div class="exercise-q">あなたの組織の中で、「やりすぎている作業・会議・KPI」を5つ挙げよ。それぞれ、減らした場合に何が起きるか想像せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 3 ／ 自然</span>
+        <div class="exercise-q">あなたの周囲の人（部下・同僚・家族）の「本来そうあるさま」を、3人分、それぞれ100字以内で描写せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 4 ／ 柔弱</span>
+        <div class="exercise-q">あなたが「短期的に勝った」が「長期的に何かを失った」経験を1つ挙げよ。逆の経験はあるか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 5 ／ 反</span>
+        <div class="exercise-q">あなたの組織で、いま最も「絶頂」に見える事業・人・施策は何か。その中に潜む「衰退の芽」を3つ挙げよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 6 ／ 玄</span>
+        <div class="exercise-q">あなたが今、答えを急いで出してしまいそうな問いを3つ挙げよ。それぞれ「保留」する場合、どんなコストがあるか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 7 ／ 上善若水</span>
+        <div class="exercise-q">あなたの組織のリーダー（あなた自身を含む）を「岩・太陽・川・海」のどれに分類するか。理由とともに述べよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 8 ／ 知足</span>
+        <div class="exercise-q">あなたが今「足りない」と感じているものを5つ挙げよ。逆に「もう十分にある」と感じるものを5つ挙げよ。後者のほうが多くなるよう、リストを書き直してみよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 9 ／ 三宝</span>
+        <div class="exercise-q">慈・倹・不敢為天下先のうち、あなたが最も苦手なのはどれか。それを実践するための小さな一歩を3つ書け。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 10 ／ 千里之行</span>
+        <div class="exercise-q">あなたが「いつかやりたい大きなこと」を1つ挙げ、それを「足下の一歩」に分解せよ。今日できる5分の行動まで分解できるか。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <h2 class="chap" id="quiz">理解度クイズ（4問）</h2>
+      <p>各問いに答えるとすぐに正解・解説が表示されます。気軽に挑戦してください。</p>
+
+      <div class="quiz" data-correct="b" data-explain="第8章「水善利萬物、而不爭。處衆人之所惡」――水の3つの徳：①万物を潤して恵む（利他）②誰とも争わない（不争）③低い場所に身を置く（謙下）。この3つを兼ねるから「道」に最も近い。">
+        <div class="quiz-q">Q1. 「上善は水の若し」――水が「道」に近いとされる理由として最も適切なのは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 透明で清らかだから</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 利他・不争・謙下の3徳を持つから</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 飲めて生命を支えるから</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 川は最後に海に流れるから</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="「無為」は inaction（不作為）ではない。non-forced action（強いられない行為）／effortless effectiveness（努力感の少ない有効性）と訳すと近い。第37章「道常無為、而無不為」――道は無為だが、成し遂げないことは何もない。マイクロマネジメントの対極にある働き方。">
+        <div class="quiz-q">Q2. 「無為」の本当の意味として最も適切なのは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 何もせずゴロゴロすること</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 仕事を他人に押し付けること</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 本質的でない作為を減らし、自然に成る働き方</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 努力を放棄して運に任せること</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="第67章「我有三寶、持而保之。一曰慈、二曰儉、三曰不敢為天下先」――老子の倫理綱領。儒家の「仁・義・礼・智・信」が積極性を強調するのに対し、老子の三宝は「抑制」を強調する。現代のサーバントリーダーシップ・ミニマリズム・サステナビリティに直結。">
+        <div class="quiz-q">Q3. 老子の「三宝」とは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 仁・義・礼</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 智・信・誠</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 慈・倹・不敢為天下先</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 道・徳・自然</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="第17章「太上、下知有之。其次、親而譽之。其次、畏之。其次、侮之」――4段階のうち最上は「存在を知られているだけ」のリーダー。これは現代のサーバントリーダーシップ、自走型組織論への鋭い先取り。「いるけど干渉しない」が最強。">
+        <div class="quiz-q">Q4. 第17章「太上、下知有之」が示す最高のリーダーとは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. みんなから愛され誉められる人</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 威厳があり恐れられる人</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 部下から「存在を知られているだけ」の人</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. ビジョンを大いに語る人</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h2 class="chap" id="books">推薦図書（20冊）</h2>
+      <div class="filter-bar">
+        <button class="chip active" onclick="filterBook('all', this)">すべて</button>
+        <button class="chip" onclick="filterBook('translation', this)">原典・現代語訳</button>
+        <button class="chip" onclick="filterBook('related', this)">荘子・道家</button>
+        <button class="chip" onclick="filterBook('philosophy', this)">比較思想</button>
+        <button class="chip" onclick="filterBook('business', this)">現代経営</button>
+        <button class="chip" onclick="filterBook('mind', this)">心理学・哲学</button>
+      </div>
+
+      <div class="books" id="books">
+        <div class="book" data-cat="translation"><span class="book-num">01.</span><span class="book-title">老子</span><div class="book-meta">蜂屋邦夫訳注／岩波文庫</div><span class="book-cat">標準版</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">02.</span><span class="book-title">老子</span><div class="book-meta">楠山春樹／講談社学術文庫</div><span class="book-cat">章節参照</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">03.</span><span class="book-title">老子</span><div class="book-meta">小川環樹訳注／中公文庫</div><span class="book-cat">古典訳</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">04.</span><span class="book-title">老子</span><div class="book-meta">福永光司／朝日選書</div><span class="book-cat">解説書</span></div>
+        <div class="book" data-cat="translation"><span class="book-num">05.</span><span class="book-title">タオ―老子</span><div class="book-meta">加島祥造／筑摩書房</div><span class="book-cat">詩的意訳</span></div>
+        <div class="book" data-cat="related"><span class="book-num">06.</span><span class="book-title">荘子</span><div class="book-meta">福永光司／岩波文庫(全4冊)</div><span class="book-cat">道家</span></div>
+        <div class="book" data-cat="related"><span class="book-num">07.</span><span class="book-title">荘子</span><div class="book-meta">池田知久／NHKブックス</div><span class="book-cat">道家</span></div>
+        <div class="book" data-cat="related"><span class="book-num">08.</span><span class="book-title">道家思想の新研究</span><div class="book-meta">池田知久／汲古書院</div><span class="book-cat">研究書</span></div>
+        <div class="book" data-cat="related"><span class="book-num">09.</span><span class="book-title">道教の歴史</span><div class="book-meta">神塚淑子／山川出版社</div><span class="book-cat">道教史</span></div>
+        <div class="book" data-cat="philosophy"><span class="book-num">10.</span><span class="book-title">中国哲学史</span><div class="book-meta">中島隆博／中公新書</div><span class="book-cat">比較</span></div>
+        <div class="book" data-cat="philosophy"><span class="book-num">11.</span><span class="book-title">生きるための論語</span><div class="book-meta">安冨歩／ちくま新書</div><span class="book-cat">儒家比較</span></div>
+        <div class="book" data-cat="philosophy"><span class="book-num">12.</span><span class="book-title">儒教とは何か</span><div class="book-meta">加地伸行／中公新書</div><span class="book-cat">儒家</span></div>
+        <div class="book" data-cat="business"><span class="book-num">13.</span><span class="book-title">サーバントリーダーシップ</span><div class="book-meta">R・グリーンリーフ／英治出版</div><span class="book-cat">現代</span></div>
+        <div class="book" data-cat="business"><span class="book-num">14.</span><span class="book-title">ブルー・オーシャン戦略</span><div class="book-meta">キム＆モボルニュ／ダイヤモンド社</div><span class="book-cat">引き算経営</span></div>
+        <div class="book" data-cat="business"><span class="book-num">15.</span><span class="book-title">世界標準の経営理論</span><div class="book-meta">入山章栄／ダイヤモンド社</div><span class="book-cat">経営学</span></div>
+        <div class="book" data-cat="business"><span class="book-num">16.</span><span class="book-title">ワイズカンパニー</span><div class="book-meta">野中郁次郎・竹内弘高／東洋経済</div><span class="book-cat">経営知</span></div>
+        <div class="book" data-cat="mind"><span class="book-num">17.</span><span class="book-title">マインドフルネスストレス低減法</span><div class="book-meta">J・カバットジン／北大路書房</div><span class="book-cat">心理学</span></div>
+        <div class="book" data-cat="mind"><span class="book-num">18.</span><span class="book-title">自省録</span><div class="book-meta">M・アウレリウス／岩波文庫</div><span class="book-cat">ストア</span></div>
+        <div class="book" data-cat="mind"><span class="book-num">19.</span><span class="book-title">ストア派哲学入門</span><div class="book-meta">R・ホリデイ／パンローリング</div><span class="book-cat">ストア</span></div>
+        <div class="book" data-cat="mind"><span class="book-num">20.</span><span class="book-title">ヘッドスペース</span><div class="book-meta">A・プディコム／CCCメディアハウス</div><span class="book-cat">瞑想</span></div>
+      </div>
+
+      <div class="tip"><strong>学習ロードマップ</strong>　Level1（入門）：本書の次は蜂屋邦夫訳『老子』岩波文庫。／Level2（原典）：楠山・小川・福永の各訳を読み比べ。／Level3（荘子）：福永光司『荘子』全4冊。／Level4（研究書）：池田知久・神塚淑子。／Level5（比較）：中島隆博『中国哲学史』、ジョセフ・ニーダム『中国の科学と文明』。完遂すると老子が「知識」ではなく「判断軸」になる。</div>
+    </section>
+
+    <section class="part" id="sources">
+      <div class="part-header">
+        <div class="part-num">出</div>
+        <div><div class="part-title">Sources ― 出典・推薦版本</div></div>
+      </div>
+      <div class="part-subtitle">SOURCES</div>
+
+      <h3 class="sec">主要参照（老子テキスト）</h3>
+      <ol style="padding-left:24px; line-height:2;">
+        <li>蜂屋邦夫訳注『老子』岩波文庫、2008年。本書の引用は主にこの版本に依拠。</li>
+        <li>楠山春樹『老子』講談社学術文庫、1978年。章節構造の参照。</li>
+        <li>小川環樹訳注『老子』中公文庫、1973年。</li>
+        <li>福永光司『老子』朝日選書、1978年。</li>
+        <li>加島祥造『タオ―老子』筑摩書房、2000年。詩的意訳の参考。</li>
+      </ol>
+
+      <h3 class="sec">王弼注・出土資料の校合</h3>
+      <ol start="6" style="padding-left:24px; line-height:2;">
+        <li>樓宇烈『王弼集校釈』中華書局、1980年。王弼本の標準テキスト。</li>
+        <li>池田知久『郭店楚簡老子研究』東京大学出版会、2011年。</li>
+        <li>池田知久『馬王堆漢墓帛書老子』（出土資料関連）</li>
+      </ol>
+
+      <h3 class="sec">荘子・道家・道教研究</h3>
+      <ol start="9" style="padding-left:24px; line-height:2;">
+        <li>福永光司『荘子』全4冊、岩波文庫。</li>
+        <li>池田知久『道家思想の新研究』汲古書院、2009年。</li>
+        <li>神塚淑子『道教の歴史』山川出版社、2015年。</li>
+      </ol>
+
+      <h3 class="sec">比較思想・現代理論</h3>
+      <ol start="12" style="padding-left:24px; line-height:2;">
+        <li>中島隆博『中国哲学史』中公新書、2022年。</li>
+        <li>R・グリーンリーフ『サーバントリーダーシップ』金井壽宏監訳、英治出版、2008年。</li>
+        <li>キム＆モボルニュ『ブルー・オーシャン戦略』ダイヤモンド社。</li>
+        <li>入山章栄『世界標準の経営理論』ダイヤモンド社、2019年。</li>
+        <li>野中郁次郎・竹内弘高『ワイズカンパニー』東洋経済新報社、2020年。</li>
+        <li>J・カバットジン『マインドフルネスストレス低減法』北大路書房。</li>
+        <li>マルクス・アウレリウス『自省録』神谷美恵子訳、岩波文庫。</li>
+      </ol>
+
+      <h3 class="sec">注記</h3>
+      <p style="font-size:13px; color:var(--kohaku);">本書の原文は王弼本を底本とし、出土資料（郭店楚簡・馬王堆帛書）との異同が大きい箇所では主要訳書の校合に従った。書き下し文・現代語訳は上記参照書を比較しつつ、本書独自の表現で整理した。81章の章番号は王弼本に従う。現代戦略論との対応関係は、本書独自の整理である。</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="brand-seal" style="margin: 0 auto 12px;">道</div>
+  <p>老子 ― ゼロから学ぶ「道」と「無為」の古典 · University Edition</p>
+  <p style="font-size:11px; color:var(--paper-shadow); margin-top:8px; letter-spacing:1px;">© COMPREHENSIVE TEXTBOOK BUILDER · 2026</p>
+</footer>
+
+<script>
+const quoteData = {
+  default: {
+    "道可道、非常道。名可名、非常名。": { yomi:"道の道（い）うべきは、常の道に非ず。名の名づくべきは、常の名に非ず。", yaku:"「これが道だ」と言葉で語れるような道は、本当の永遠の道ではない。「これが○○だ」と名づけられるような名は、本当の永遠の名ではない。", kaisetsu:"第1章冒頭、老子全体を貫く認識のスタンス。道は言葉や概念の檻に入らない。だから語ろうとした瞬間に「道そのもの」からは外れる。月を指差す指のようなもの――指を見るな、指の先を見よ。" },
+    "上善若水。水善利萬物、而不爭。處衆人之所惡、故幾於道。": { yomi:"上善は水の若（ごと）し。水は善く万物を利して、而（しか）も争わず。衆人の悪（にく）む所に処（お）る。故に道に幾（ちか）し。", yaku:"最高の善とは、水のような在り方である。水はあらゆるものを潤して恵むのに、何とも争わない。みんなが嫌がる場所（低いところ）にとどまる。だから「道」に最も近い。", kaisetsu:"第8章。水は3つの徳を持つ。①万物を潤して恵む（利他）②誰とも争わない（不争）③低い場所に身を置く（謙下）。この3つを身につけた人が「道」に近い。" },
+    "知人者智、自知者明。勝人者有力、自勝者強。知足者富。": { yomi:"人を知る者は智、自ら知る者は明なり。人に勝つ者は力有り、自ら勝つ者は強し。足るを知る者は富めり。", yaku:"他人を知るのは「智」、自分を知るのは「明」。他人に勝つのは「力」、自分に勝つのは「強」。足るを知る者こそが、本当の意味で富んでいる。", kaisetsu:"第33章。3組の対比で「外向きの徳」と「内向きの徳」を切り分け、内向きの徳のほうを上位に置く。「知足」はその到達点。現代日本人に最も足りない徳のひとつ。" },
+    "天下皆知美之為美、斯惡已。皆知善之為善、斯不善已。": { yomi:"天下、皆な美の美たるを知るも、斯（こ）れ悪（あ）しきのみ。皆な善の善たるを知るも、斯れ不善のみ。", yaku:"天下の人々が「これは美しい」と一致して認めれば、それはもう（醜さを生む基準としての）悪である。「これは善である」と一致して認めれば、それはもう不善である。", kaisetsu:"第2章。あらゆる概念は対立物との関係でしか成り立たない。会社で「優秀な社員」を称揚すれば「優秀でない社員」が生まれる。評価軸そのものが、評価される側とされない側を同時に作る――この自覚がリーダーには必要。" },
+    "是以聖人後其身、而身先。外其身、而身存。": { yomi:"是を以て聖人は其の身を後（しりぞ）けて、而（しか）も身は先（さき）んず。其の身を外（そと）にして、而も身は存（そん）す。", yaku:"聖人は、自分の身を後ろに引く。それでいて、結果として、その身は先頭に立っている。", kaisetsu:"第7章。目立とうとしない者が、結果として目立つ。会議で最後に発言するリーダーが、最も影響力を持つ。ジョブズは「最後の決断者」として知られたが、ミーティングでは長時間黙って聞き、最後に方向を示した。" },
+    "生而不有、為而不恃、長而不宰。是謂玄德。": { yomi:"生んで有（も）たず、為して恃（たの）まず、長（おさ）めて宰（しは）かず。是を玄徳と謂う。", yaku:"生み出しても所有しない。為し遂げても功を誇らない。育てても支配しようとしない。これを「玄徳（奥深い徳）」と呼ぶ。", kaisetsu:"第10章。親が子を、上司が部下を、メンターが弟子を育てる――育てた結果を「自分のもの」として握らない姿勢が、相手の自立を生み、結果として最高の関係を作る。" },
+    "故有之以為利、無之以為用。": { yomi:"故に有の以て利と為すは、無の以て用と為すなり。", yaku:"「有」が利益を生むのは、「無」が機能しているからである。", kaisetsu:"第11章。「無いから役に立つ」という逆説。車輪・器・部屋――どれも中心が空っぽだから機能する。職場でも、過密スケジュールでは創造的議論が生まれない。空白こそが機能を成立させる前提。" },
+    "太上、下知有之。其次、親而譽之。其次、畏之。其次、侮之。": { yomi:"太上は、下、之有るを知るのみ。其の次は、親しんで之を誉む。其の次は、之を畏（おそ）る。其の次は、之を侮（あなど）る。", yaku:"最高のリーダーは、部下から「存在を知られているだけ」の存在である。その次のレベルは、部下に親しまれ誉められる。その次は、畏れられる。最も下のレベルは、侮（あなど）られる。", kaisetsu:"第17章。「いるかいないか分からないくらい」が最高のリーダー、というのが老子の評価軸。これはサーバントリーダーシップ・自走型組織論への鋭い先取り。" },
+    "曲則全、枉則直、窪則盈、敝則新、少則得、多則惑。": { yomi:"曲なれば則ち全し。枉（ま）がれば則ち直し。窪（くぼ）めば則ち盈（み）つ。敝（やぶ）るれば則ち新たなり。少なければ則ち得、多ければ則ち惑う。", yaku:"曲がっているからこそ完全に保たれる。歪んでいるからこそまっすぐになれる。くぼんでいるからこそ満たされる。破れているからこそ新しくなる。少ないからこそ得るところがあり、多すぎると迷う。", kaisetsu:"第22章。6つの逆説の連打。「完全」と「欠如」が同じコインの裏表であることを示す。完璧主義者への治療薬。" },
+    "將欲歙之、必固張之。將欲弱之、必固強之。": { yomi:"将に之を歙（おさ）めんと欲すれば、必ず固（しばら）く之を張らしむ。将に之を弱めんと欲すれば、必ず固く之を強くす。", yaku:"何かを収縮させたければ、まずいったん張らせよ。何かを弱めたければ、まずいったん強めさせよ。", kaisetsu:"第36章。極まれば反転するなら、敢えて極まらせる、という戦略。柔道で言えば「相手を引き出しておいて投げる」。" },
+    "道常無為、而無不為。": { yomi:"道は常に無為にして、而（しか）も為さざるは無し。", yaku:"道はいつも「無為（むい）」――作為のない働き方をしているが、それでいて成し遂げないことは何もない。", kaisetsu:"第37章、道経の最終章。「無為」とは「ゴロゴロして何もしない」ことではなく、本質的でない作為を減らし、必要なことが必要なときに自然に成る状態。" },
+    "上德不德、是以有德。下德不失德、是以無德。": { yomi:"上徳は徳とせず、是を以て徳有り。下徳は徳を失わず、是を以て徳無し。", yaku:"最上の徳は、自分の徳を意識しない。だから本当に徳がある。下等の徳は、自分の徳を失うまいとする。だから本当の徳がない。", kaisetsu:"第38章、徳経の冒頭。「徳のある人」を自認した瞬間、その人の徳は半減する。無自覚にやさしい人こそが本当にやさしい。" },
+    "反者、道之動。弱者、道之用。": { yomi:"反は道の動、弱は道の用なり。", yaku:"反対側へと振れていくこと、これが「道」の動き方である。弱さを使いこなすこと、これが「道」の働かせ方である。", kaisetsu:"第40章。極まれば反転する――宇宙の動きの基本パターン。陰陽の循環、好況不況の振り子、組織の盛衰――すべてが「反」で動く。現代の「振り子の法則」「回帰平均」「ホメオスタシス」の遠い祖先。" },
+    "為學日益、為道日損。損之又損、以至於無為。": { yomi:"学を為すは日に益（ま）し、道を為すは日に損（へ）ず。之を損じ又た損じ、以て無為に至る。", yaku:"学問を積むのは、日々何かを足していくことだ。道を求めるのは、日々何かを減らしていくことだ。減らし、また減らし、ついには「無為」に到達する。", kaisetsu:"第48章。学習は足し算、修養は引き算。20代は学習中心でいい。30代後半以降は、修養側にウェイトを移していかないと、人生が膨らみすぎて爆発する。" },
+    "治大國若烹小鮮。": { yomi:"大国を治むるは、小鮮（しょうせん、小魚）を烹（に）るが若（ごと）し。", yaku:"大きな国を治めるのは、小魚を煮るようなものだ（あまり頻繁にひっくり返してはいけない）。", kaisetsu:"第60章。ひっくり返しすぎると崩れる。CEOが交代するたびに方針が変われば、社員は適応疲労を起こす。「意図的に何もしない」勇気が必要。" },
+    "圖難於其易、為大於其細。": { yomi:"難（かた）きを其の易（やす）きに図り、大を其の細（こま）かなるに為す。", yaku:"難しいことは、まだ易しいうちに対処する。大きなことは、まだ小さいうちに為す。", kaisetsu:"第63章。早めに、小さく、味のないうちに処理せよ。プロアクティブ・マネジメントの古典的定式。予防医療・予防保全の原理。" },
+    "合抱之木、生於毫末。九層之臺、起於累土。千里之行、始於足下。": { yomi:"合抱（ごうほう）の木も、毫末（ごうまつ、毛筋の先）より生ず。九層の台も、累土（るいど）より起こる。千里の行も、足下より始まる。", yaku:"両手で抱える大木も、最初は毛筋ほどの細さから始まる。九層の高台も、最初は一握りの土から積み上がる。千里の旅も、最初の一歩から始まる。", kaisetsu:"第64章。最も有名な老子の一句。「千里の道も一歩から」――大きなものは小さなものの積み重ねで成る、という当然のようでいて忘れがちな真理。" },
+    "我有三寶、持而保之。一曰慈、二曰儉、三曰不敢為天下先。": { yomi:"我に三宝有り、持して之を保つ。一に曰く慈、二に曰く倹、三に曰く敢えて天下の先と為らず。", yaku:"私には三つの宝がある。一つ目は「慈（やさしさ・思いやり）」、二つ目は「倹（つつましさ・節度）」、三つ目は「敢えて天下の先頭に立とうとしないこと」。", kaisetsu:"第67章、老子の倫理綱領の最終形。儒家の五常が「積極性」を強調するのに対し、老子の三宝は「抑制」を強調する。現代のミニマリズム、サステナビリティ、サーバントリーダーシップに直接通じる。" },
+    "天下莫柔弱於水、而攻堅強者、莫之能勝。": { yomi:"天下、水より柔弱なるは莫（な）し。而して堅強を攻むる者は、之に能（よ）く勝つもの莫し。", yaku:"天下に水ほど柔らかく弱いものはない。しかし、堅く強いものを攻めるとき、水に勝てるものは何もない。", kaisetsu:"第78章。水は岩に勝てないように見える。しかし、長い時間をかけて岩を削り、谷を作るのは水である。短期的弱さは長期的強さ――老子の時間軸。" },
+    "信言不美、美言不信。善者不辯、辯者不善。": { yomi:"信言は美ならず、美言は信ならず。善者は弁ぜず、弁者は善ならず。", yaku:"真実の言葉は美しくない。美しい言葉は真実ではない。よい人は弁が立たない。弁が立つ者はよい人ではない。", kaisetsu:"第81章、老子最終章。「コンテンツマーケティング時代への警告」としても読める。バズる言葉ほど嘘臭く、滑らかな弁論ほど薄っぺらい。" }
+  }
+};
+
+const cosmoStages = [
+  {level:"根源", name:"道", title:"道 ― 混沌として定義不能の根源", body:"「有物混成、先天地生」――あるものが混沌として一体に成り、天地より先に生まれた。静かで、深く、独り立って変わらず、巡り行って疲れない。これこそ天下の母（生み出すもの）である。<strong>道は言葉や概念の檻に入らない</strong>。だから語ろうとした瞬間に「道そのもの」からは外れる。<br><strong>現代に翻訳</strong>：スポーツのフロー状態、優秀な営業の「なんとなく」――言語化以前の最適化が「道」の小さな現れ。"},
+  {level:"第一段", name:"一", title:"一 ― 統一原理、未分化のエネルギー", body:"道から最初に生じるのが「一」。これは未分化のエネルギー、まだ陰陽に分かれる前の根源的な気。<strong>すべての対立を含みつつ、まだそれを表に出していない状態</strong>。<br><strong>現代に翻訳</strong>：宇宙物理学の「特異点」、創業期のスタートアップ、起案者の頭の中にしかないアイデア。「これになる」と決まる前の、可能性の集まり。"},
+  {level:"第二段", name:"二", title:"二 ― 陰陽、対立する二項の発生", body:"「一」から「二」へ。ここで陰と陽の対立が生まれる。明暗、男女、動静、剛柔――世界は対立軸として現れる。<br><strong>注意点</strong>：陰と陽は単なる「敵」ではなく、互いを必要としあう<strong>補完関係</strong>。陰だけ・陽だけでは世界は動かない。<br><strong>現代に翻訳</strong>：プロダクト vs マーケット、攻め vs 守り、急進 vs 保守。「二項対立の中で停滞する」のは、まだ「三」に至っていない状態。"},
+  {level:"第三段", name:"三", title:"三 ― 陰陽＋沖気、第三項による調和", body:"「二」から「三」へ。ここで「沖気（ちゅうき、中庸の気）」という<strong>第三項</strong>が加わる。陰と陽が沖気を媒介として調和し、初めて世界が動き出す。<br><strong>これがヘーゲルの「正・反・合」の弁証法の遠い先取り</strong>。<br><strong>実務的示唆</strong>：職場の対立を解決するとき、二項対立の中だけで議論すると止まる。「第三の視点」――上司、顧客、長期的視点、外部専門家など――を導入すると動き始める。優れたファシリテーターは意図的に「沖気」を挿入する。"},
+  {level:"展開", name:"万物", title:"万物 ― 個別の事物の展開", body:"「三」から「万物」へ。陰・陽・沖気の三項調和を経て、無数の個別の事物（万物）が生み出される。木も石も人も会社も、すべてこの調和の派生物。<br><strong>万物は陰を負（せお）いて陽を抱（いだ）き、沖気を以て和を為す</strong>――すべての存在は内に対立を抱えつつ、その対立を中庸で調和させる構造を持つ。<br><strong>現代に翻訳</strong>：あらゆる成功した組織・製品・人間関係は、内部に「対立を抱えた上での調和」を持っている。"}
+];
+
+const kwData = {
+  do: { title:"道（みち）― 言葉にできない根本原理", body:`<p>老子思想の最重要概念。「<strong>定義できない</strong>」ことを定義としているやっかいな概念。「道可道、非常道」――「これが道だ」と言葉で語れるような道は、本当の永遠の道ではない。</p><p>「道」とは「<strong>この世界が、そのようにあり、そのように動いている、根源の原理</strong>」。重力、進化、四季の循環、人間関係のもつれと収束――これらすべての背後で働いている、名づけがたい働きの全体。<strong>身近な比喩</strong>：スポーツの「ゾーン」――テニス選手が考えずに最適に動いている状態。考えた瞬間、フローは壊れる。考えずに動いているのに最適化された動き――これが小さな「道」の現れ。</p>` },
+  mui: { title:"無為（むい）― 「何もしない」のではない", body:`<p>老子最大の誤解されやすい概念。「<strong>無為</strong>」とは「ゴロゴロして何もしない」ことではない。「non-forced action（強いられない行為）」「effortless effectiveness（努力感の少ない有効性）」と訳すと近い。</p><p>第37章「道常無為、而無不為」――道は常に無為だが、それでいて成し遂げないことは何もない。<strong>「為」的マネジメント</strong>：頻繁な進捗会議、細かい指示、KPIの毎週見直し。<strong>「無為」的マネジメント</strong>：採用と権限移譲を丁寧にやり、信頼して任せる。問題が起きたら寄り添う。現代の心理的安全性・サーバントリーダーシップ・自走型組織の源流がここにある。</p>` },
+  jinen: { title:"自然（じねん）― 本来そうあるがままに", body:`<p>現代日本語の「ネイチャー（自然環境）」とは違う。老子の「自然」は「<strong>自（おの）ずから然（しか）り</strong>」――「本来そうなっているもの」「外から強制されずに、自分の本性のままにあること」を指す。</p><p>第25章「人は地に法（のっと）り、地は天に法り、天は道に法り、道は自然に法る」――最高位にあるのは「道」より上の「自然」である。<strong>「自分の本性に逆らうな」</strong>――これは「努力するな」とは違う。自分の本性が伸びる方向への努力は楽しいが、本性に逆らう努力は摩耗する。植物に「成長しなさい」と命令しても伸びない。水と日光と栄養を与えれば、勝手に伸びる。「伸ばす」のではなく「伸びる条件を整える」――これが自然。</p>` },
+  jujaku: { title:"柔弱（じゅうじゃく）― 弱さこそが強さ", body:`<p>老子の中で<strong>最も逆説的に見える</strong>哲学。第76章「人の生（い）くるや柔弱、その死するや堅強」――生まれたての赤ん坊は全身が柔らかい。死体は硬い。若い樹木はしなる、枯れた樹木は折れる。<strong>柔らかさは生命の徴、硬さは死の徴</strong>。</p><p>第78章「天下、水より柔弱なるは莫し。而して堅強を攻むる者は、之に能く勝つもの莫し」――水は岩に勝てないように見える。しかし、長い時間をかけて岩を削り、谷を作るのは水である。<strong>短期的弱さは長期的強さ</strong>。これは処世のスローガンではなく、短期と長期のトレードオフを長期側に振る戦略。強硬な交渉者は短期的に勝つが関係が壊れる。柔軟な交渉者は短期的に負けたように見えて長期的に勝つ。</p>` },
+  han: { title:"反（はん）― 反対のほうへ動く法則", body:`<p>第40章「反者、道之動。弱者、道之用」――反対側へと振れていくこと、これが「道」の動き方。<strong>極まれば反転する</strong>のが宇宙の動きの基本パターン。陰陽の循環、好況不況の振り子、組織の盛衰――すべてが「反」で動く。</p><p>第36章「将に之を弱めんと欲すれば、必ず固く之を強くす」――何かを弱めたければ、まずいったん強めさせよ。これは現代風に言えば「振り子の法則」「回帰平均」「ホメオスタシス」。<strong>過剰な勤勉→燃え尽き／過剰な統制→反乱／過剰な楽観→急な悲観</strong>。だから老子は「過剰にならない」を最重要の処世訓のひとつにする。振り子を中央に保て――それが「反」を理解した上での処世。</p>` },
+  gen: { title:"玄（げん）― 奥深いブラックボックス", body:`<p>「玄」は「黒く深い」「奥が見えない」「神秘的」という意味の語。第1章末尾「玄之又玄、衆妙之門」――奥が深く、その奥がさらに深い。すべての絶妙な現象が出てくる門である。</p><p>「玄」を理解する鍵は「<strong>分からないものを分からないままにしておく能力</strong>」。Googleで検索すれば1秒で答えが出る時代に、「答えがないことを抱え続ける」という認知的負担に耐えにくい。しかし人生の本当に大事な問い（自分は何のために生まれてきたか、この組織をこのまま続けていいか）に性急な答えを出すと、たいてい間違える。<strong>保留する、抱え続ける、観察し続ける、答えが熟するのを待つ</strong>――これが「玄」の作法。英国の詩人キーツが「ネガティブ・ケイパビリティ（消極的能力）」と呼んだものに近い。</p>` },
+  jozen: { title:"上善若水 ― 水のように生きる", body:`<p>第8章、老子が最も愛した比喩。「<strong>最高の善とは、水のような在り方である</strong>」。水は3つの徳を持つ：①万物を潤して恵む（利他）②誰とも争わない（不争）③低い場所に身を置く（謙下）。</p><p>水のメタファーが繰り返されるのは、水が「自然の法則がすでに人格化されたモデル」だから。<strong>重力に従うだけで意志を持たない（無為）／柔らかいが長期では岩を削る（柔弱）／形を持たないからどんな器にも入る（融通無碍）／低きへと流れるから争いがない（謙下）／集まれば海となるから最終的に最大の力（積小成大）</strong>。リーダーの型を「岩・太陽・川・海」に分けると、老子が説くのは下2つ。岩でも太陽でもなく、川と海であれ。</p>` },
+  chisoku: { title:"知足（ちそく）― 足るを知る", body:`<p>第33章「知足者富」――足るを知る者こそが、本当の意味で富んでいる。第46章「禍は足るを知らざるより大なるは莫し」――禍の中で最も大きいのは「足ることを知らない」こと。</p><p>年収1,000万円になれば次は2,000万円、課長になれば部長、家を買えば別荘が欲しくなる――<strong>「もう一段上」という渇望は、得れば得るほど強くなる</strong>。「知足」は単なる諦めではなく「<strong>自分の中の限度を知り、その限度の中で深く豊かに生きる</strong>」積極的な選択。横並び比較で焦るのが「知足を知らない人」、自分の基準で満足できるのが「知足を知る人」。これは老子が説く処世の中でも、現代日本人に最も欠けていて、最も効果が大きい徳。</p>` }
+};
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.dataset.theme === "dark" ? "light" : "dark";
+  html.dataset.theme = next;
+  document.getElementById('theme-btn').textContent = next === "dark" ? "☀ ライト" : "🌙 ダーク";
+}
+
+function showCosmo(i) {
+  document.querySelectorAll('.c-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.c-item')[i].classList.add('active');
+  const s = cosmoStages[i];
+  document.getElementById('c-detail').innerHTML = `<div class="c-detail-title">${s.title}</div><p>${s.body}</p>`;
+}
+
+function openKW(id) {
+  const d = kwData[id]; if (!d) return;
+  const detail = document.getElementById('kw-detail');
+  detail.innerHTML = `<div class="kw-detail-title">${d.title}</div>${d.body}`;
+  detail.classList.add('open');
+  detail.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function filterBook(cat, btn) {
+  document.querySelectorAll('#books').forEach(book => {
+    book.previousElementSibling.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('.book').forEach(book => {
+    book.style.display = (cat === 'all' || book.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+function switchTab(btn, mode) {
+  const card = btn.closest('.quote-card');
+  card.querySelectorAll('.quote-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const body = card.querySelector('.quote-body');
+  const original = body.dataset.original || body.textContent;
+  if (!body.dataset.original) body.dataset.original = original;
+  body.dataset.mode = mode;
+  const key = original.trim();
+  const data = quoteData.default[key];
+  if (mode === 'genbun') body.innerHTML = original.replace(/\n/g, '<br>');
+  else if (data && data[mode]) body.textContent = data[mode];
+  else body.textContent = '（このタブの内容は準備中です）';
+}
+
+function toggleAcc(head) { head.parentElement.classList.toggle('open'); }
+
+function answerQuiz(btn, choice) {
+  const quiz = btn.closest('.quiz');
+  const correct = quiz.dataset.correct;
+  const explain = quiz.dataset.explain;
+  const fb = quiz.querySelector('.quiz-feedback');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
+  if (choice === correct) {
+    btn.classList.add('correct');
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '◎ 正解！　' + explain;
+  } else {
+    btn.classList.add('wrong');
+    const correctBtn = Array.from(quiz.querySelectorAll('.quiz-opt')).find(o => o.getAttribute('onclick').includes("'" + correct + "'"));
+    if (correctBtn) correctBtn.classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✕ 残念。正解は緑のもの。　' + explain;
+  }
+}
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrollTop = h.scrollTop || document.body.scrollTop;
+  const scrollHeight = h.scrollHeight - h.clientHeight;
+  document.getElementById('progress-bar').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('nav.side a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector('nav.side a[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+document.querySelectorAll('section.part, .hero').forEach(s => observer.observe(s));
+
+showCosmo(0);
+</script>
+</body>
+</html>
