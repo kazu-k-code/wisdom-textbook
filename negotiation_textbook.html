@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交渉学 ― ゼロから学ぶネゴシエーションの理論と実践</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;700;900&family=Zen+Old+Mincho:wght@400;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #1a2228;
+  --sumi-light: #2d3540;
+  --kong: #1e5266;
+  --kong-deep: #0f2d3d;
+  --kong-soft: #4a7a8c;
+  --kong-pale: #8aaab8;
+  --kin: #c8a548;
+  --kin-soft: #e0c069;
+  --kin-pale: #f0d488;
+  --kinari: #f5f1e6;
+  --hakuji: #fafaf7;
+  --kasumi: #dde5e8;
+  --kohaku: #586878;
+  --paper: #f3f1e8;
+  --paper-shadow: #d8d4c8;
+  --line: #c8d4d8;
+  --aijiro: #ebf1f0;
+  --ai: #2a4858;
+  --green: #4a7c59;
+  --shu: #b04030;
+}
+[data-theme="dark"] {
+  --sumi: #ebf1f3;
+  --sumi-light: #d0d8dc;
+  --kong: #6aa8c0;
+  --kong-deep: #4a7a8c;
+  --kong-soft: #4a6878;
+  --kin: #e0c069;
+  --kin-soft: #f0d488;
+  --kinari: #1a1d20;
+  --hakuji: #15171a;
+  --kasumi: #22282c;
+  --kohaku: #98a8b8;
+  --paper: #1a1d20;
+  --paper-shadow: #0a0c10;
+  --line: #38424a;
+  --aijiro: #1f262a;
+  --ai: #8db1c2;
+  --green: #8ab09a;
+  --shu: #d76155;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', '游明朝', 'YuMincho', serif;
+  background: var(--paper);
+  color: var(--sumi);
+  line-height: 1.85;
+  font-size: 16px;
+  font-feature-settings: "palt";
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+.en { font-family: 'Inter', sans-serif; letter-spacing: 0.02em; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--kong), var(--kin)); z-index: 1000; width: 0%; transition: width 0.1s; }
+header.global {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(243, 241, 232, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+[data-theme="dark"] header.global { background: rgba(26, 29, 32, 0.92); }
+.brand { display: flex; align-items: center; gap: 12px; font-family: 'Zen Old Mincho', serif; }
+.brand-seal {
+  width: 36px; height: 36px;
+  background: var(--kong); color: var(--kinari);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; border-radius: 4px;
+  letter-spacing: -1px; font-family: 'Zen Old Mincho', serif;
+  box-shadow: 2px 2px 0 var(--kong-deep);
+}
+.brand-title { font-size: 17px; font-weight: 700; color: var(--sumi); }
+.brand-sub { font-size: 11px; color: var(--kohaku); letter-spacing: 1px; }
+.controls { display: flex; gap: 8px; }
+.btn {
+  background: none; border: 1px solid var(--line); color: var(--sumi);
+  padding: 6px 14px; border-radius: 4px; cursor: pointer;
+  font-family: inherit; font-size: 13px; transition: all 0.2s;
+}
+.btn:hover { background: var(--kong); color: var(--kinari); border-color: var(--kong); }
+.layout {
+  display: grid; grid-template-columns: 260px 1fr;
+  max-width: 1400px; margin: 0 auto; gap: 0;
+}
+nav.side {
+  position: sticky; top: 64px; align-self: start;
+  height: calc(100vh - 64px); overflow-y: auto;
+  padding: 24px 18px; border-right: 1px solid var(--line); background: var(--paper);
+}
+nav.side ol { list-style: none; }
+nav.side > ol > li { margin-bottom: 4px; }
+nav.side a {
+  display: block; padding: 8px 12px;
+  color: var(--kohaku); text-decoration: none;
+  border-radius: 4px; font-size: 14px;
+  transition: all 0.2s; border-left: 3px solid transparent;
+}
+nav.side a:hover, nav.side a.active {
+  color: var(--kong); background: var(--kasumi); border-left-color: var(--kong);
+}
+nav.side a.section-title { font-weight: 700; color: var(--sumi); font-size: 15px; margin-top: 16px; }
+nav.side a.sub { font-size: 13px; padding-left: 24px; }
+main { padding: 32px 48px 80px; max-width: 880px; }
+.hero {
+  position: relative; padding: 60px 40px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--kasumi) 100%);
+  border-radius: 8px; overflow: hidden; margin-bottom: 48px;
+  border: 1px solid var(--line);
+}
+.hero::before {
+  content: "交"; position: absolute; top: -40px; right: -20px;
+  font-size: 320px; color: var(--kong); opacity: 0.08;
+  font-family: 'Zen Old Mincho', serif; font-weight: 900; line-height: 1;
+}
+.hero-tag {
+  display: inline-block; padding: 4px 12px;
+  background: var(--kong); color: var(--kinari);
+  font-size: 11px; letter-spacing: 2px; border-radius: 2px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 42px; font-weight: 900; line-height: 1.3;
+  margin-bottom: 12px; color: var(--sumi);
+}
+.hero .sub-title { font-size: 18px; color: var(--kohaku); margin-bottom: 24px; }
+.hero-meta {
+  display: flex; gap: 32px; font-size: 13px; color: var(--kohaku);
+  padding-top: 24px; border-top: 1px solid var(--line);
+}
+.hero-meta-item span { display: block; color: var(--sumi); font-weight: 700; font-size: 16px; margin-top: 2px; }
+section.part { margin-bottom: 80px; scroll-margin-top: 80px; }
+.part-header {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 8px; padding-bottom: 12px; border-bottom: 3px solid var(--kong);
+}
+.part-num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 56px; font-weight: 900; color: var(--kong); line-height: 1;
+}
+.part-title { font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; }
+.part-subtitle { color: var(--kohaku); font-size: 14px; margin-bottom: 32px; }
+h2.chap {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 22px; margin: 40px 0 16px;
+  padding-left: 16px; border-left: 4px solid var(--kong);
+  scroll-margin-top: 80px;
+}
+h3.sec {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px; color: var(--kong-deep); margin: 28px 0 12px;
+}
+p { margin: 12px 0; font-size: 15.5px; }
+p.lead { font-size: 17px; color: var(--sumi); line-height: 2; }
+.styles {
+  position: relative; margin: 32px 0; padding: 24px 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.styles-track { display: flex; gap: 0; min-width: 760px; position: relative; padding: 20px 0; align-items: stretch; justify-content: space-between; }
+.s-item {
+  flex: 1; text-align: center; position: relative; cursor: pointer; padding: 14px 8px;
+  background: var(--paper); border: 2px solid var(--line);
+  margin: 0 6px; border-radius: 10px; transition: all 0.25s;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.s-item:hover, .s-item.active {
+  border-color: var(--kong); background: var(--kasumi);
+  transform: translateY(-3px); box-shadow: 0 8px 16px rgba(30,82,102,0.15);
+}
+.s-num {
+  display: inline-block; background: var(--kong); color: var(--kinari);
+  font-size: 10px; padding: 2px 8px; border-radius: 12px; margin-bottom: 8px; letter-spacing: 1px;
+}
+.s-name { font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 900; color: var(--kong); line-height: 1.3; margin: 4px 0; }
+.s-en { font-size: 10px; color: var(--kohaku); letter-spacing: 1px; font-family: 'Inter', sans-serif; }
+.s-label { font-size: 11px; color: var(--sumi); margin-top: 6px; line-height: 1.4; }
+.s-detail {
+  margin-top: 20px; padding: 20px;
+  background: var(--kasumi); border-radius: 6px;
+  border-left: 4px solid var(--kong); min-height: 80px;
+}
+.s-detail-title { font-family: 'Zen Old Mincho', serif; font-size: 18px; font-weight: 700; color: var(--kong-deep); margin-bottom: 8px; }
+.kw-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px; margin: 24px 0;
+}
+.kw-card {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; padding: 20px; cursor: pointer;
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.kw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(30,82,102,0.15);
+  border-color: var(--kong);
+}
+.kw-card::after {
+  content: ""; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 3px; background: var(--kong); transition: width 0.3s;
+}
+.kw-card:hover::after { width: 100%; }
+.kw-glyph {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px; font-weight: 900; color: var(--kong); line-height: 1.1; margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.kw-yomi { font-size: 11px; color: var(--kohaku); letter-spacing: 1.5px; }
+.kw-name { font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; margin: 4px 0 8px; }
+.kw-summary { font-size: 13px; color: var(--kohaku); line-height: 1.6; }
+.kw-detail {
+  margin-top: 16px; padding: 24px;
+  background: var(--kasumi); border-radius: 8px;
+  border-left: 4px solid var(--kong); display: none;
+}
+.kw-detail.open { display: block; animation: fadeIn 0.4s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.kw-detail-title { font-family: 'Zen Old Mincho', serif; font-size: 22px; margin-bottom: 8px; }
+.quote-card {
+  margin: 28px 0; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(30,82,102,0.06);
+}
+.quote-tabs { display: flex; background: var(--kasumi); border-bottom: 1px solid var(--line); }
+.quote-tab {
+  flex: 1; padding: 10px 12px; font-size: 13px;
+  background: none; border: none; cursor: pointer; color: var(--kohaku);
+  font-family: inherit; border-bottom: 3px solid transparent; transition: all 0.2s;
+}
+.quote-tab.active { color: var(--kong); background: var(--paper); border-bottom-color: var(--kong); font-weight: 700; }
+.quote-tab:hover { color: var(--kong); }
+.quote-body { padding: 24px; min-height: 80px; }
+.quote-body[data-mode="genbun"] {
+  font-family: 'Inter', 'Zen Old Mincho', serif; font-size: 18px;
+  text-align: center; letter-spacing: 1px; color: var(--sumi);
+  padding: 28px 24px; line-height: 1.7;
+  font-style: italic;
+}
+.quote-body[data-mode="yomi"] { font-family: 'Zen Old Mincho', serif; font-size: 16px; color: var(--sumi); }
+.quote-body[data-mode="yaku"] { font-size: 15.5px; color: var(--sumi); }
+.quote-body[data-mode="kaisetsu"] {
+  font-size: 14px; color: var(--kohaku);
+  background: var(--kasumi); border-left: 3px solid var(--kong);
+  padding: 16px 20px; margin: 16px; border-radius: 4px;
+}
+.quote-source { text-align: right; font-size: 12px; color: var(--kohaku); padding: 8px 24px 16px; }
+.tbl-wrap { overflow-x: auto; margin: 24px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid var(--line); background: var(--paper); }
+th { background: var(--kong); color: var(--kinari); padding: 10px 12px; text-align: left; font-weight: 700; font-size: 13px; }
+td { padding: 10px 12px; border-top: 1px solid var(--line); }
+tr:nth-child(even) td { background: var(--kasumi); }
+tr:hover td { background: var(--kin-pale); color: var(--sumi); }
+.accordion-item { border: 1px solid var(--line); border-radius: 6px; margin-bottom: 12px; overflow: hidden; background: var(--paper); }
+.accordion-head {
+  padding: 16px 20px; background: var(--kasumi); cursor: pointer;
+  font-family: 'Zen Old Mincho', serif; font-weight: 700; font-size: 16px;
+  display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;
+}
+.accordion-head:hover { background: var(--kin-pale); }
+.accordion-head::after { content: "▼"; font-size: 10px; color: var(--kong); transition: transform 0.3s; }
+.accordion-item.open .accordion-head::after { transform: rotate(180deg); }
+.accordion-num {
+  display: inline-block; background: var(--kong); color: var(--kinari);
+  width: 28px; height: 28px; border-radius: 50%;
+  text-align: center; line-height: 28px; font-size: 13px; margin-right: 12px;
+}
+.accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.5s, padding 0.3s; }
+.accordion-item.open .accordion-body { padding: 16px 20px; max-height: none; }
+.pillar-svg-wrap { margin: 32px auto; max-width: 700px; text-align: center; }
+.exercise { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin: 16px 0; }
+.exercise-num {
+  display: inline-block; background: var(--kong); color: var(--kinari);
+  padding: 2px 8px; border-radius: 3px; font-size: 12px; letter-spacing: 1px; margin-bottom: 8px;
+}
+.exercise-q { font-weight: 700; margin-bottom: 12px; }
+.exercise textarea {
+  width: 100%; padding: 12px; border: 1px solid var(--line);
+  border-radius: 4px; font-family: inherit; font-size: 14px;
+  resize: vertical; min-height: 80px; background: var(--kinari); color: var(--sumi);
+}
+.quiz {
+  background: var(--paper); border: 2px solid var(--kong);
+  border-radius: 8px; padding: 24px; margin: 24px 0;
+}
+.quiz-q { font-weight: 700; margin-bottom: 14px; font-size: 16px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 10px 16px; border: 1px solid var(--line);
+  border-radius: 4px; background: var(--kinari); cursor: pointer;
+  text-align: left; font-family: inherit; font-size: 14px;
+  transition: all 0.2s; color: var(--sumi);
+}
+.quiz-opt:hover { background: var(--kin-pale); border-color: var(--kong); }
+.quiz-opt.correct { background: #d4ecd5; border-color: var(--green); color: var(--green); font-weight: 700; }
+.quiz-opt.wrong { background: #f3d1cd; border-color: var(--shu); }
+.quiz-feedback { margin-top: 14px; padding: 12px; border-radius: 4px; font-size: 14px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: #e8f3e9; color: var(--green); }
+.quiz-feedback.wrong { background: #fae6e2; color: var(--shu); }
+.pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+.pillar-card {
+  background: var(--paper); padding: 24px; border-radius: 8px;
+  border-top: 4px solid var(--kong); border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.pillar-card h4 { font-family: 'Zen Old Mincho', serif; font-size: 18px; color: var(--kong); margin-bottom: 8px; }
+.pillar-card .pillar-no { font-size: 11px; letter-spacing: 2px; color: var(--kohaku); }
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 24px 0; }
+.book { background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; font-size: 13px; }
+.book .book-num { color: var(--kong); font-weight: 700; margin-right: 6px; }
+.book .book-title { font-weight: 700; font-family: 'Zen Old Mincho', serif; }
+.book .book-meta { color: var(--kohaku); font-size: 11px; margin-top: 2px; }
+.book .book-cat { display: inline-block; background: var(--kasumi); color: var(--kong-deep); font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-top: 4px; }
+footer { background: var(--sumi); color: var(--kinari); padding: 40px 24px; text-align: center; margin-top: 80px; }
+footer .brand-seal { background: var(--kong); color: var(--kinari); display: inline-flex; }
+footer p { color: var(--paper-shadow); font-size: 13px; margin-top: 12px; }
+.filter-bar { display: flex; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+.chip {
+  padding: 6px 14px; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 20px; cursor: pointer; font-size: 13px; font-family: inherit;
+  color: var(--sumi); transition: all 0.2s;
+}
+.chip.active, .chip:hover { background: var(--kong); color: var(--kinari); border-color: var(--kong); }
+.tip {
+  background: var(--aijiro); border-left: 4px solid var(--ai);
+  padding: 14px 18px; border-radius: 4px; margin: 16px 0;
+  font-size: 14px; color: var(--sumi);
+}
+.tip strong { color: var(--ai); }
+.warn {
+  background: #fae6e2; border-left: 4px solid var(--shu);
+  padding: 14px 18px; border-radius: 4px; margin: 16px 0;
+  font-size: 14px; color: var(--sumi);
+}
+.warn strong { color: var(--shu); }
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; max-width: 100%; }
+  nav.side { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 14px 16px; max-height: 280px; }
+  main { padding: 24px 18px 60px; max-width: 100%; }
+  .hero { padding: 32px 20px; }
+  .hero h1 { font-size: 28px; }
+  .hero::before { font-size: 180px; right: -10px; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; gap: 14px; }
+}
+@media (max-width: 600px) {
+  body { font-size: 14px; }
+  header.global { padding: 8px 12px; }
+  .brand { gap: 8px; }
+  .brand-seal { width: 28px; height: 28px; font-size: 13px; box-shadow: 1px 1px 0 var(--kong-deep); }
+  .brand-title { font-size: 12px; line-height: 1.3; }
+  .brand-sub { display: none; }
+  .controls { gap: 4px; }
+  .btn { padding: 5px 8px; font-size: 10px; }
+  nav.side { padding: 12px 14px; max-height: 240px; }
+  nav.side a { padding: 6px 10px; font-size: 13px; }
+  nav.side a.section-title { font-size: 13px; margin-top: 10px; }
+  nav.side a.sub { font-size: 12px; padding-left: 20px; }
+  main { padding: 18px 14px 40px; max-width: 100%; }
+  .hero { padding: 22px 16px; margin-bottom: 32px; }
+  .hero h1 { font-size: 22px; line-height: 1.35; }
+  .hero h1 span { font-size: 0.6em; }
+  .hero .sub-title { font-size: 13px; line-height: 1.8; }
+  .hero-tag { font-size: 10px; padding: 3px 8px; letter-spacing: 1px; margin-bottom: 12px; }
+  .hero::before { font-size: 140px; right: -5px; top: -10px; }
+  .hero-meta { gap: 12px; padding-top: 16px; font-size: 11px; }
+  .hero-meta-item span { font-size: 13px; }
+  p { font-size: 14px; line-height: 1.85; margin: 10px 0; }
+  p.lead { font-size: 14.5px; line-height: 1.9; }
+  h2.chap { font-size: 16px; margin: 24px 0 10px; padding-left: 10px; border-left-width: 3px; }
+  h3.sec { font-size: 14px; margin: 20px 0 10px; }
+  .part-header { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 8px; }
+  .part-num { font-size: 34px; line-height: 1; }
+  .part-title { font-size: 16px; }
+  .part-subtitle { font-size: 11px; margin-bottom: 18px; letter-spacing: 1px; }
+  .filter-bar { gap: 6px; margin: 12px 0; }
+  .chip { padding: 5px 11px; font-size: 12px; }
+  .kw-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .kw-card { padding: 12px; }
+  .kw-glyph { font-size: 20px; }
+  .kw-yomi { font-size: 10px; }
+  .kw-name { font-size: 13px; }
+  .kw-summary { font-size: 11px; line-height: 1.55; }
+  .kw-detail { padding: 16px; }
+  .kw-detail-title { font-size: 17px; }
+  .quote-tabs { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .quote-tab { padding: 8px 2px; font-size: 10px; border-right: 1px solid var(--line); }
+  .quote-tab:last-child { border-right: none; }
+  .quote-body { padding: 16px 12px; }
+  .quote-body[data-mode="genbun"] { font-size: 14px; padding: 18px 10px; letter-spacing: 0.5px; line-height: 1.7; }
+  .quote-body[data-mode="yomi"] { font-size: 13.5px; }
+  .quote-body[data-mode="yaku"] { font-size: 13.5px; }
+  .quote-body[data-mode="kaisetsu"] { font-size: 12px; padding: 12px 14px; margin: 12px; }
+  .accordion-head { padding: 12px 14px; font-size: 13px; }
+  .accordion-num { width: 22px; height: 22px; line-height: 22px; font-size: 11px; margin-right: 8px; }
+  .accordion-item.open .accordion-body { padding: 12px 14px; }
+  .pillar-grid { gap: 12px; }
+  .pillar-card { padding: 16px; }
+  .pillar-card h4 { font-size: 15px; }
+  .pillar-card .pillar-no { font-size: 10px; }
+  .tip, .warn { padding: 12px 14px; font-size: 12.5px; line-height: 1.7; }
+  .tbl-wrap { margin: 16px 0; }
+  table { font-size: 11.5px; }
+  th, td { padding: 6px 8px; }
+  th { font-size: 11px; }
+  .styles { margin: 20px 0; }
+  .styles-track { min-width: 700px; padding: 14px 0; }
+  .s-name { font-size: 14px; }
+  .s-num { font-size: 9px; }
+  .s-label { font-size: 10px; }
+  .s-detail { margin-top: 16px; padding: 14px; }
+  .s-detail-title { font-size: 15px; }
+  .exercise { padding: 14px; margin: 12px 0; }
+  .exercise-q { font-size: 13.5px; margin-bottom: 10px; }
+  .exercise textarea { font-size: 13px; min-height: 70px; padding: 10px; }
+  .exercise-num { font-size: 11px; padding: 2px 7px; }
+  .quiz { padding: 16px; margin: 18px 0; }
+  .quiz-q { font-size: 14px; margin-bottom: 12px; }
+  .quiz-opt { padding: 9px 12px; font-size: 12.5px; }
+  .quiz-feedback { font-size: 12.5px; padding: 10px; }
+  .books { grid-template-columns: 1fr; gap: 8px; }
+  .book { padding: 10px 12px; font-size: 12px; }
+  .book .book-meta { font-size: 10px; }
+  .book .book-cat { font-size: 9px; }
+  .pillar-svg-wrap { margin: 24px auto; }
+}
+@media (max-width: 380px) {
+  .brand-title { display: none; }
+  .kw-grid { grid-template-columns: 1fr; }
+  .quote-tabs { grid-template-columns: repeat(2, 1fr); }
+  .quote-tab:nth-child(2) { border-right: none; }
+}
+@media (max-width: 980px) {
+  html, body { width: 100%; }
+  body { overflow-x: hidden; }
+  .layout, header.global, footer, main, section, nav.side, div, p, h1, h2, h3, h4, ul, ol, li { max-width: 100%; box-sizing: border-box; }
+  p, li, td, th, .kw-summary, .tip, .warn, .quote-body, .accordion-head { overflow-wrap: anywhere; word-break: break-word; }
+  img, svg, video, iframe, embed { max-width: 100%; height: auto; }
+  .styles, .tbl-wrap { max-width: 100%; overflow-x: auto; }
+  table { max-width: 100%; }
+  .hero { overflow: hidden; max-width: 100%; }
+}
+@media print {
+  header.global, nav.side, .controls, #progress-bar { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  body { background: white; color: black; }
+  .accordion-body { max-height: none !important; padding: 16px 20px !important; }
+  .kw-detail { display: block !important; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<header class="global">
+  <div class="brand">
+    <div class="brand-seal">交</div>
+    <div>
+      <div class="brand-title">交渉学 ― ゼロから学ぶ独習教科書</div>
+      <div class="brand-sub">NEGOTIATION · UNIVERSITY EDITION</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="toggleTheme()" id="theme-btn">🌙 ダーク</button>
+    <button class="btn" onclick="window.print()">🖨 印刷</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="side" id="sidenav">
+    <ol>
+      <li><a href="#hero" class="section-title active">表紙</a></li>
+      <li><a href="#part1" class="section-title">第1部 交渉学への招待</a>
+        <ol>
+          <li><a href="#types" class="sub">交渉の3類型</a></li>
+          <li><a href="#history" class="sub">交渉学の歴史</a></li>
+        </ol>
+      </li>
+      <li><a href="#part2" class="section-title">第2部 コア概念</a></li>
+      <li><a href="#part3" class="section-title">第3部 主要文献と理論</a></li>
+      <li><a href="#part4" class="section-title">第4部 実務応用</a></li>
+      <li><a href="#part5" class="section-title">第5部 ワークブック</a>
+        <ol>
+          <li><a href="#diagnosis" class="sub">5スタイル診断</a></li>
+          <li><a href="#exercises" class="sub">演習</a></li>
+          <li><a href="#quiz" class="sub">クイズ</a></li>
+          <li><a href="#books" class="sub">推薦図書</a></li>
+        </ol>
+      </li>
+      <li><a href="#sources" class="section-title">Sources</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section class="hero" id="hero">
+      <span class="hero-tag">UNIVERSITY EDITION</span>
+      <h1>交渉学<br><span style="font-size:0.55em; color: var(--kong-deep);">ゼロから学ぶネゴシエーションの理論と実践</span></h1>
+      <p class="sub-title">「人間は交渉する動物である」――ハーバード大学のロジャー・フィッシャーは言った。配偶者との夕食決め、上司への締切交渉、クライアントとの価格交渉、子どもとのゲーム時間――<strong>私たちの人生は交渉の連続である</strong>。にもかかわらず、それを体系的に学ぶ機会を持たないまま大人になる。本書は半世紀にわたる交渉学（Negotiation Studies）の蓄積を、日本のビジネスパーソン向けに再構築した独習教科書である。</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">原点<span>Harvard Negotiation Project (1979)</span></div>
+        <div class="hero-meta-item">確立<span>Fisher & Ury『Getting to Yes』(1981)</span></div>
+        <div class="hero-meta-item">最新動向<span>AI時代の交渉（2025-26）</span></div>
+        <div class="hero-meta-item">本書のページ<span>5部構成・37章相当</span></div>
+      </div>
+    </section>
+
+    <section class="part" id="part1">
+      <div class="part-header">
+        <div class="part-num">壱</div>
+        <div><div class="part-title">交渉学への招待</div></div>
+      </div>
+      <div class="part-subtitle">PART 1｜INTRODUCTION</div>
+
+      <p class="lead">本書の目的はただひとつ。<strong>交渉という人間の根源的な営みを、感覚や根性論ではなく、再現可能な「学問」として身につける</strong>こと。交渉学はハーバード交渉プロジェクトが1970年代に体系化して以降、半世紀にわたって蓄積されてきた。</p>
+
+      <h2 class="chap">交渉とは何か ― 古典的定義</h2>
+
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">英文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">日本語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">意味</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">Negotiation is a back-and-forth communication designed to reach an agreement when you and the other side have some interests that are shared and others that are opposed.</div>
+        <div class="quote-source">Fisher & Ury『Getting to Yes』(1981)</div>
+      </div>
+
+      <p>この定義には3つの重要なポイントがある。第一に「<strong>双方向のコミュニケーション</strong>」――一方的な命令や説得は交渉ではない。第二に「<strong>共通する利害と対立する利害が同時に存在</strong>」――利害が100%一致していれば交渉は不要、100%対立していれば戦争か訴訟になる。第三に「<strong>合意</strong>がゴール」――決裂のための話し合いは交渉ではない。</p>
+
+      <h3 class="sec">交渉が成立する4条件</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>条件</th><th>説明</th><th>反例</th></tr></thead>
+          <tbody>
+            <tr><td>① 相互依存</td><td>互いに相手が必要</td><td>一方が完全自給自足</td></tr>
+            <tr><td>② 利害の重なりと対立</td><td>共通点と相違点が両方ある</td><td>完全一致／完全対立</td></tr>
+            <tr><td>③ 不確実性</td><td>結果がまだ確定していない</td><td>既に決まっている</td></tr>
+            <tr><td>④ 合意形成の意思</td><td>双方が解決を望む</td><td>一方が「白黒」のみ望む</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>コンビニで150円のおにぎりを定価で買うとき、私たちは交渉していない。価格が固定で不確実性も交渉余地もないからだ。一方、フリーマーケットで「2,000円のシャツを1,500円に値切る」場面では、4条件がすべて揃う。<strong>これが交渉の最小単位</strong>である。</p>
+
+      <h2 class="chap" id="types">交渉の3類型 ― 分配型・統合型・関係型</h2>
+
+      <p class="lead"><strong>類型を誤認すると戦略を間違える</strong>。なぜなら、長期関係に分配型戦術を持ち込むと関係資本を破壊し、長期的に大損するからだ。</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>類型</th><th>別名</th><th>パイの性質</th><th>関係性</th><th>例</th></tr></thead>
+          <tbody>
+            <tr><td>分配型</td><td>Win-Lose、ゼロサム</td><td>固定（Fixed Pie）</td><td>短期・一回性</td><td>中古車購入、相続争い</td></tr>
+            <tr><td>統合型</td><td>Win-Win、問題解決型</td><td>可変（Expanding Pie）</td><td>中長期・継続的</td><td>長期契約、共同開発、M&A</td></tr>
+            <tr><td>関係型</td><td>Identity-based</td><td>関係資本</td><td>長期・コミュニティ的</td><td>家族の役割分担、近所付き合い</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip"><strong>熟練者の核心スキル</strong>　最初は分配型に見える交渉から「統合型に変換できる要素」を引き出すこと。「価格しか論点がない」と思える場面でも、納期・支払い条件・数量・アフターサポート・独占権など、相手と自分で重要度が違う変数を探せば、ほぼ必ず統合の余地が見つかる。</div>
+
+      <h2 class="chap" id="history">交渉学の歴史 ― 5スタイルへの招待</h2>
+
+      <p>1979年のハーバード交渉プロジェクト設立、1981年の『Getting to Yes』が現代交渉学のビッグバンだった。それ以前にも孫子、マキャヴェッリ、シェリングなどの先駆的思想があり、特にシェリングがゲーム理論の基盤を提供した。日本では1990年代以降に田村次朗・隅田浩司らが体系化した。</p>
+
+      <h3 class="sec">5つの交渉スタイル（クリックで詳細）</h3>
+      <p>G. Richard Shellが体系化した、人がデフォルトで取りやすい5つの交渉スタイル。<strong>自分のデフォルトを知ることが交渉学習の出発点</strong>である。各スタイルをクリックして、強み・弱み・適切な場面を確かめよう。</p>
+
+      <div class="styles">
+        <div class="styles-track">
+          <div class="s-item active" data-stage="0" onclick="showStyle(0)">
+            <div class="s-num">STYLE 1</div>
+            <div class="s-name">競争型</div>
+            <div class="s-en">Competing</div>
+            <div class="s-label">勝ち負け重視</div>
+          </div>
+          <div class="s-item" data-stage="1" onclick="showStyle(1)">
+            <div class="s-num">STYLE 2</div>
+            <div class="s-name">協調型</div>
+            <div class="s-en">Collaborating</div>
+            <div class="s-label">Win-Win志向</div>
+          </div>
+          <div class="s-item" data-stage="2" onclick="showStyle(2)">
+            <div class="s-num">STYLE 3</div>
+            <div class="s-name">妥協型</div>
+            <div class="s-en">Compromising</div>
+            <div class="s-label">折半志向</div>
+          </div>
+          <div class="s-item" data-stage="3" onclick="showStyle(3)">
+            <div class="s-num">STYLE 4</div>
+            <div class="s-name">回避型</div>
+            <div class="s-en">Avoiding</div>
+            <div class="s-label">対立回避</div>
+          </div>
+          <div class="s-item" data-stage="4" onclick="showStyle(4)">
+            <div class="s-num">STYLE 5</div>
+            <div class="s-name">順応型</div>
+            <div class="s-en">Accommodating</div>
+            <div class="s-label">関係重視</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-detail" id="s-detail">
+        <div class="s-detail-title">競争型（Competing）― 勝ち負け重視</div>
+        <p>自己主張が強く、協調性が低いスタイル。<strong>強み</strong>：明確な勝利、迅速な決着。<strong>弱み</strong>：関係破壊、長期不利。<strong>適場面</strong>：一度きりの取引、敵対的法廷、緊急時の決断。<br><strong>注意点</strong>：いつもこのスタイルだと評判を失い、業界から孤立する。長期取引では絶対に使ってはいけない。「強引な営業」「圧力的なクライアント」がこのタイプ。</p>
+      </div>
+
+      <div class="tip"><strong>第1部のまとめ</strong>　交渉は双方向コミュニケーションによる合意形成。3類型（分配型・統合型・関係型）を見極め、5スタイルを使い分けるのが熟練者。自分のデフォルトスタイルを把握し、状況に応じて切り替える力が交渉力の本質。</div>
+    </section>
+
+    <section class="part" id="part2">
+      <div class="part-header">
+        <div class="part-num">弐</div>
+        <div><div class="part-title">コア概念 ― 交渉学の「九九」</div></div>
+      </div>
+      <div class="part-subtitle">PART 2｜CORE CONCEPTS</div>
+
+      <p class="lead">第2部は本書の心臓部。ここで紹介する8つの概念は、<strong>交渉学の「九九」</strong>にあたる。これらを覚えていない状態で第3部以降を読むのは、九九を知らずに微積分を学ぶに等しい。<strong>気になる用語をクリック</strong>すると詳細が展開する。</p>
+
+      <div class="kw-grid" id="kw-grid">
+        <div class="kw-card" onclick="openKW('batna')">
+          <div class="kw-glyph">BATNA</div>
+          <div class="kw-yomi">バトナ</div>
+          <div class="kw-name">不合意時最善代替案</div>
+          <div class="kw-summary">交渉力の最大の源泉、最重要概念</div>
+        </div>
+        <div class="kw-card" onclick="openKW('zopa')">
+          <div class="kw-glyph">ZOPA</div>
+          <div class="kw-yomi">ゾーパ</div>
+          <div class="kw-name">合意可能領域</div>
+          <div class="kw-summary">双方が合意可能な条件の範囲</div>
+        </div>
+        <div class="kw-card" onclick="openKW('reservation')">
+          <div class="kw-glyph">Reserve</div>
+          <div class="kw-yomi">リザベーション</div>
+          <div class="kw-name">留保価格</div>
+          <div class="kw-summary">これ以上譲れない撤退ライン</div>
+        </div>
+        <div class="kw-card" onclick="openKW('aspiration')">
+          <div class="kw-glyph">Aspire</div>
+          <div class="kw-yomi">アスピレーション</div>
+          <div class="kw-name">目標値</div>
+          <div class="kw-summary">高く保つほど結果も良くなる野心</div>
+        </div>
+        <div class="kw-card" onclick="openKW('anchoring')">
+          <div class="kw-glyph">Anchor</div>
+          <div class="kw-yomi">アンカリング</div>
+          <div class="kw-name">錨効果</div>
+          <div class="kw-summary">最初の数字が判断基準になる効果</div>
+        </div>
+        <div class="kw-card" onclick="openKW('framing')">
+          <div class="kw-glyph">Frame</div>
+          <div class="kw-yomi">フレーミング</div>
+          <div class="kw-name">枠付け</div>
+          <div class="kw-summary">同じ情報を異なる枠で提示する</div>
+        </div>
+        <div class="kw-card" onclick="openKW('logrolling')">
+          <div class="kw-glyph">Logroll</div>
+          <div class="kw-yomi">ログローリング</div>
+          <div class="kw-name">交換取引</div>
+          <div class="kw-summary">重要度の差を活用した交換</div>
+        </div>
+        <div class="kw-card" onclick="openKW('pioc')">
+          <div class="kw-glyph">PIOC</div>
+          <div class="kw-yomi">原則4つ</div>
+          <div class="kw-name">原則立脚型交渉</div>
+          <div class="kw-summary">People-Interests-Options-Criteria</div>
+        </div>
+      </div>
+
+      <div class="kw-detail" id="kw-detail">
+        <div class="kw-detail-title">クリックして詳細を見る</div>
+        <p>各カードをタップすると、その概念の詳細解説と実例が現れます。</p>
+      </div>
+
+      <h3 class="sec">最重要の引用：BATNAの定義</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">英文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">日本語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">意味</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">Best Alternative to a Negotiated Agreement — the course of action you will take if the current negotiation fails.</div>
+        <div class="quote-source">Fisher & Ury (1981)</div>
+      </div>
+
+      <h3 class="sec">原則立脚型交渉の核心：「立場でなく利害に焦点」</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">英文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">日本語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">意味</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">Focus on interests, not positions.</div>
+        <div class="quote-source">Fisher & Ury『Getting to Yes』第2原則</div>
+      </div>
+
+      <h3 class="sec">FBI流のキー概念：「決して差を分けるな」</h3>
+      <div class="quote-card">
+        <div class="quote-tabs">
+          <button class="quote-tab active" onclick="switchTab(this,'genbun')">英文</button>
+          <button class="quote-tab" onclick="switchTab(this,'yomi')">日本語訳</button>
+          <button class="quote-tab" onclick="switchTab(this,'yaku')">意味</button>
+          <button class="quote-tab" onclick="switchTab(this,'kaisetsu')">解説</button>
+        </div>
+        <div class="quote-body" data-mode="genbun">Never split the difference. Negotiating as if your life depended on it.</div>
+        <div class="quote-source">Chris Voss『Never Split the Difference』(2016)</div>
+      </div>
+
+      <h2 class="chap">主要コンセプト精読</h2>
+
+      <div id="accordions">
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">1</span>BATNA ― 交渉力の最大の源泉</span></div>
+          <div class="accordion-body">
+            <p><strong>BATNA（Best Alternative to a Negotiated Agreement）</strong>はFisher & Uryが『Getting to Yes』で提唱した、交渉学最重要の用語。「いま行っている交渉が決裂したときに、あなたが取りうる最良の代替手段」を指す。</p>
+            <p><strong>強いBATNAを持つ者ほど、交渉で強く出られる</strong>。逆にBATNAがない／弱い状態で交渉に臨むと、相手の言いなりになりやすい。「他社からも複数のオファーがある」求職者は強気で交渉できる。</p>
+            <h3 class="sec">BATNAを強化する3つの方法</h3>
+            <ol style="padding-left:24px; line-height:1.9;">
+              <li><strong>複数の代替案を持つ</strong>：転職活動なら3〜5社に同時応募</li>
+              <li><strong>代替案の質を高める</strong>：それぞれが魅力的な状態にする</li>
+              <li><strong>代替案を相手に「ほのめかす」</strong>：露骨でなく暗示する</li>
+            </ol>
+            <div class="tip"><strong>3行サマリー</strong><br>・BATNAは交渉決裂時の最良の代替案で、交渉力の最大の源泉<br>・BATNAは事前準備で強化でき、複数の代替案を持つことが基本<br>・BATNAは武器ではなく自信の源泉。露骨な誇示は関係を壊す</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">2</span>ZOPA ― 合意可能領域</span></div>
+          <div class="accordion-body">
+            <p><strong>ZOPA（Zone of Possible Agreement）</strong>は、Howard Raiffaが体系化した、双方が合意可能な条件の範囲。あなたの最低希望3,500万円、買い手の最高許容4,000万円なら、ZOPAは500万円の幅。</p>
+            <p>ZOPAは<strong>双方のBATNAから論理的に導かれる</strong>。あなたが「他の不動産業者は3,500万円で買い取る」（BATNA）なら、それがあなたのReservation Price。</p>
+            <h3 class="sec">ZOPAがない場合（Negative ZOPA）の対処</h3>
+            <ol style="padding-left:24px; line-height:1.9;">
+              <li><strong>交渉を打ち切る</strong>：BATNAに戻る</li>
+              <li><strong>次元を増やす</strong>：価格以外の要素を加え、統合型に変換する</li>
+              <li><strong>時間をかける</strong>：状況変化を待つ</li>
+            </ol>
+            <div class="tip"><strong>3行サマリー</strong><br>・ZOPAは双方が合意可能な条件の範囲で、双方のReservation Priceで挟まれる<br>・ZOPAはBATNAから導かれ、ZOPAがなければ次元を増やすか撤退するしかない<br>・交渉前にZOPAを書き出して可視化する習慣が、熟練への第一歩</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">3</span>Reservation Price と Aspiration ― 撤退ラインと目標</span></div>
+          <div class="accordion-body">
+            <p><strong>Reservation Price</strong>＝「これ以下/以上では絶対に合意しない」撤退ライン。BATNAから論理的に導かれる。<br><strong>Aspiration</strong>＝「うまくいけばここまで取れる」野心的目標値。</p>
+            <p>複数の実証研究（Neale & Bazerman 1985〜）が示すのは、<strong>高いAspirationを持つ交渉者ほど高い結果を得る</strong>こと。心理的にも論理的にも理にかなっている。</p>
+            <h3 class="sec">Aspirationを設定する4ステップ</h3>
+            <ol style="padding-left:24px; line-height:1.9;">
+              <li>市場相場・客観基準を調べる</li>
+              <li>相場の上位10〜25%にAspirationを置く</li>
+              <li>その根拠を3つ用意する</li>
+              <li>第三者に「これは妥当？」と検証してもらう</li>
+            </ol>
+            <div class="tip"><strong>3行サマリー</strong><br>・Reservation Priceは撤退ライン、Aspirationは野心的目標値<br>・実証研究上、高いAspirationを持つ交渉者ほど高い結果を得る<br>・AspirationとReservationは紙に書き分け、混同しない</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">4</span>Anchoring と Framing ― 認知の操作術</span></div>
+          <div class="accordion-body">
+            <p><strong>Anchoring</strong>は最初の数字が判断基準になる効果（Tversky & Kahneman）。<strong>強気のFirst Offerが主導権を握る</strong>。ただし極端なアンカーは関係を壊すので、Reservation Priceから20〜30%離れたあたりが適度。</p>
+            <p><strong>Framing</strong>は同じ情報を異なる枠で提示する技。「死亡率10%」vs「生存率90%」――同じだが医療判断は大きく変わる。</p>
+            <h3 class="sec">Framingの5タイプ</h3>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Frame</th><th>例</th><th>効果</th></tr></thead>
+                <tbody>
+                  <tr><td>利得フレーム</td><td>「これで10万円得します」</td><td>安心感、慎重</td></tr>
+                  <tr><td>損失フレーム</td><td>「逃すと10万円損します」</td><td>危機感、行動</td></tr>
+                  <tr><td>比較フレーム</td><td>「相場より20%安い」</td><td>相対的お得感</td></tr>
+                  <tr><td>時間フレーム</td><td>「3年で考えれば年間20万円」</td><td>価格を希釈</td></tr>
+                  <tr><td>道徳フレーム</td><td>「公平な分配です」</td><td>倫理的訴求</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tip"><strong>3行サマリー</strong><br>・Anchoringは最初の数字が判断基準になる効果で、強気のFirst Offerが主導権を握る<br>・Framingは同じ情報を異なる枠で提示する技で、損失フレームは行動を促す<br>・相手の極端なアンカーは正面で議論せず、別の基準で置き換えるのが上策</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">5</span>Trade-off と Logrolling ― 交換の知恵</span></div>
+          <div class="accordion-body">
+            <p><strong>Trade-off</strong>はある要素を譲る代わりに別の要素を得る交換取引。<strong>Logrolling</strong>はその拡張版で、<strong>自分にとって重要度が低く、相手にとって重要度が高い項目を譲り、その逆を相手に譲ってもらう</strong>手法。</p>
+            <p>Logrollingが成立するには<strong>変数（論点）が複数</strong>必要。だからこそ熟練交渉者は意図的に論点を増やす。価格しかない交渉でも、納期・支払条件・サービス・独占権・契約期間・更新オプション・違約条項などを持ち込んで多次元化する。</p>
+            <h3 class="sec">条件付提案の構文：「If/Then」</h3>
+            <p>❌ 「リモートワーク週3日でお願いします」（単なる要求）<br>⭕ 「<strong>もし</strong>年俸800万円でご決定いただけるなら、その代わり<strong>リモートワーク週3日</strong>を確約いただけますか」（条件付き）</p>
+            <div class="tip"><strong>3行サマリー</strong><br>・Trade-offは交換取引、Logrollingはその拡張で、双方の重要度の差を活用する<br>・Logrollingには複数の論点が必要なので、意図的に論点を増やすことが鍵<br>・Trade-offは「If/Then」の条件付提案として切り出すのが基本構文</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">6</span>Principled Negotiation の4原則（PIOC）</span></div>
+          <div class="accordion-body">
+            <p>Fisher & Uryが提唱した原則立脚型交渉の4原則。<strong>「PIOC（パイオック）」</strong>と覚える。</p>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>原則</th><th>内容</th><th>反対の悪習</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>P</strong>eople</td><td>人と問題を分けよ</td><td>相手を人格攻撃する</td></tr>
+                  <tr><td><strong>I</strong>nterests</td><td>立場でなく利害に焦点を当てよ</td><td>立場で殴り合う</td></tr>
+                  <tr><td><strong>O</strong>ptions</td><td>相互利益となる選択肢を創れ</td><td>早急に決着を急ぐ</td></tr>
+                  <tr><td><strong>C</strong>riteria</td><td>客観的基準を主張せよ</td><td>主観と感情で押し切る</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3 class="sec">古典的例：オレンジの寓話</h3>
+            <p>姉妹が一個のオレンジを取り合っている。<strong>立場</strong>は両者「全部欲しい」。<strong>利害</strong>は姉「ジュース作りたい（果汁が欲しい）」、妹「マーマレード作りたい（皮が欲しい）」。立場で殴り合えば半分ずつで満足度50%、利害を聞き出せば姉に果汁・妹に皮を全部渡して両者100%。</p>
+            <div class="tip"><strong>3行サマリー</strong><br>・4原則は人と問題の分離、利害への焦点、選択肢の創造、客観基準で、順序に意味がある<br>・「立場でなく利害」が最重要で、「なぜ？」と問うことが核心スキル<br>・客観基準への合意は、感情的押し問答からの脱出口</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-head" onclick="toggleAcc(this)"><span><span class="accordion-num">7</span>Win-Win思考、信頼、評判 ― 関係資本の経済学</span></div>
+          <div class="accordion-body">
+            <p>「Win-Win」はCoveyの『7つの習慣』で世に広まったが、<strong>多くの人がWin-Winを「双方が満足する妥協」と誤解</strong>している。正しい定義は「<strong>双方の利害を最大化する解決策を共同で発見すること。妥協ではなく、創造</strong>」。</p>
+            <p><strong>信頼は交渉コストを劇的に下げる経済資源</strong>。Francis Fukuyamaは『Trust』(1995)で、社会の信頼度が経済成長に直結することを実証した。長期取引では、信頼への投資が最大のROIを生む。</p>
+            <h3 class="sec">信頼を築く5つの行動</h3>
+            <ol style="padding-left:24px; line-height:1.9;">
+              <li><strong>約束を守る</strong>：小さな約束ほど守る</li>
+              <li><strong>情報を共有</strong>：相手に有利な情報も開示</li>
+              <li><strong>誤りを認める</strong>：ミスを隠さず謝る</li>
+              <li><strong>一貫性</strong>：言動が一致</li>
+              <li><strong>共感を示す</strong>：相手の立場を理解</li>
+            </ol>
+            <div class="tip"><strong>3行サマリー</strong><br>・Win-Winは妥協ではなく、双方の利害を最大化する創造的解決<br>・信頼は取引コストを下げる経済資源で、長期取引で最大のROIを生む<br>・評判は外部化された信頼の貯金で、長期的勝利の源泉</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="part" id="part3">
+      <div class="part-header">
+        <div class="part-num">参</div>
+        <div><div class="part-title">主要文献と理論的フレームワーク</div></div>
+      </div>
+      <div class="part-subtitle">PART 3｜KEY LITERATURE & THEORY</div>
+
+      <p class="lead">第3部では、交渉学の主要文献を体系的に紹介し、ゲーム理論・行動経済学・心理学・文化人類学の理論的フレームワークを学ぶ。<strong>中心にあるのはZOPA-BATNA構造</strong>――双方のReservation Priceとその間の合意領域。</p>
+
+      <div class="pillar-svg-wrap">
+        <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <linearGradient id="zopaG" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1e5266" stop-opacity="0.15"/>
+              <stop offset="50%" stop-color="#c8a548" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#1e5266" stop-opacity="0.15"/>
+            </linearGradient>
+          </defs>
+          <!-- Title -->
+          <text x="350" y="30" text-anchor="middle" fill="#1e5266" font-family="Zen Old Mincho, serif" font-size="18" font-weight="900">ZOPA ― 合意可能領域</text>
+          <text x="350" y="50" text-anchor="middle" fill="#586878" font-size="11">Zone of Possible Agreement</text>
+          <!-- Buyer range bar -->
+          <rect x="50" y="100" width="450" height="40" fill="#1e5266" opacity="0.85" rx="4"/>
+          <text x="40" y="125" text-anchor="end" fill="#1e5266" font-family="Inter, sans-serif" font-size="13" font-weight="700">買い手</text>
+          <text x="50" y="160" fill="#586878" font-size="11">¥0</text>
+          <text x="500" y="160" text-anchor="middle" fill="#586878" font-size="11">買い手の上限</text>
+          <text x="500" y="174" text-anchor="middle" fill="#1e5266" font-size="13" font-weight="700">¥4,000万</text>
+          <!-- Seller range bar -->
+          <rect x="250" y="200" width="400" height="40" fill="#c8a548" opacity="0.85" rx="4"/>
+          <text x="660" y="225" text-anchor="start" fill="#c8a548" font-family="Inter, sans-serif" font-size="13" font-weight="700">売り手</text>
+          <text x="250" y="260" text-anchor="middle" fill="#586878" font-size="11">売り手の下限</text>
+          <text x="250" y="274" text-anchor="middle" fill="#c8a548" font-size="13" font-weight="700">¥3,500万</text>
+          <text x="650" y="260" text-anchor="end" fill="#586878" font-size="11">¥∞</text>
+          <!-- ZOPA overlap -->
+          <rect x="250" y="100" width="250" height="140" fill="url(#zopaG)" stroke="#1e5266" stroke-width="2" stroke-dasharray="6,4" rx="4"/>
+          <text x="375" y="330" text-anchor="middle" fill="#1e5266" font-family="Zen Old Mincho, serif" font-size="16" font-weight="900">ZOPA（合意可能領域）</text>
+          <text x="375" y="348" text-anchor="middle" fill="#586878" font-size="11">¥3,500万 〜 ¥4,000万</text>
+        </svg>
+        <p style="color:var(--kohaku); font-size:13px;">図3-1：買い手の上限と売り手の下限の重なりがZOPA。この範囲内ならどこかで合意できる。</p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">FOUNDATION</div>
+          <h4>Fisher & Ury『Getting to Yes』(1981)</h4>
+          <p>交渉学のビッグバン本。ソフト型・ハード型の二項対立を超える「<strong>原則立脚型交渉（PIOC）</strong>」を確立。BATNAを「交渉力の源泉」として再定義した歴史的貢献。世界500万部超。<strong>必読の1冊</strong>。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">TOUGH</div>
+          <h4>William Ury『Getting Past No』(1991)</h4>
+          <p>『Getting to Yes』の補完書。<strong>非協力的な相手</strong>との交渉に焦点。「バルコニーに上がる（俯瞰）」「黄金の橋（相手のメンツを保つ退路）」など、頑なな相手を協力に転換する5段階アプローチ。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">EMOTION</div>
+          <h4>Chris Voss『Never Split the Difference』(2016)</h4>
+          <p>元FBI国際人質交渉責任者による「感情の交渉学」。中心概念は<strong>Tactical Empathy（戦術的共感）</strong>。技法はMirroring・Labeling・Calibrated Questions。ハーバード流の合理主義に真正面から異議。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">STYLE</div>
+          <h4>G. Richard Shell『Bargaining for Advantage』(1999)</h4>
+          <p>Whartonビジネススクール教授による5スタイル理論の決定版。競争型・協調型・妥協型・回避型・順応型。<strong>自分のデフォルトスタイルを知ることが交渉学習の出発点</strong>。文化差にも言及。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">GAME</div>
+          <h4>ゲーム理論（Nash, Schelling, Axelrod）</h4>
+          <p>Nash Bargaining Solution（フェアな分配の数理）、Ultimatum Game（合理性の限界）、SchellingのFocal Point・Credible Commitment、Axelrodの<strong>Tit for Tat戦略</strong>。長期取引の指針。Schellingは2005年ノーベル経済学賞。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">BIAS</div>
+          <h4>行動経済学（Kahneman, Tversky）</h4>
+          <p>「人は合理的でない」を実証。Loss Aversion（損失回避）、Endowment Effect（保有効果）、Reactive Devaluation（相手提案の即座低評価）など10のバイアスが交渉を歪める。Kahnemanは2002年ノーベル経済学賞。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">CULTURE</div>
+          <h4>文化差研究（Hofstede, Hall）</h4>
+          <p>Hofstede の6次元モデル（権力格差・個人主義・男性性・不確実性回避・長期志向・放縦/抑制）、Hallの<strong>高文脈/低文脈</strong>。米国は低文脈で直接、日中は高文脈で婉曲。<strong>熟達者は文化に応じてスタイルを切り替える</strong>。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">JAPAN</div>
+          <h4>日本の交渉学者（田村・隅田・北野・奥山）</h4>
+          <p><strong>田村次朗</strong>（慶應）と<strong>隅田浩司</strong>（東京富士大）がハーバード流を学術的に体系化。<strong>北野唯我</strong>は人材市場、<strong>奥山真司</strong>は地政学的交渉と、応用領域で独自展開。日本独自の「根回し」「腹芸」の理論化が今後の課題。</p>
+        </div>
+      </div>
+
+      <h2 class="chap">説得心理学：Cialdini の6原理</h2>
+      <p>Robert Cialdini『Influence』(1984)の説得6原理は、交渉でも有効に機能する。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>原理</th><th>内容</th><th>交渉での応用</th></tr></thead>
+          <tbody>
+            <tr><td>① 返報性 (Reciprocity)</td><td>もらったら返したくなる</td><td>先に小さな譲歩</td></tr>
+            <tr><td>② コミットメント</td><td>一度言ったことを貫きたい</td><td>段階的合意（YES積み重ね）</td></tr>
+            <tr><td>③ 社会的証明</td><td>他人と同じ行動を取りたい</td><td>「他社も導入しています」</td></tr>
+            <tr><td>④ 好意 (Liking)</td><td>好きな人の言うことを聞く</td><td>共通点を探す、褒める</td></tr>
+            <tr><td>⑤ 権威 (Authority)</td><td>専門家・権威に従う</td><td>専門家の意見を引用</td></tr>
+            <tr><td>⑥ 希少性 (Scarcity)</td><td>入手困難なものほど欲しい</td><td>「今だけ」「限定」</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="chap">AI時代の交渉（2025-2026）</h2>
+      <p>2025-2026年現在、AI技術は交渉に3方向で影響を与えている。①<strong>AI支援交渉</strong>（営業・調達でClaude・ChatGPT等が準備支援）、②<strong>AIエージェント間交渉</strong>（Walmart×Pactum AI等の自動契約交渉、Fortune 500の30%超が導入）、③<strong>人間スキルの変容</strong>。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>残るスキル（人間特化）</th><th>自動化されるスキル</th></tr></thead>
+          <tbody>
+            <tr><td>戦略構築・大局判断</td><td>価格交渉の戦術実行</td></tr>
+            <tr><td>信頼構築・関係構築</td><td>データ分析・比較</td></tr>
+            <tr><td>創造的提案・統合型解決</td><td>定型契約の条件交渉</td></tr>
+            <tr><td>倫理判断・価値判断</td><td>パターン認識</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warn"><strong>倫理的論点</strong>　AI交渉には不透明性（説明できない提案）、責任の所在、力の非対称（AIを持つ大企業 vs 持たない個人）、マニピュレーションなど新たな問題がある。EU AI Actを始めとする規制動向に注目が必要。</div>
+    </section>
+
+    <section class="part" id="part4">
+      <div class="part-header">
+        <div class="part-num">肆</div>
+        <div><div class="part-title">実務応用 ― 9つの領域</div></div>
+      </div>
+      <div class="part-subtitle">PART 4｜PRACTICAL APPLICATIONS</div>
+
+      <p class="lead">第4部では、これまで学んだ理論を<strong>9つの実務領域</strong>に適用する。各章は独立して読めるよう設計されている。</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>領域</th><th>中心テーマ</th><th>キー戦術</th></tr></thead>
+          <tbody>
+            <tr><td>① 営業交渉</td><td>価値の問題解決枠での提示</td><td>多次元化、ROI訴求、価値ベース</td></tr>
+            <tr><td>② 調達交渉</td><td>サプライヤーマネジメント</td><td>Kraljicマトリクス、TCO分析</td></tr>
+            <tr><td>③ 労使交渉</td><td>賃金・労働条件</td><td>Walton-McKersie 4サブプロセス</td></tr>
+            <tr><td>④ M&A交渉</td><td>企業価値・条項設計</td><td>アーンアウト、MAC、表明保証</td></tr>
+            <tr><td>⑤ 国際ビジネス</td><td>文化差を超えた合意</td><td>高文脈/低文脈の使い分け</td></tr>
+            <tr><td>⑥ 外交・国家間</td><td>多者・公衆性</td><td>Two-Level Game(国内+国際)</td></tr>
+            <tr><td>⑦ 人質交渉</td><td>死活的緊張下</td><td>FBI流9段階、Tactical Empathy</td></tr>
+            <tr><td>⑧ 日常交渉</td><td>給与・不動産・家族</td><td>市場相場、I Message、関係資本</td></tr>
+            <tr><td>⑨ AI時代の交渉</td><td>人間とAIの役割分担</td><td>戦略・信頼・倫理に特化</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="chap">代表領域の深掘り</h2>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-no">SALES</div>
+          <h4>営業交渉 ― 値引き地獄を避ける</h4>
+          <p>営業交渉の本質は「<strong>自社製品の価値を、相手の問題解決の枠組みで提示すること</strong>」。値引き地獄に陥る営業は、製品の価値を「価格」という一次元に圧縮している。<strong>3つの脱出路</strong>：①価値の言語化（ROI 300%）②多次元化（納期、サポート、保証）③アンカリング（上位プラン提示）。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">SALARY</div>
+          <h4>給与交渉 ― 個人の労使交渉</h4>
+          <p>市場相場をLinkedIn・Glassdoor・転職サイトで確認。<strong>First Offerは出さない</strong>（採用側に出させる）。「年俸〇〇円ではいかがでしょうか」と質問形で。年次評価では「過去1年の成果を数字で並べる」「他社からも声をかけられている」を「現職を継続したい」と表現。多次元化（年俸・賞与・株式・休暇）で統合型に変換。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">HOSTAGE</div>
+          <h4>人質交渉のビジネス応用</h4>
+          <p>Chris Vossの『Never Split the Difference』が示したのは、人質交渉の技法は<strong>ビジネス交渉でも有効</strong>ということ。Active Listening→顧客ヒアリング、Tactical Empathy→クレーム対応、Mirroring→営業会話、Labeling→感情ケア、Calibrated Questions→異議処理。「How am I supposed to do that?」が万能フレーズ。</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-no">FAMILY</div>
+          <h4>家族交渉 ― 関係型の典型</h4>
+          <p>家族交渉は<strong>関係型の典型</strong>。①関係資本を最優先（短期勝利より長期関係）②「You Message」を避ける（「あなたは〜」より「私は〜」）③感情を言語化（我慢でなく共有）④定期的な対話の場（月1の夫婦会議）。<strong>「身内には交渉学を使うな」は誤解</strong>――使うべきだが、関係型として使う。</p>
+        </div>
+      </div>
+
+      <h2 class="chap">明日から使う交渉の10の問い</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>問い</th><th>根拠概念</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>私のBATNAは何か？　強化できるか？</td><td>BATNA</td></tr>
+            <tr><td>2</td><td>相手のBATNAをどう推定できるか？</td><td>BATNA</td></tr>
+            <tr><td>3</td><td>ZOPAは存在するか？</td><td>ZOPA</td></tr>
+            <tr><td>4</td><td>私のAspirationは高すぎないか／低すぎないか？</td><td>Aspiration</td></tr>
+            <tr><td>5</td><td>論点は1つに圧縮されていないか？　多次元化できるか？</td><td>Logrolling</td></tr>
+            <tr><td>6</td><td>相手の「立場」の背後の「利害」は何か？</td><td>原則②</td></tr>
+            <tr><td>7</td><td>客観基準（相場・データ）は何か？</td><td>原則④</td></tr>
+            <tr><td>8</td><td>First Offerを出すべき情報を持っているか？</td><td>Anchoring</td></tr>
+            <tr><td>9</td><td>感情のトリガーは何か？　バルコニーに上がれるか？</td><td>Tactical Empathy</td></tr>
+            <tr><td>10</td><td>これは短期取引か、長期関係か？</td><td>3類型</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="part" id="part5">
+      <div class="part-header">
+        <div class="part-num">伍</div>
+        <div><div class="part-title">実践ワークブック</div></div>
+      </div>
+      <div class="part-subtitle">PART 5｜WORKBOOK</div>
+
+      <p class="lead"><strong>交渉成果の8〜9割が事前準備で決まる</strong>（ハーバード交渉プロジェクトの30年研究）。本部の内容は紙にコピーして、交渉のたびに使ってほしい。</p>
+
+      <h2 class="chap" id="diagnosis">5つの交渉スタイル自己診断</h2>
+      <p>下記15問に1〜5で答え（1=全くそうでない、5=非常にそう）、自分のデフォルトスタイルを把握しよう。</p>
+
+      <div class="exercise">
+        <span class="exercise-num">診断シート</span>
+        <div class="exercise-q">設問1〜15について、自分の度合いを記入</div>
+        <textarea placeholder="1. 自分の主張を相手に通すことを重視する：
+2. 相手と協力して双方にとってのベストを探したい：
+3. 中庸の落としどころが好きだ：
+4. 対立場面では議論を回避したくなる：
+5. 関係維持のため自分が譲歩することが多い：
+6. 勝負には絶対勝ちたい：
+7. 相手の言うことをじっくり聞く：
+8. 「足して2で割る」のは公平だと思う：
+9. 感情的な対立は避けたい：
+10. 「いい人」と言われる方だ：
+11. 「タフな交渉者」と言われたい：
+12. 解決策をブレインストームするのが好きだ：
+13. 早く決着をつけたい：
+14. 議論より時間が解決すると思う：
+15. 自分より相手の幸せを優先しがちだ：
+
+採点：
+競争型（1,6,11）：
+協調型（2,7,12）：
+妥協型（3,8,13）：
+回避型（4,9,14）：
+順応型（5,10,15）：
+
+最高点が私のデフォルトスタイル："></textarea>
+      </div>
+
+      <h2 class="chap" id="exercises">演習10問</h2>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 1 ／ BATNA</span>
+        <div class="exercise-q">今あなたが関わっている交渉（給与・契約・買い物など）を1つ選び、自分のBATNAを書き出せ。強化する3つの方法を考えよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 2 ／ ZOPA</span>
+        <div class="exercise-q">同じ交渉について、自分のReservation Priceと相手の推定Reservation Priceを書き、ZOPAの有無を判定せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 3 ／ Aspiration</span>
+        <div class="exercise-q">市場相場を3サイト以上で調査し、その上位10〜25%にAspirationを置け。根拠を3つ用意せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 4 ／ 多次元化</span>
+        <div class="exercise-q">価格1つの交渉を、5つの論点に多次元化せよ。それぞれの自分の重要度と相手の重要度を推定。</div>
+        <textarea placeholder="論点1: 重要度（自分/相手）
+論点2:
+論点3:
+論点4:
+論点5:"></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 5 ／ 立場 vs 利害</span>
+        <div class="exercise-q">相手の表面的な「立場」と、その背後の「利害」を切り分けよ。利害を推定する質問を3つ準備せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 6 ／ Anchoring</span>
+        <div class="exercise-q">First Offerを出すべきか出さざるべきか、判断材料を整理せよ。出す場合のアンカー値はいくらか？</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 7 ／ 客観基準</span>
+        <div class="exercise-q">交渉相手と合意できる「客観基準」（相場・データ・判例・業界標準）を3つ用意せよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 8 ／ 想定問答</span>
+        <div class="exercise-q">相手から出そうな反論を5つ想定し、それぞれへの応答案を準備せよ。</div>
+        <textarea placeholder="反論1: 応答:
+反論2: 応答:
+反論3: 応答:
+反論4: 応答:
+反論5: 応答:"></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 9 ／ Tactical Empathy</span>
+        <div class="exercise-q">想定される相手の感情を3つ書き、それぞれにLabeling（"It seems like you're..."）を作れ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <span class="exercise-num">演習 10 ／ 自己管理</span>
+        <div class="exercise-q">交渉中に感情的になるトリガーを3つ書き、「バルコニーに上がる」合言葉を決めよ。</div>
+        <textarea placeholder="ここに記入..."></textarea>
+      </div>
+
+      <h2 class="chap" id="quiz">理解度クイズ（4問）</h2>
+      <p>各問いに答えるとすぐに正解・解説が表示されます。</p>
+
+      <div class="quiz" data-correct="b" data-explain="BATNA（Best Alternative to a Negotiated Agreement）はFisher & Uryが『Getting to Yes』(1981)で提唱した交渉学最重要の用語。「いま行っている交渉が決裂したときに、あなたが取りうる最良の代替手段」。Reservation Price（撤退ライン）とは別概念で、BATNAから論理的に導かれる関係。">
+        <div class="quiz-q">Q1. BATNAの正しい定義は？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 交渉の最低希望価格</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 交渉決裂時に取りうる最良の代替手段</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 交渉の野心的目標値</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 相手の手の内</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="Negative ZOPA（双方のReservation Priceが重ならない）状態の対処は3つ：①交渉打切り（BATNAに戻る）②次元を増やす（多次元化で統合型に変換）③時間をかける。価格しか論点がない交渉から、納期・サポート・契約期間など複数論点を加えることで、新たな合意領域が生まれることが多い。">
+        <div class="quiz-q">Q2. ZOPAがNegative（マイナス）のとき、最も創造的な対応は？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. 即座に交渉を打ち切る</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. 自分のReservation Priceを下げて妥協する</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. 価格以外の論点を増やして多次元化する</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. 相手のReservation Priceを聞き出す</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="b" data-explain="Fisher & Uryの4原則（PIOC: People-Interests-Options-Criteria）のうち、最重要は「Focus on interests, not positions」（立場でなく利害に焦点を当てよ）。オレンジの寓話が典型例――姉妹が一個のオレンジを取り合う「立場」の背後に、姉は果汁（ジュース作り）、妹は皮（マーマレード作り）という異なる「利害」がある。これに気づけば両者100%満足できる。「なぜ？」と問うのが核心スキル。">
+        <div class="quiz-q">Q3. Fisher & Uryの原則立脚型交渉（PIOC）の4原則のうち、最も重要とされるのは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. People（人と問題を分けよ）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. Interests（立場でなく利害に焦点を当てよ）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. Options（相互利益の選択肢を創れ）</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. Criteria（客観的基準を主張せよ）</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz" data-correct="c" data-explain="Chris Vossの『Never Split the Difference』のTactical Empathy（戦術的共感）では、感情にラベルを付ける際「I think you feel...」は押し付けがましいのでNG、「It seems like / It sounds like / It looks like...」と第三者的に語るのが正解。相手が「Yes, exactly!」と返したら成功。これにより相手は「自分は理解されている」と感じ、心の防衛を解く。">
+        <div class="quiz-q">Q4. Chris Vossの「Tactical Empathy」で、相手の感情にラベルを付ける際の正しいフレーズは？</div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="answerQuiz(this,'a')">A. "I think you feel angry"</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'b')">B. "You are obviously frustrated"</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'c')">C. "It seems like you're under pressure"</button>
+          <button class="quiz-opt" onclick="answerQuiz(this,'d')">D. "Don't worry about it"</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h2 class="chap" id="books">推薦図書20選</h2>
+      <div class="filter-bar">
+        <button class="chip active" onclick="filterBook('all', this)">すべて</button>
+        <button class="chip" onclick="filterBook('must', this)">必読5冊</button>
+        <button class="chip" onclick="filterBook('intermediate', this)">中級</button>
+        <button class="chip" onclick="filterBook('advanced', this)">上級</button>
+        <button class="chip" onclick="filterBook('japan', this)">日本</button>
+      </div>
+
+      <div class="books" id="books">
+        <div class="book" data-cat="must"><span class="book-num">01.</span><span class="book-title">Getting to Yes</span><div class="book-meta">Fisher & Ury／三笠書房</div><span class="book-cat">必読・聖典</span></div>
+        <div class="book" data-cat="must"><span class="book-num">02.</span><span class="book-title">Getting Past No</span><div class="book-meta">William Ury／三笠書房</div><span class="book-cat">必読・タフ相手</span></div>
+        <div class="book" data-cat="must"><span class="book-num">03.</span><span class="book-title">Never Split the Difference</span><div class="book-meta">Chris Voss／早川書房</div><span class="book-cat">必読・FBI流</span></div>
+        <div class="book" data-cat="must"><span class="book-num">04.</span><span class="book-title">Getting More</span><div class="book-meta">Stuart Diamond／ダイヤモンド社</div><span class="book-cat">必読・Wharton</span></div>
+        <div class="book" data-cat="must"><span class="book-num">05.</span><span class="book-title">Thinking, Fast and Slow</span><div class="book-meta">Daniel Kahneman／早川書房</div><span class="book-cat">必読・行動経済</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">06.</span><span class="book-title">Bargaining for Advantage</span><div class="book-meta">G. Richard Shell／Penguin</div><span class="book-cat">中級・5スタイル</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">07.</span><span class="book-title">Negotiation Genius</span><div class="book-meta">Malhotra & Bazerman／Bantam</div><span class="book-cat">中級・実証</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">08.</span><span class="book-title">Art and Science of Negotiation</span><div class="book-meta">Howard Raiffa／Harvard</div><span class="book-cat">中級・古典</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">09.</span><span class="book-title">Beyond Reason</span><div class="book-meta">Fisher & Shapiro／三笠書房</div><span class="book-cat">中級・感情</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">10.</span><span class="book-title">Influence</span><div class="book-meta">Robert Cialdini／誠信書房</div><span class="book-cat">中級・説得</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">11.</span><span class="book-title">Friend & Foe</span><div class="book-meta">Adam Galinsky／Crown</div><span class="book-cat">中級・競合協力</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">12.</span><span class="book-title">Difficult Conversations</span><div class="book-meta">Sheila Heen et al.／日経BP</div><span class="book-cat">中級・対話</span></div>
+        <div class="book" data-cat="intermediate"><span class="book-num">13.</span><span class="book-title">Women Don't Ask</span><div class="book-meta">Linda Babcock／Princeton UP</div><span class="book-cat">中級・ジェンダー</span></div>
+        <div class="book" data-cat="japan"><span class="book-num">14.</span><span class="book-title">交渉プロフェッショナル</span><div class="book-meta">田村次朗／NHK出版</div><span class="book-cat">日本・体系</span></div>
+        <div class="book" data-cat="japan"><span class="book-num">15.</span><span class="book-title">戦略的交渉入門</span><div class="book-meta">田村・隅田／日経出版</div><span class="book-cat">日本・実務</span></div>
+        <div class="book" data-cat="advanced"><span class="book-num">16.</span><span class="book-title">The Strategy of Conflict</span><div class="book-meta">Thomas Schelling／勁草書房</div><span class="book-cat">上級・ゲーム理論</span></div>
+        <div class="book" data-cat="advanced"><span class="book-num">17.</span><span class="book-title">The Evolution of Cooperation</span><div class="book-meta">Robert Axelrod／ミネルヴァ書房</div><span class="book-cat">上級・進化</span></div>
+        <div class="book" data-cat="advanced"><span class="book-num">18.</span><span class="book-title">Cultures and Organizations</span><div class="book-meta">Hofstede／有斐閣</div><span class="book-cat">上級・文化差</span></div>
+        <div class="book" data-cat="advanced"><span class="book-num">19.</span><span class="book-title">孫子</span><div class="book-meta">各種邦訳</div><span class="book-cat">上級・古典</span></div>
+        <div class="book" data-cat="advanced"><span class="book-num">20.</span><span class="book-title">君主論</span><div class="book-meta">マキャヴェッリ／各種邦訳</div><span class="book-cat">上級・古典</span></div>
+      </div>
+
+      <div class="tip"><strong>1年で交渉力を上げるロードマップ</strong>　1〜2月：基礎理解（本書第1〜2部）／3月：『Getting to Yes』原書or邦訳精読／4月：『Never Split the Difference』読了、Mirroring練習／5月：Kahneman『Thinking, Fast and Slow』／6月：中間振り返り／7月：実践週間（1日1交渉を意識）／8月：文化差研究（Hofstede・Hall）／9月：スタイル拡張（デフォルト以外を試す）／10月：ゲーム理論・Schellingに挑戦／11月：自業界の交渉実例研究／12月：1年の交渉日記から型を抽出、次年度設計。<strong>3〜6ヶ月のスランプ期で諦めないことが熟達への分かれ目</strong>。</div>
+    </section>
+
+    <section class="part" id="sources">
+      <div class="part-header">
+        <div class="part-num">出</div>
+        <div><div class="part-title">Sources ― 出典・参考文献</div></div>
+      </div>
+      <div class="part-subtitle">SOURCES</div>
+
+      <h3 class="sec">一次文献（原書）</h3>
+      <ol style="padding-left:24px; line-height:2;">
+        <li>Fisher, Roger, William Ury, and Bruce Patton. <em>Getting to Yes</em>. 3rd ed. Penguin Books, 2011.</li>
+        <li>Ury, William. <em>Getting Past No</em>. Bantam Books, 2007.</li>
+        <li>Voss, Chris, and Tahl Raz. <em>Never Split the Difference</em>. Harper Business, 2016.</li>
+        <li>Shell, G. Richard. <em>Bargaining for Advantage</em>. 3rd ed. Penguin Books, 2018.</li>
+        <li>Diamond, Stuart. <em>Getting More</em>. Crown Business, 2010.</li>
+        <li>Malhotra, Deepak, and Max H. Bazerman. <em>Negotiation Genius</em>. Bantam, 2007.</li>
+        <li>Raiffa, Howard. <em>The Art and Science of Negotiation</em>. Belknap/Harvard, 1982.</li>
+        <li>Cialdini, Robert B. <em>Influence: The Psychology of Persuasion</em>. Harper, 2006.</li>
+        <li>Schelling, Thomas C. <em>The Strategy of Conflict</em>. Harvard UP, 1960.</li>
+        <li>Axelrod, Robert. <em>The Evolution of Cooperation</em>. Basic Books, 1984.</li>
+        <li>Kahneman, Daniel. <em>Thinking, Fast and Slow</em>. Farrar, Straus and Giroux, 2011.</li>
+        <li>Hofstede, Geert et al. <em>Cultures and Organizations</em>. 3rd ed. McGraw-Hill, 2010.</li>
+      </ol>
+
+      <h3 class="sec">日本語文献</h3>
+      <ol start="13" style="padding-left:24px; line-height:2;">
+        <li>田村次朗『交渉プロフェッショナル』NHK出版、2014年。</li>
+        <li>田村次朗・隅田浩司『戦略的交渉入門』日本経済新聞出版、2014年。</li>
+        <li>奥山真司『地政学』五月書房新社、2004年。</li>
+        <li>北野唯我『天才を殺す凡人』日本経済新聞出版、2019年。</li>
+      </ol>
+
+      <h3 class="sec">学術論文・最新動向（2020-2026年）</h3>
+      <ol start="17" style="padding-left:24px; line-height:2;">
+        <li>Putnam, R. D. "Diplomacy and Domestic Politics: The Logic of Two-Level Games." <em>International Organization</em> 42, no. 3 (1988).</li>
+        <li>Nash, J. F. "The Bargaining Problem." <em>Econometrica</em> 18, no. 2 (1950).</li>
+        <li>Pactum AI. "Walmart Case Study: Automated Vendor Negotiations." 2023.</li>
+        <li>World Economic Forum. "The Future of Negotiation in the Age of AI." 2024.</li>
+        <li>European Commission. "AI Act and Autonomous Negotiation." 2025.</li>
+      </ol>
+
+      <h3 class="sec">研究機関・コース</h3>
+      <ol start="22" style="padding-left:24px; line-height:2;">
+        <li>Harvard Program on Negotiation (PON): <a href="https://www.pon.harvard.edu/" style="color:var(--kong);">pon.harvard.edu</a></li>
+        <li>Wharton Negotiation Strategies (G. Richard Shell)</li>
+        <li>Stanford GSB Negotiation Program</li>
+        <li>INSEAD Negotiation Dynamics</li>
+        <li>日本交渉学会／慶應丸の内シティキャンパス</li>
+      </ol>
+
+      <h3 class="sec">注記</h3>
+      <p style="font-size:13px; color:var(--kohaku);">本書は半世紀以上にわたる交渉学の蓄積を、日本のビジネスパーソン向けに体系化したもの。理論と実務の架橋、読者の現実の交渉力向上を目的とする。すべての概念・引用は出典明示のもと、原著者の知的貢献に最大限の敬意を払っている。BATNA・ZOPA・PIOC・Tactical Empathy等の用語は各原著者の定義に基づく。</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="brand-seal" style="margin: 0 auto 12px;">交</div>
+  <p>交渉学 ― ゼロから学ぶネゴシエーションの理論と実践 · University Edition</p>
+  <p style="font-size:11px; color:var(--paper-shadow); margin-top:8px; letter-spacing:1px;">© COMPREHENSIVE TEXTBOOK BUILDER · 2026</p>
+</footer>
+
+<script>
+const quoteData = {
+  default: {
+    "Negotiation is a back-and-forth communication designed to reach an agreement when you and the other side have some interests that are shared and others that are opposed.": {
+      yomi:"交渉とは、共通する利害と対立する利害を抱えた当事者同士が、合意に到達するために行う双方向のコミュニケーションである。",
+      yaku:"3つの要点：①双方向のコミュニケーション（一方的命令は交渉ではない）／②共通利害と対立利害が同時に存在／③合意がゴール。",
+      kaisetsu:"Fisher & Ury『Getting to Yes』(1981)の古典的定義。交渉学の出発点。コンビニで定価のおにぎりを買うのは「取引」だが「交渉」ではない（不確実性も交渉余地もないため）。"
+    },
+    "Best Alternative to a Negotiated Agreement — the course of action you will take if the current negotiation fails.": {
+      yomi:"BATNA（バトナ）― 不合意時最善代替案。いま行っている交渉が決裂したときに、あなたが取りうる最良の代替手段。",
+      yaku:"交渉力の最大の源泉。強いBATNAを持つ者ほど交渉で強く出られる。逆にBATNAが弱いと相手の言いなりになる。",
+      kaisetsu:"Fisher & Ury(1981)の最大の貢献。事前準備で強化できる：①複数の代替案を持つ ②それぞれの質を高める ③相手にほのめかす。武器ではなく自信の源泉として、内に秘めて使う。"
+    },
+    "Focus on interests, not positions.": {
+      yomi:"立場でなく利害に焦点を当てよ。",
+      yaku:"Position（立場）=表面的な主張「私は○○を要求する」。Interest（利害）=「なぜそれを要求するのか」の背後の理由。利害に焦点を当てると、新しい解決策が生まれる。",
+      kaisetsu:"PIOC 4原則の中で最重要。古典的なオレンジの寓話：姉妹が一個のオレンジを取り合う立場の背後に、姉は果汁・妹は皮という異なる利害がある。立場で殴り合えば50%、利害を聞き出せば両者100%。「なぜ？」と問うのが核心スキル。"
+    },
+    "Never split the difference. Negotiating as if your life depended on it.": {
+      yomi:"決して差を分けるな ― あなたの命がかかっているかのように交渉せよ。",
+      yaku:"安易な妥協（50:50で折半）を拒否せよ。「Why?」と聞き返し、相手の真意を引き出せ。",
+      kaisetsu:"Chris Voss『Never Split the Difference』(2016)のタイトル。元FBI国際人質交渉責任者の警句。「ベテランの靴屋なら、4万円のスーツを2万円に値切られても3万円で妥協しない。3万円でも赤字だから」。感情の科学としての交渉論。"
+    }
+  }
+};
+
+const styles = [
+  {num:"STYLE 1", name:"競争型", en:"Competing", title:"競争型（Competing）― 勝ち負け重視", body:"自己主張が強く、協調性が低いスタイル。<strong>強み</strong>：明確な勝利、迅速な決着。<strong>弱み</strong>：関係破壊、長期不利。<strong>適場面</strong>：一度きりの取引、敵対的法廷、緊急時の決断。<br><strong>注意点</strong>：いつもこのスタイルだと評判を失い、業界から孤立する。長期取引では絶対に使ってはいけない。「強引な営業」「圧力的なクライアント」がこのタイプ。"},
+  {num:"STYLE 2", name:"協調型", en:"Collaborating", title:"協調型（Collaborating）― Win-Win志向", body:"自己主張と協調性の両方が高い、統合型交渉の理想スタイル。<strong>強み</strong>：双方の最大利益、長期関係構築。<strong>弱み</strong>：時間がかかる、情報共有のリスク。<strong>適場面</strong>：長期取引、複雑な統合型交渉、戦略的提携。<br><strong>真髄</strong>：「パイを分ける」のでなく「パイを大きくする」発想。論点を多次元化し、双方の重要度の差を活用する（Logrolling）。"},
+  {num:"STYLE 3", name:"妥協型", en:"Compromising", title:"妥協型（Compromising）― 折半志向", body:"中庸的なスタイル。「足して2で割る」ことを好む。<strong>強み</strong>：迅速、公平感が出る。<strong>弱み</strong>：最適解でない、惰性的になりがち。<strong>適場面</strong>：時間制約があるとき、軽微な論点、Win-Winが見つからない場合の次善策。<br><strong>注意</strong>：Vossの「Never split the difference」の戒め通り、安易な妥協は両者にとって最適でないことが多い。「Why?」と問い直す癖をつける。"},
+  {num:"STYLE 4", name:"回避型", en:"Avoiding", title:"回避型（Avoiding）― 対立回避", body:"自己主張も協調性も低いスタイル。<strong>強み</strong>：対立回避、時間稼ぎ、冷却期間。<strong>弱み</strong>：問題未解決、消極的、悪化することも。<strong>適場面</strong>：感情過熱時、優先度が低い問題、自分の準備不足時の戦略的撤退。<br><strong>注意</strong>：常用すると問題が雪だるま式に拡大する。意図的撤退と消極的逃避は区別すること。"},
+  {num:"STYLE 5", name:"順応型", en:"Accommodating", title:"順応型（Accommodating）― 関係重視", body:"自己主張が低く、協調性が高いスタイル。<strong>強み</strong>：関係維持、信頼蓄積、長期的好感。<strong>弱み</strong>：利益損失、ナメられがち、「いい人」の罠。<strong>適場面</strong>：関係>利益のとき、明白に自分が正しくないとき、家族・親友との関係。<br><strong>日本人に多い落とし穴</strong>：全状況にこれを適用してしまうと、結果的に搾取される。場面に応じて他スタイルへの切替が必須。"}
+];
+
+const kwData = {
+  batna: { title:"BATNA（バトナ）― 不合意時最善代替案", body:`<p><strong>BATNA</strong>（Best Alternative to a Negotiated Agreement）はFisher & Uryが『Getting to Yes』(1981)で提唱した、<strong>交渉学最重要の用語</strong>。「いま行っている交渉が決裂したときに、あなたが取りうる最良の代替手段」を指す。</p><p>BATNAが最重要なのは、<strong>交渉力（Bargaining Power）の源泉</strong>だから。強いBATNAを持つ者ほど交渉で強く出られ、弱いと相手の言いなりになる。「他社からも複数のオファーがある」求職者は強気で交渉できる。<br><strong>強化する3つの方法</strong>：①複数の代替案を持つ（転職なら3〜5社並行）②代替案の質を高める ③相手にほのめかす。<strong>露骨な誇示は関係を壊す</strong>。BATNAは武器ではなく、自分自身の足元を確認する鏡である。</p>` },
+  zopa: { title:"ZOPA（ゾーパ）― 合意可能領域", body:`<p><strong>ZOPA</strong>（Zone of Possible Agreement）は、Howard Raiffaが体系化した、双方が合意可能な条件の範囲。あなたの最低希望3,500万円、買い手の最高許容4,000万円なら、ZOPAは500万円の幅。</p><p>ZOPAは<strong>双方のBATNAから論理的に導かれる</strong>。Reservation Price（撤退ライン）の重なり部分。ZOPAが存在しないとき（<strong>Negative ZOPA</strong>）の対処は3つ：①交渉打切り ②次元を増やす（多次元化で統合型に変換） ③時間をかける。<strong>交渉前にZOPAを書き出して可視化する習慣</strong>が、熟練への第一歩。</p>` },
+  reservation: { title:"Reservation Price（リザベーション・プライス）― 留保価格", body:`<p>「<strong>これ以下/以上では絶対に合意しない</strong>」というあなたの撤退ライン。Walk-away Pointとも。売り手なら最低価格、買い手なら最高価格。</p><p><strong>BATNAから論理的に導かれる</strong>。BATNAが「現職700万円で残る」なら、Reservation Priceは「700万円相当」（厳密にはリスク・転職コスト等を調整）。<br><strong>感情で決めない</strong>のが鉄則。「絶対譲らない」と決めつけるのでなく、客観的根拠（BATNA）から論理的に導く。</p>` },
+  aspiration: { title:"Aspiration（アスピレーション）― 目標値", body:`<p>「<strong>うまくいけばここまで取れる</strong>」という野心的目標。Reservation Priceが「最低ライン」、Aspirationが「最高目標」。両者を紙に書き分けることが重要。</p><p>複数の実証研究（Neale & Bazerman 1985〜）が示すのは、<strong>高いAspirationを持つ交渉者ほど高い結果を得る</strong>こと。Aspirationを高く設定すれば、譲歩の余地が増え、最終合意も高くなりやすい。<br><strong>設定の4ステップ</strong>：①市場相場を調べる ②上位10〜25%にAspirationを置く ③根拠を3つ用意 ④第三者検証。「Dream Big, Walk Strong」が交渉準備の合言葉。</p>` },
+  anchoring: { title:"Anchoring（アンカリング）― 錨効果", body:`<p>Tversky & Kahnemanが発見した最強の認知バイアスのひとつ。<strong>最初に提示された数値や情報が、その後の判断の基準点（錨）になる</strong>心理現象。</p><p><strong>有名な実験</strong>：ハーバードMBA学生に「アフリカの国連加盟国は全体の何%か？」と聞く前にルーレットの数字（10 or 65）を見せると、平均回答が25% vs 45%に変わる。<strong>無関係な数字が判断に影響した</strong>。<br><strong>交渉での王道戦略</strong>：強気のFirst Offer。売り手なら高め、買い手なら低め。Reservation Priceから20〜30%離れたあたりが適度。極端すぎると関係が壊れる。情報が十分なら先に出せ（Malhotra & Bazerman）。<br><strong>相手のアンカー無効化</strong>：正面で議論せず、別の基準（市場相場）を持ち出してリセットする。</p>` },
+  framing: { title:"Framing（フレーミング）― 枠付け", body:`<p>Kahneman & Tversky 1981以降の行動経済学の中心テーマ。<strong>同じ情報を異なる「枠」で提示することで相手の印象を変える</strong>手法。古典的例：「死亡率10%」vs「生存率90%」――同じだが医療判断は大きく変わる。</p><p><strong>5つのフレーム</strong>：①利得フレーム「これで10万円得します」→安心・慎重／②損失フレーム「逃すと10万円損します」→危機感・行動／③比較フレーム「相場より20%安い」→相対的お得感／④時間フレーム「3年で考えれば年間20万円」→価格を希釈／⑤道徳フレーム「公平な分配です」→倫理的訴求。<br><strong>熟練者はAnchoringと組み合わせる</strong>：「市場相場800〜1,200万円ですが（基準）、御社規模なら通常1,150万円（アンカー）。今回は特別に1,100万円（譲歩感）でいかがでしょう」。</p>` },
+  logrolling: { title:"Logrolling（ログローリング）― 交換取引", body:`<p>Trade-offの拡張版。語源は伐採作業で丸太を交互に転がす協働作業。<strong>自分にとって重要度が低く、相手にとって重要度が高い項目を譲り、その逆を相手に譲ってもらう</strong>手法。</p><p>Logrollingが成立するには<strong>変数（論点）が複数</strong>必要。だから熟練交渉者は意図的に論点を増やす。価格しかない交渉でも、納期・支払条件・サービス・独占権・契約期間・更新オプション・違約条項などを持ち込んで多次元化する。<br><strong>条件付提案の構文</strong>：「<strong>If</strong> you give X, <strong>then</strong> I will give Y」。❌「リモートワーク週3日でお願いします」（単なる要求）／⭕「もし年俸800万円でご決定いただけるなら、その代わりリモートワーク週3日を確約いただけますか」（条件付き）。「<strong>論点を増やせ、変数を増やせ</strong>」が統合型交渉の鉄則。</p>` },
+  pioc: { title:"PIOC ― 原則立脚型交渉の4原則", body:`<p>Fisher & Uryが提唱した、ハーバード流交渉術の核心。語呂合わせで「<strong>PIOC（パイオック）</strong>」。</p><p>① <strong>P</strong>eople：人と問題を分けよ／② <strong>I</strong>nterests：立場でなく利害に焦点／③ <strong>O</strong>ptions：相互利益の選択肢を創れ／④ <strong>C</strong>riteria：客観的基準を主張せよ。</p><p><strong>4原則は使う順番が重要</strong>：①で関係を整え、②で本当の問題を発見し、③で選択肢を広げ、④で客観的に決める。この順序を飛ばすと交渉は感情的・主観的になりやすい。<br><strong>古典的例（オレンジの寓話）</strong>：姉妹がオレンジを取り合う「立場」の背後に、姉は果汁（ジュース）・妹は皮（マーマレード）の異なる「利害」。立場で殴り合えば50%、利害を聞き出せば両者100%。「<strong>なぜ？</strong>」と問うのが核心スキル。</p>` }
+};
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.dataset.theme === "dark" ? "light" : "dark";
+  html.dataset.theme = next;
+  document.getElementById('theme-btn').textContent = next === "dark" ? "☀ ライト" : "🌙 ダーク";
+}
+
+function showStyle(i) {
+  document.querySelectorAll('.s-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.s-item')[i].classList.add('active');
+  const s = styles[i];
+  document.getElementById('s-detail').innerHTML = `<div class="s-detail-title">${s.title}</div><p>${s.body}</p>`;
+}
+
+function openKW(id) {
+  const d = kwData[id]; if (!d) return;
+  const detail = document.getElementById('kw-detail');
+  detail.innerHTML = `<div class="kw-detail-title">${d.title}</div>${d.body}`;
+  detail.classList.add('open');
+  detail.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function filterBook(cat, btn) {
+  document.querySelectorAll('#books').forEach(book => {
+    book.previousElementSibling.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('.book').forEach(book => {
+    book.style.display = (cat === 'all' || book.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+function switchTab(btn, mode) {
+  const card = btn.closest('.quote-card');
+  card.querySelectorAll('.quote-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const body = card.querySelector('.quote-body');
+  const original = body.dataset.original || body.textContent;
+  if (!body.dataset.original) body.dataset.original = original;
+  body.dataset.mode = mode;
+  const key = original.trim();
+  const data = quoteData.default[key];
+  if (mode === 'genbun') body.innerHTML = original.replace(/\n/g, '<br>');
+  else if (data && data[mode]) body.textContent = data[mode];
+  else body.textContent = '（このタブの内容は準備中です）';
+}
+
+function toggleAcc(head) { head.parentElement.classList.toggle('open'); }
+
+function answerQuiz(btn, choice) {
+  const quiz = btn.closest('.quiz');
+  const correct = quiz.dataset.correct;
+  const explain = quiz.dataset.explain;
+  const fb = quiz.querySelector('.quiz-feedback');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
+  if (choice === correct) {
+    btn.classList.add('correct');
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '◎ 正解！　' + explain;
+  } else {
+    btn.classList.add('wrong');
+    const correctBtn = Array.from(quiz.querySelectorAll('.quiz-opt')).find(o => o.getAttribute('onclick').includes("'" + correct + "'"));
+    if (correctBtn) correctBtn.classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✕ 残念。正解は緑のもの。　' + explain;
+  }
+}
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrollTop = h.scrollTop || document.body.scrollTop;
+  const scrollHeight = h.scrollHeight - h.clientHeight;
+  document.getElementById('progress-bar').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('nav.side a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector('nav.side a[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+document.querySelectorAll('section.part, .hero').forEach(s => observer.observe(s));
+
+showStyle(0);
+</script>
+</body>
+</html>
